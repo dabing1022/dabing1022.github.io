@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入浅出MagicalRecord-04 | HappyCoding:)ChildhoodAndy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们接着上一篇 深入浅出MagicalRecord-03。
+这节我们来一起学习下 MagicalRecord 对数据的存储，内容主要来自于 MagicalRecord的github资料。
+ 存储的时机一般情况下，我们应该在数据发生变化时就进行存储操作。有些应用选择在退出的时候存储，然而在大多数情况下这是不必要的。事实上，如果你只是当应用退出的时候进行存储，你有可能会丢失数据！如果你的应用崩溃了呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出MagicalRecord-04">
+<meta property="og:url" content="dabing1022.github.io/2014/07/22/easy-magicalrecord-04/index.html">
+<meta property="og:site_name" content="HappyCoding:)ChildhoodAndy">
+<meta property="og:description" content="我们接着上一篇 深入浅出MagicalRecord-03。
+这节我们来一起学习下 MagicalRecord 对数据的存储，内容主要来自于 MagicalRecord的github资料。
+ 存储的时机一般情况下，我们应该在数据发生变化时就进行存储操作。有些应用选择在退出的时候存储，然而在大多数情况下这是不必要的。事实上，如果你只是当应用退出的时候进行存储，你有可能会丢失数据！如果你的应用崩溃了呢？">
+<meta property="og:updated_time" content="2015-01-16T16:36:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出MagicalRecord-04">
+<meta name="twitter:description" content="我们接着上一篇 深入浅出MagicalRecord-03。
+这节我们来一起学习下 MagicalRecord 对数据的存储，内容主要来自于 MagicalRecord的github资料。
+ 存储的时机一般情况下，我们应该在数据发生变化时就进行存储操作。有些应用选择在退出的时候存储，然而在大多数情况下这是不必要的。事实上，如果你只是当应用退出的时候进行存储，你有可能会丢失数据！如果你的应用崩溃了呢？">
+  
+    <link rel="alternative" href="/atom.xml" title="HappyCoding:)ChildhoodAndy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ChildhoodAndy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+		
+		
+		<form><input type="text" class="search" placeholder=" Search..."></form>
+				
+
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives/">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/about/">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="/dabing1022@gmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="/dabing1022" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="/ChildhoodAndy" title="Twitter"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="/1986621" title="StackOverflow"></a></li>
+					        
+						</ul>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/BMFont/" style="font-size: 10px;">BMFont</a> <a href="/tags/Bitmap-Font-Generator/" style="font-size: 10px;">Bitmap Font Generator</a> <a href="/tags/Box2D/" style="font-size: 15px;">Box2D</a> <a href="/tags/CCTableView/" style="font-size: 10px;">CCTableView</a> <a href="/tags/Chipmunk/" style="font-size: 17.5px;">Chipmunk</a> <a href="/tags/Chipmunk2D/" style="font-size: 10px;">Chipmunk2D</a> <a href="/tags/Cocoapods/" style="font-size: 17.5px;">Cocoapods</a> <a href="/tags/Cocoapods升级/" style="font-size: 10px;">Cocoapods升级</a> <a href="/tags/Cocos2d-iPhone/" style="font-size: 12.5px;">Cocos2d-iPhone</a> <a href="/tags/CoreData/" style="font-size: 17.5px;">CoreData</a> <a href="/tags/Glyph-Designer/" style="font-size: 10px;">Glyph Designer</a> <a href="/tags/HeartOfTheCity/" style="font-size: 15px;">HeartOfTheCity</a> <a href="/tags/ITC/" style="font-size: 10px;">ITC</a> <a href="/tags/Lua/" style="font-size: 15px;">Lua</a> <a href="/tags/MagicalRecord/" style="font-size: 17.5px;">MagicalRecord</a> <a href="/tags/PhysicsEngine/" style="font-size: 10px;">PhysicsEngine</a> <a href="/tags/PhysicsJointDistance/" style="font-size: 10px;">PhysicsJointDistance</a> <a href="/tags/Prelease/" style="font-size: 10px;">Prelease</a> <a href="/tags/Python/" style="font-size: 12.5px;">Python</a> <a href="/tags/RGBA8888/" style="font-size: 10px;">RGBA8888</a> <a href="/tags/ShoeBox/" style="font-size: 10px;">ShoeBox</a> <a href="/tags/TheNatureOfCode/" style="font-size: 10px;">TheNatureOfCode</a> <a href="/tags/UDID/" style="font-size: 10px;">UDID</a> <a href="/tags/UUID/" style="font-size: 10px;">UUID</a> <a href="/tags/WorldOfWarcraft/" style="font-size: 10px;">WorldOfWarcraft</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/build/" style="font-size: 10px;">build</a> <a href="/tags/categorybitmask/" style="font-size: 10px;">categorybitmask</a> <a href="/tags/chainable/" style="font-size: 10px;">chainable</a> <a href="/tags/cocos2d/" style="font-size: 15px;">cocos2d</a> <a href="/tags/cocos2dx/" style="font-size: 15px;">cocos2dx</a> <a href="/tags/collision/" style="font-size: 12.5px;">collision</a> <a href="/tags/collisionBitmask/" style="font-size: 10px;">collisionBitmask</a> <a href="/tags/contactBitmask/" style="font-size: 10px;">contactBitmask</a> <a href="/tags/cpPinJont/" style="font-size: 10px;">cpPinJont</a> <a href="/tags/credentials/" style="font-size: 10px;">credentials</a> <a href="/tags/exporter/" style="font-size: 10px;">exporter</a> <a href="/tags/filter/" style="font-size: 10px;">filter</a> <a href="/tags/focusbooster/" style="font-size: 10px;">focusbooster</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iPhone/" style="font-size: 10px;">iPhone</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/ios模拟器/" style="font-size: 10px;">ios模拟器</a> <a href="/tags/ipad/" style="font-size: 10px;">ipad</a> <a href="/tags/leak/" style="font-size: 10px;">leak</a> <a href="/tags/libLua-a/" style="font-size: 10px;">libLua.a</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/objective-c/" style="font-size: 10px;">objective-c</a> <a href="/tags/performselector/" style="font-size: 10px;">performselector</a> <a href="/tags/physicseditor/" style="font-size: 10px;">physicseditor</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/query/" style="font-size: 10px;">query</a> <a href="/tags/quick/" style="font-size: 12.5px;">quick</a> <a href="/tags/quick-cocos2dx/" style="font-size: 10px;">quick-cocos2dx</a> <a href="/tags/quick-x/" style="font-size: 10px;">quick-x</a> <a href="/tags/remove/" style="font-size: 10px;">remove</a> <a href="/tags/replace/" style="font-size: 10px;">replace</a> <a href="/tags/scene/" style="font-size: 10px;">scene</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/statemachine/" style="font-size: 10px;">statemachine</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/table/" style="font-size: 10px;">table</a> <a href="/tags/tolua/" style="font-size: 10px;">tolua</a> <a href="/tags/v1-1-0/" style="font-size: 10px;">v1.1.0</a> <a href="/tags/venture-partners/" style="font-size: 10px;">venture-partners</a> <a href="/tags/warning/" style="font-size: 10px;">warning</a> <a href="/tags/wax/" style="font-size: 10px;">wax</a> <a href="/tags/中文/" style="font-size: 10px;">中文</a> <a href="/tags/事件流/" style="font-size: 10px;">事件流</a> <a href="/tags/位图字体/" style="font-size: 10px;">位图字体</a> <a href="/tags/创业/" style="font-size: 12.5px;">创业</a> <a href="/tags/删除/" style="font-size: 12.5px;">删除</a> <a href="/tags/发布/" style="font-size: 10px;">发布</a> <a href="/tags/吞噬/" style="font-size: 10px;">吞噬</a> <a href="/tags/多重继承/" style="font-size: 10px;">多重继承</a> <a href="/tags/心城/" style="font-size: 20px;">心城</a> <a href="/tags/情境/" style="font-size: 10px;">情境</a> <a href="/tags/情感/" style="font-size: 15px;">情感</a> <a href="/tags/拒绝/" style="font-size: 10px;">拒绝</a> <a href="/tags/搜索引擎/" style="font-size: 10px;">搜索引擎</a> <a href="/tags/数据采集/" style="font-size: 10px;">数据采集</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/概念图/" style="font-size: 10px;">概念图</a> <a href="/tags/添加图片/" style="font-size: 10px;">添加图片</a> <a href="/tags/爬虫/" style="font-size: 12.5px;">爬虫</a> <a href="/tags/版本/" style="font-size: 10px;">版本</a> <a href="/tags/物理引擎/" style="font-size: 10px;">物理引擎</a> <a href="/tags/状态机/" style="font-size: 10px;">状态机</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/番茄工作法/" style="font-size: 10px;">番茄工作法</a> <a href="/tags/碰撞查询/" style="font-size: 10px;">碰撞查询</a> <a href="/tags/碰撞过滤/" style="font-size: 10px;">碰撞过滤</a> <a href="/tags/移除/" style="font-size: 10px;">移除</a> <a href="/tags/纹理/" style="font-size: 10px;">纹理</a> <a href="/tags/编程模拟自然系统/" style="font-size: 10px;">编程模拟自然系统</a> <a href="/tags/联想词/" style="font-size: 10px;">联想词</a> <a href="/tags/触摸/" style="font-size: 10px;">触摸</a> <a href="/tags/设备信息/" style="font-size: 10px;">设备信息</a> <a href="/tags/账户密码/" style="font-size: 10px;">账户密码</a> <a href="/tags/距离关节/" style="font-size: 10px;">距离关节</a> <a href="/tags/输入/" style="font-size: 10px;">输入</a> <a href="/tags/链式语法/" style="font-size: 10px;">链式语法</a> <a href="/tags/销关节/" style="font-size: 10px;">销关节</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zengrong.net/">曾嵘</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://post.justbilt.com/">justblit</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yulingtianxia.com">玉令天下</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mokai.github.io">mokai</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">热爱编码，希望家人幸福安康</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">ChildhoodAndy</a></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<a href="/" class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</a>
+			<hgroup>
+			  <h1 class="header-author"><a href="/" title="回到主页">ChildhoodAndy</a></h1>
+			</hgroup>
+			
+			<p class="header-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives/">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/about/">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="/dabing1022@gmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="/dabing1022" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="/ChildhoodAndy" title="Twitter"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="/1986621" title="StackOverflow"></a></li>
+					        
+						</ul>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-easy-magicalrecord-04" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/07/22/easy-magicalrecord-04/" class="article-date">
+  	<time datetime="2014-07-21T18:42:00.000Z" itemprop="datePublished">7月 22 2014</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入浅出MagicalRecord-04
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/ios/">ios</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cocoapods/">Cocoapods</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CoreData/">CoreData</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MagicalRecord/">MagicalRecord</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们接着上一篇 <a href="http://childhood.logdown.com/posts/211016/easy-magicalrecord-03" target="_blank" rel="external">深入浅出MagicalRecord-03</a>。</p>
+<p>这节我们来一起学习下 MagicalRecord 对数据的存储，内容主要来自于 <a href="https://github.com/magicalpanda/MagicalRecord/blob/develop/Docs/Saving.md" target="_blank" rel="external">MagicalRecord的github资料</a>。</p>
+<h1 id="存储的时机"><i class="icon-save"> 存储的时机</i></h1><p>一般情况下，我们应该在数据发生变化时就进行存储操作。有些应用选择在退出的时候存储，然而在大多数情况下这是不必要的。<strong><em>事实上，如果你只是当应用退出的时候进行存储，你有可能会丢失数据！</em></strong>如果你的应用崩溃了呢？用户会丢失他们改变的数据，这是很糟糕的体验，应该极力去避免出现这种情况。</p>
+<p>如果你发现存储比较耗时，有下面几点你可以考虑下：</p>
+<p>1.<strong>利用后台线程存储</strong></p>
+<p>MagicalRecord 提供了一个简洁的API来操作后台线程对实体改变的存储。例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) &#123;</span><br><span class="line">    <span class="comment">//在这里做存储工作，该闭包代码块的工作将会在后台线程运行</span></span><br><span class="line">&#125; completion:^(BOOL success, NSError *error) &#123;</span><br><span class="line">    [application endBackgroundTask:bgTask];</span><br><span class="line">    bgTask = UIBackgroundTaskInvalid;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<p>2.<strong>将存储任务拆分成细小的存储</strong></p>
+<p>类似导入大量数据这样的任务应该被拆分成多个小模块。一次性存储多少量的数据并没有统一的标准，所以你需要使用 Apple’s Instruments 的来测试下你的应用的性能。</p>
+<h1 id="处理长时存储"><i class="icon-save"> 处理长时存储</i></h1><h2 id="ios平台"><i class="icon-mobile-phone"> ios平台</i></h2><p>当退出 ios 应用时，有机会来整理和存储数据到磁盘上。如果你知道存储操作要持续一会，那么最好的方法就是请求应用延期退出。如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">UIApplication *application = [UIApplication sharedApplication];</span><br><span class="line"></span><br><span class="line">__block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    [application endBackgroundTask:bgTask];</span><br><span class="line">    bgTask = UIBackgroundTaskInvalid;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) &#123;</span><br><span class="line">    <span class="comment">//这里做存储操作</span></span><br><span class="line">&#125; completion:^(BOOL success, NSError *error) &#123;</span><br><span class="line">    [application endBackgroundTask:bgTask];</span><br><span class="line">    bgTask = UIBackgroundTaskInvalid;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<p>请确保认真阅读了 <a href="https://developer.apple.com/library/iOS/documentation/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/occ/instm/UIApplication/beginBackgroundTaskWithExpirationHandler:" target="_blank" rel="external">read the documentation for beginBackgroundTaskWithExpirationHandler</a>，因为不适当或者不必要的延长应用程序的生命周期可能会在审核的时候遭到拒绝。</p>
+<h2 id="OSX平台"><i class="icon-desktop"> OSX平台</i></h2><p>在 OS X Mavericks (10.9) 以及后面的版本中，App Nap 可以使得应用在后台的时候可以有效的被终止退出。如果你知道存储操作要持续一会，那么最好的方法就是暂时禁用自动终止和突然终止功能（前提是你的应用支持这些功能）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">NSProcessInfo *processInfo = [NSProcessInfo processInfo];</span><br><span class="line"></span><br><span class="line">[processInfo disableSuddenTermination];</span><br><span class="line">[processInfo disableAutomaticTermination:@<span class="string">"Application is currently saving to persistent store"</span>];</span><br><span class="line"></span><br><span class="line">[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) &#123;</span><br><span class="line">    <span class="comment">//这里做存储操作</span></span><br><span class="line">&#125; completion:^(BOOL success, NSError *error) &#123;</span><br><span class="line">    [processInfo enableSuddenTermination];</span><br><span class="line">    [processInfo enableAutomaticTermination:@<span class="string">"Application has finished saving to the persistent store"</span>];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<p>和 ios 实现一样，在实现之前确保阅读 <a href="https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/Classes/NSProcessInfo_Class/Reference/Reference.html" target="_blank" rel="external">read the documentation on NSProcessInfo</a>来避免被拒绝。</p>
+<h1 id="变化"><i class="icon-bell-alt"> 变化</i></h1><p>在 MagicalRecord 2.2 中，存储API更加一致并遵循CoreData的命名模式。在这个版本中，已经加入了自动化测试来确保将来更新时，存储工作（新的API和废弃的API）能够继续工作。</p>
+<p><code>MR_save</code>被暂时恢复到当前线程的同步运行和存储到<em>持久存储</em>(persistent store)的原始状态。然而，<strong><code>MR_save</code>方法被标记为“将被废弃”(deprecated)，将会在下个大版本 MagicalRecord 3.0 中移除掉。</strong>你应该使用<code>MR_saveToPersistentStoreAndWait</code>同功能函数来替代它。</p>
+<h2 id="a)新的方法">a)新的方法</h2><p>新增加了下面几个方法：</p>
+<h3 id="NSManagedObjectContext+MagicalSaves">NSManagedObjectContext+MagicalSaves</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveOnlySelfAndWait;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveToPersistentStoreAndWait;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;</span><br></pre></td></tr></table></figure>
+<h3 id="MagicalRecord+Actions">MagicalRecord+Actions</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>) saveWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block;</span><br><span class="line">+ (<span class="keyword">void</span>) saveWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;</span><br><span class="line">+ (<span class="keyword">void</span>) saveWithBlockAndWait:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block;</span><br><span class="line">+ (<span class="keyword">void</span>) saveUsingCurrentThreadContextWithBlock:(<span class="keyword">void</span> (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;</span><br><span class="line">+ (<span class="keyword">void</span>) saveUsingCurrentThreadContextWithBlockAndWait:(<span class="keyword">void</span> (^)(NSManagedObjectContext *localContext))block;</span><br></pre></td></tr></table></figure>
+<h2 id="b)标记为废弃的函数">b)标记为废弃的函数</h2><p>下面这些函数被标记为“废弃的”，将会在 MagicalRecord 3.0 版本移除掉，推荐使用替代的函数。</p>
+<h3 id="NSManagedObjectContext+MagicalSaves-1">NSManagedObjectContext+MagicalSaves</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) MR_save;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveWithErrorCallback:(<span class="keyword">void</span>(^)(NSError *error))errorCallback;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveInBackgroundCompletion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveInBackgroundErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveInBackgroundErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveNestedContexts;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveNestedContextsErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveNestedContextsErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion;</span><br></pre></td></tr></table></figure>
+<h3 id="MagicalRecord+Actions-1">MagicalRecord+Actions</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>) saveWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block;</span><br><span class="line">+ (<span class="keyword">void</span>) saveInBackgroundWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block;</span><br><span class="line">+ (<span class="keyword">void</span>) saveInBackgroundWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block completion:(<span class="keyword">void</span>(^)(<span class="keyword">void</span>))completion;</span><br><span class="line">+ (<span class="keyword">void</span>) saveInBackgroundUsingCurrentContextWithBlock:(<span class="keyword">void</span> (^)(NSManagedObjectContext *localContext))block completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion errorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorHandler;</span><br></pre></td></tr></table></figure>
+      
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="/2014/07/22/easy-magicalrecord-04/">深入浅出MagicalRecord-04</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 ChildhoodAndy 的个人博客">ChildhoodAndy</a></p>
+  <p><span>发布时间:</span>2014年7月22日 - 02时07分</p>
+  <p><span>最后更新:</span>2015年1月17日 - 00时01分</p>
+  <p>
+    <span>原始链接:</span><a href="/2014/07/22/easy-magicalrecord-04/" title="深入浅出MagicalRecord-04">dabing1022.github.io/2014/07/22/easy-magicalrecord-04/</a>
+    <span class="btn" data-clipboard-text="原文: dabing1022.github.io/2014/07/22/easy-magicalrecord-04/　　作者: ChildhoodAndy" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="/js/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.btn'); </script>
+</div>
+<style type="text/css">
+  .copyright p .btn {
+    margin-left: 1em;
+  }
+  .copyright:hover p .btn::after {
+    content: "复制"
+  }
+  .copyright p .btn:hover {
+      color: gray;
+      cursor: pointer;
+    };
+</style>
+
+
+
+<nav id="article-nav">
+  
+    <div id="article-nav-newer" class="article-nav-title">
+      <a href="/2014/10/07/add-pictures-to-album-ios-simulator-library/">
+        为ios模拟器相册库添加图片
+      </a>
+    </div>
+  
+  
+    <div id="article-nav-older" class="article-nav-title">
+      <a href="/2014/07/21/easy-magicalrecord-03/">
+        深入浅出MagicalRecord-03
+      </a>
+    </div>
+  
+</nav>
+
+  
+</article>
+
+<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
+<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#存储的时机"><span class="toc-number">1.</span> <span class="toc-text"> 存储的时机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#处理长时存储"><span class="toc-number">2.</span> <span class="toc-text"> 处理长时存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ios平台"><span class="toc-number">2.1.</span> <span class="toc-text"> ios平台</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OSX平台"><span class="toc-number">2.2.</span> <span class="toc-text"> OSX平台</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变化"><span class="toc-number">3.</span> <span class="toc-text"> 变化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a)新的方法"><span class="toc-number">3.1.</span> <span class="toc-text">a)新的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSManagedObjectContext+MagicalSaves"><span class="toc-number">3.1.1.</span> <span class="toc-text">NSManagedObjectContext+MagicalSaves</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MagicalRecord+Actions"><span class="toc-number">3.1.2.</span> <span class="toc-text">MagicalRecord+Actions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#b)标记为废弃的函数"><span class="toc-number">3.2.</span> <span class="toc-text">b)标记为废弃的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSManagedObjectContext+MagicalSaves-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">NSManagedObjectContext+MagicalSaves</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MagicalRecord+Actions-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">MagicalRecord+Actions</span></a></li></ol></li></ol></li></ol>
+</div>
+<style type="text/css">
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script type="text/javascript">
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  /* Show or hide toc when click on tocButton.
+  通过点击设置的按钮显示或者隐藏文章目录.*/
+  toc_button.onclick=function(){
+  if(toc_div.style.display=="none"){
+  toc_div.style.display="block";
+  toc_button.value="隐藏目录";
+  document.getElementById("switch-btn").style.display="none";
+  document.getElementById("switch-area").style.display="none";
+  }
+  else{
+  toc_div.style.display="none";
+  toc_button.value="显示目录";
+  document.getElementById("switch-btn").style.display="block";
+  document.getElementById("switch-area").style.display="block";
+  }
+  }
+</script>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+	</div>
+	<script>
+	window._bd_share_config={
+		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2014/07/22/easy-magicalrecord-04/" data-title="深入浅出MagicalRecord-04" data-url="dabing1022.github.io/2014/07/22/easy-magicalrecord-04/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ChildhoodAndy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+    <style type="text/css">
+    #scroll {
+      display: none;
+    }
+    </style>
+    <div class="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#ds-thread" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    </div>
+
+
+  
+  
+    
+    <div  class="post-nav-button">
+    <a href="/2014/10/07/add-pictures-to-album-ios-simulator-library/" title="上一篇: 为ios模拟器相册库添加图片">
+    <i class="fa fa-angle-left"></i>
+    </a>
+    <a href="/2014/07/21/easy-magicalrecord-03/" title="下一篇: 深入浅出MagicalRecord-03">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+  
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2015 ChildhoodAndy
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        </div>
+    </div>
+    <div class="visit">
+      <span id="busuanzi_container_site_pv" style='display:none'>
+        <span id="site-visit" >本站到访数: 
+        <span id="busuanzi_value_site_uv"></span>
+        </span>
+      </span>
+      <span id="busuanzi_container_page_pv" style='display:none'>
+        <span id="page-visit">, 本页阅读量: 
+        <span id="busuanzi_value_page_pv"></span>
+        </span>
+      </span>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+  <style type="text/css">
+    body {
+      background: lightgray;
+    }
+    #container .left-col {
+      background: white;
+    }
+    .article-inner {
+      background: white;
+    }
+    .post-nav-button {
+      background: #ececec;
+    }
+    #header .header-nav .social #GitHub {
+      background-color: #bfd3ec;
+    }
+  </style>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

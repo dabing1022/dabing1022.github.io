@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Cocos2d重新加载当前场景 | HappyCoding:)ChildhoodAndy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在cocos2d中如何重新加载当前场景？1CCScene *currentScene = [[CCDirector sharedDirector]runningScene];&amp;#10;[[CCDirector sharedDirector]replaceScene:currentScene];
+上面的方法肯定不对啦更改如下：1[[CCDirector sharedDirector] replace">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d重新加载当前场景">
+<meta property="og:url" content="dabing1022.github.io/2013/09/06/cocos2d-reloads-the-current-scene/index.html">
+<meta property="og:site_name" content="HappyCoding:)ChildhoodAndy">
+<meta property="og:description" content="在cocos2d中如何重新加载当前场景？1CCScene *currentScene = [[CCDirector sharedDirector]runningScene];&amp;#10;[[CCDirector sharedDirector]replaceScene:currentScene];
+上面的方法肯定不对啦更改如下：1[[CCDirector sharedDirector] replace">
+<meta property="og:updated_time" content="2015-01-16T16:34:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d重新加载当前场景">
+<meta name="twitter:description" content="在cocos2d中如何重新加载当前场景？1CCScene *currentScene = [[CCDirector sharedDirector]runningScene];&amp;#10;[[CCDirector sharedDirector]replaceScene:currentScene];
+上面的方法肯定不对啦更改如下：1[[CCDirector sharedDirector] replace">
+  
+    <link rel="alternative" href="/atom.xml" title="HappyCoding:)ChildhoodAndy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ChildhoodAndy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+		
+		
+		<form><input type="text" class="search" placeholder=" Search..."></form>
+				
+
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives/">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/about/">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="/dabing1022@gmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="/dabing1022" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="/ChildhoodAndy" title="Twitter"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="/1986621" title="StackOverflow"></a></li>
+					        
+						</ul>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/BMFont/" style="font-size: 10px;">BMFont</a> <a href="/tags/Bitmap-Font-Generator/" style="font-size: 10px;">Bitmap Font Generator</a> <a href="/tags/Box2D/" style="font-size: 15px;">Box2D</a> <a href="/tags/CCTableView/" style="font-size: 10px;">CCTableView</a> <a href="/tags/Chipmunk/" style="font-size: 17.5px;">Chipmunk</a> <a href="/tags/Chipmunk2D/" style="font-size: 10px;">Chipmunk2D</a> <a href="/tags/Cocoapods/" style="font-size: 17.5px;">Cocoapods</a> <a href="/tags/Cocoapods升级/" style="font-size: 10px;">Cocoapods升级</a> <a href="/tags/Cocos2d-iPhone/" style="font-size: 12.5px;">Cocos2d-iPhone</a> <a href="/tags/CoreData/" style="font-size: 17.5px;">CoreData</a> <a href="/tags/Glyph-Designer/" style="font-size: 10px;">Glyph Designer</a> <a href="/tags/HeartOfTheCity/" style="font-size: 15px;">HeartOfTheCity</a> <a href="/tags/ITC/" style="font-size: 10px;">ITC</a> <a href="/tags/Lua/" style="font-size: 15px;">Lua</a> <a href="/tags/MagicalRecord/" style="font-size: 17.5px;">MagicalRecord</a> <a href="/tags/PhysicsEngine/" style="font-size: 10px;">PhysicsEngine</a> <a href="/tags/PhysicsJointDistance/" style="font-size: 10px;">PhysicsJointDistance</a> <a href="/tags/Prelease/" style="font-size: 10px;">Prelease</a> <a href="/tags/Python/" style="font-size: 12.5px;">Python</a> <a href="/tags/RGBA8888/" style="font-size: 10px;">RGBA8888</a> <a href="/tags/ShoeBox/" style="font-size: 10px;">ShoeBox</a> <a href="/tags/TheNatureOfCode/" style="font-size: 10px;">TheNatureOfCode</a> <a href="/tags/UDID/" style="font-size: 10px;">UDID</a> <a href="/tags/UUID/" style="font-size: 10px;">UUID</a> <a href="/tags/WorldOfWarcraft/" style="font-size: 10px;">WorldOfWarcraft</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/build/" style="font-size: 10px;">build</a> <a href="/tags/categorybitmask/" style="font-size: 10px;">categorybitmask</a> <a href="/tags/chainable/" style="font-size: 10px;">chainable</a> <a href="/tags/cocos2d/" style="font-size: 15px;">cocos2d</a> <a href="/tags/cocos2dx/" style="font-size: 15px;">cocos2dx</a> <a href="/tags/collision/" style="font-size: 12.5px;">collision</a> <a href="/tags/collisionBitmask/" style="font-size: 10px;">collisionBitmask</a> <a href="/tags/contactBitmask/" style="font-size: 10px;">contactBitmask</a> <a href="/tags/cpPinJont/" style="font-size: 10px;">cpPinJont</a> <a href="/tags/credentials/" style="font-size: 10px;">credentials</a> <a href="/tags/exporter/" style="font-size: 10px;">exporter</a> <a href="/tags/filter/" style="font-size: 10px;">filter</a> <a href="/tags/focusbooster/" style="font-size: 10px;">focusbooster</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iPhone/" style="font-size: 10px;">iPhone</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/ios模拟器/" style="font-size: 10px;">ios模拟器</a> <a href="/tags/ipad/" style="font-size: 10px;">ipad</a> <a href="/tags/leak/" style="font-size: 10px;">leak</a> <a href="/tags/libLua-a/" style="font-size: 10px;">libLua.a</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/objective-c/" style="font-size: 10px;">objective-c</a> <a href="/tags/performselector/" style="font-size: 10px;">performselector</a> <a href="/tags/physicseditor/" style="font-size: 10px;">physicseditor</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/query/" style="font-size: 10px;">query</a> <a href="/tags/quick/" style="font-size: 12.5px;">quick</a> <a href="/tags/quick-cocos2dx/" style="font-size: 10px;">quick-cocos2dx</a> <a href="/tags/quick-x/" style="font-size: 10px;">quick-x</a> <a href="/tags/remove/" style="font-size: 10px;">remove</a> <a href="/tags/replace/" style="font-size: 10px;">replace</a> <a href="/tags/scene/" style="font-size: 10px;">scene</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/statemachine/" style="font-size: 10px;">statemachine</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/table/" style="font-size: 10px;">table</a> <a href="/tags/tolua/" style="font-size: 10px;">tolua</a> <a href="/tags/v1-1-0/" style="font-size: 10px;">v1.1.0</a> <a href="/tags/venture-partners/" style="font-size: 10px;">venture-partners</a> <a href="/tags/warning/" style="font-size: 10px;">warning</a> <a href="/tags/wax/" style="font-size: 10px;">wax</a> <a href="/tags/中文/" style="font-size: 10px;">中文</a> <a href="/tags/事件流/" style="font-size: 10px;">事件流</a> <a href="/tags/位图字体/" style="font-size: 10px;">位图字体</a> <a href="/tags/创业/" style="font-size: 12.5px;">创业</a> <a href="/tags/删除/" style="font-size: 12.5px;">删除</a> <a href="/tags/发布/" style="font-size: 10px;">发布</a> <a href="/tags/吞噬/" style="font-size: 10px;">吞噬</a> <a href="/tags/多重继承/" style="font-size: 10px;">多重继承</a> <a href="/tags/心城/" style="font-size: 20px;">心城</a> <a href="/tags/情境/" style="font-size: 10px;">情境</a> <a href="/tags/情感/" style="font-size: 15px;">情感</a> <a href="/tags/拒绝/" style="font-size: 10px;">拒绝</a> <a href="/tags/搜索引擎/" style="font-size: 10px;">搜索引擎</a> <a href="/tags/数据采集/" style="font-size: 10px;">数据采集</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/概念图/" style="font-size: 10px;">概念图</a> <a href="/tags/添加图片/" style="font-size: 10px;">添加图片</a> <a href="/tags/爬虫/" style="font-size: 12.5px;">爬虫</a> <a href="/tags/版本/" style="font-size: 10px;">版本</a> <a href="/tags/物理引擎/" style="font-size: 10px;">物理引擎</a> <a href="/tags/状态机/" style="font-size: 10px;">状态机</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/番茄工作法/" style="font-size: 10px;">番茄工作法</a> <a href="/tags/碰撞查询/" style="font-size: 10px;">碰撞查询</a> <a href="/tags/碰撞过滤/" style="font-size: 10px;">碰撞过滤</a> <a href="/tags/移除/" style="font-size: 10px;">移除</a> <a href="/tags/纹理/" style="font-size: 10px;">纹理</a> <a href="/tags/编程模拟自然系统/" style="font-size: 10px;">编程模拟自然系统</a> <a href="/tags/联想词/" style="font-size: 10px;">联想词</a> <a href="/tags/触摸/" style="font-size: 10px;">触摸</a> <a href="/tags/设备信息/" style="font-size: 10px;">设备信息</a> <a href="/tags/账户密码/" style="font-size: 10px;">账户密码</a> <a href="/tags/距离关节/" style="font-size: 10px;">距离关节</a> <a href="/tags/输入/" style="font-size: 10px;">输入</a> <a href="/tags/链式语法/" style="font-size: 10px;">链式语法</a> <a href="/tags/销关节/" style="font-size: 10px;">销关节</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zengrong.net/">曾嵘</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://post.justbilt.com/">justblit</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yulingtianxia.com">玉令天下</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mokai.github.io">mokai</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">热爱编码，希望家人幸福安康</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">ChildhoodAndy</a></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<a href="/" class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</a>
+			<hgroup>
+			  <h1 class="header-author"><a href="/" title="回到主页">ChildhoodAndy</a></h1>
+			</hgroup>
+			
+			<p class="header-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives/">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/about/">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="/dabing1022@gmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="/dabing1022" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="/ChildhoodAndy" title="Twitter"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="/1986621" title="StackOverflow"></a></li>
+					        
+						</ul>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-cocos2d-reloads-the-current-scene" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/09/06/cocos2d-reloads-the-current-scene/" class="article-date">
+  	<time datetime="2013-09-06T01:27:00.000Z" itemprop="datePublished">9月 6 2013</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cocos2d重新加载当前场景
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/cocos2d/">cocos2d</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocos2d/">cocos2d</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/replace/">replace</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scene/">scene</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在cocos2d中如何重新加载当前场景？<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCScene *currentScene = [[CCDirector sharedDirector]runningScene];&#10;[[CCDirector sharedDirector]replaceScene:currentScene];</span><br></pre></td></tr></table></figure></p>
+<p>上面的方法肯定不对啦<br>更改如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[CCDirector sharedDirector] replaceScene:[YourSceneClass scene]];</span><br></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCScene *currentScene = [CCDirector sharedDirector].runningScene;&#10;CCScene *newScene = [[[currentScene class] alloc] init];&#10;[[CCDirector sharedDirector] replaceScene:newScene];</span><br></pre></td></tr></table></figure></p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="/2013/09/06/cocos2d-reloads-the-current-scene/">Cocos2d重新加载当前场景</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 ChildhoodAndy 的个人博客">ChildhoodAndy</a></p>
+  <p><span>发布时间:</span>2013年9月6日 - 09时09分</p>
+  <p><span>最后更新:</span>2015年1月17日 - 00时01分</p>
+  <p>
+    <span>原始链接:</span><a href="/2013/09/06/cocos2d-reloads-the-current-scene/" title="Cocos2d重新加载当前场景">dabing1022.github.io/2013/09/06/cocos2d-reloads-the-current-scene/</a>
+    <span class="btn" data-clipboard-text="原文: dabing1022.github.io/2013/09/06/cocos2d-reloads-the-current-scene/　　作者: ChildhoodAndy" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="/js/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.btn'); </script>
+</div>
+<style type="text/css">
+  .copyright p .btn {
+    margin-left: 1em;
+  }
+  .copyright:hover p .btn::after {
+    content: "复制"
+  }
+  .copyright p .btn:hover {
+      color: gray;
+      cursor: pointer;
+    };
+</style>
+
+
+
+<nav id="article-nav">
+  
+    <div id="article-nav-newer" class="article-nav-title">
+      <a href="/2013/09/25/cocos2d-iphone-calling-lua/">
+        Cocos2d-iPhone调用lua
+      </a>
+    </div>
+  
+  
+    <div id="article-nav-older" class="article-nav-title">
+      <a href="/2013/09/05/open-lua-journey/">
+        开启Lua旅程
+      </a>
+    </div>
+  
+</nav>
+
+  
+</article>
+
+<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
+<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+
+</div>
+<style type="text/css">
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script type="text/javascript">
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  /* Show or hide toc when click on tocButton.
+  通过点击设置的按钮显示或者隐藏文章目录.*/
+  toc_button.onclick=function(){
+  if(toc_div.style.display=="none"){
+  toc_div.style.display="block";
+  toc_button.value="隐藏目录";
+  document.getElementById("switch-btn").style.display="none";
+  document.getElementById("switch-area").style.display="none";
+  }
+  else{
+  toc_div.style.display="none";
+  toc_button.value="显示目录";
+  document.getElementById("switch-btn").style.display="block";
+  document.getElementById("switch-area").style.display="block";
+  }
+  }
+</script>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+	</div>
+	<script>
+	window._bd_share_config={
+		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2013/09/06/cocos2d-reloads-the-current-scene/" data-title="Cocos2d重新加载当前场景" data-url="dabing1022.github.io/2013/09/06/cocos2d-reloads-the-current-scene/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ChildhoodAndy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+    <style type="text/css">
+    #scroll {
+      display: none;
+    }
+    </style>
+    <div class="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#ds-thread" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    </div>
+
+
+  
+  
+    
+    <div  class="post-nav-button">
+    <a href="/2013/09/25/cocos2d-iphone-calling-lua/" title="上一篇: Cocos2d-iPhone调用lua">
+    <i class="fa fa-angle-left"></i>
+    </a>
+    <a href="/2013/09/05/open-lua-journey/" title="下一篇: 开启Lua旅程">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+  
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2015 ChildhoodAndy
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        </div>
+    </div>
+    <div class="visit">
+      <span id="busuanzi_container_site_pv" style='display:none'>
+        <span id="site-visit" >本站到访数: 
+        <span id="busuanzi_value_site_uv"></span>
+        </span>
+      </span>
+      <span id="busuanzi_container_page_pv" style='display:none'>
+        <span id="page-visit">, 本页阅读量: 
+        <span id="busuanzi_value_page_pv"></span>
+        </span>
+      </span>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+  <style type="text/css">
+    body {
+      background: lightgray;
+    }
+    #container .left-col {
+      background: white;
+    }
+    .article-inner {
+      background: white;
+    }
+    .post-nav-button {
+      background: #ececec;
+    }
+    #header .header-nav .social #GitHub {
+      background-color: #bfd3ec;
+    }
+  </style>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
