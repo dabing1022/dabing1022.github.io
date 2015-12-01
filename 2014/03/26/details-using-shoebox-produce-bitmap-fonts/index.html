@@ -1,11 +1,59 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="theme-next   use-motion ">
 <head>
-  <meta charset="utf-8">
-  
-  <title>详解利用ShoeBox制作位图字体 | HappyCoding:)ChildhoodAndy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 ShoeBox 简介
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="BMFont,Bitmap Font Generator,Glyph Designer,ShoeBox,位图字体," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HappyCoding:)ChildhoodAndy" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="1 ShoeBox 简介
 
 ShoeBox官网
 
@@ -64,242 +112,223 @@ ShoeBox是一个基于AdobeAIR实现的免费跨平台的工具。这个工具�
 
 
 2 功能概括介绍ShoeBox虽小，五脏俱全。作者做这个工具足见是用了心，如果各位想捐款，官网右上角:)。写这篇文字的时候，笔者用的版本是最新版3.4.2。官网的一些图片说明不少是老版本">
-  
-    <link rel="alternative" href="/atom.xml" title="HappyCoding:)ChildhoodAndy" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 详解利用ShoeBox制作位图字体 | HappyCoding:)ChildhoodAndy </title>
 </head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="/img/avatar.png" class="js-avatar">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">ChildhoodAndy</a></h1>
-		</hgroup>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-		
-		<p class="header-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
-		
-		
-		<form><input type="text" class="search" placeholder=" Search..."></form>
-				
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
 
 
-		
-			<div id="switch-btn" class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-						<li>关于我</li>
-						
-					</ul>
-				</div>
-			</div>
-		
 
-		<div id="switch-area" class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives/">所有文章</a></li>
-				        
-							<li><a href="/tags/">标签云</a></li>
-				        
-							<li><a href="/about/">关于我</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<ul class="social">
-							
-								<li id="Email"><a class="Email" target="_blank" href="/dabing1022@gmail.com" title="Email"></a></li>
-					        
-								<li id="GitHub"><a class="GitHub" target="_blank" href="http://www.github.com/dabing1022" title="GitHub"></a></li>
-					        
-								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
-					        
-								<li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/childhoodandy" title="Twitter"></a></li>
-					        
-								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/1986621" title="StackOverflow"></a></li>
-					        
-						</ul>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/BMFont/" style="font-size: 10px;">BMFont</a> <a href="/tags/Bitmap-Font-Generator/" style="font-size: 10px;">Bitmap Font Generator</a> <a href="/tags/Box2D/" style="font-size: 15px;">Box2D</a> <a href="/tags/CCTableView/" style="font-size: 10px;">CCTableView</a> <a href="/tags/Chipmunk/" style="font-size: 17.5px;">Chipmunk</a> <a href="/tags/Chipmunk2D/" style="font-size: 10px;">Chipmunk2D</a> <a href="/tags/Cocoapods/" style="font-size: 17.5px;">Cocoapods</a> <a href="/tags/Cocoapods升级/" style="font-size: 10px;">Cocoapods升级</a> <a href="/tags/Cocos2d-iPhone/" style="font-size: 12.5px;">Cocos2d-iPhone</a> <a href="/tags/CoreData/" style="font-size: 17.5px;">CoreData</a> <a href="/tags/Glyph-Designer/" style="font-size: 10px;">Glyph Designer</a> <a href="/tags/HeartOfTheCity/" style="font-size: 15px;">HeartOfTheCity</a> <a href="/tags/ITC/" style="font-size: 10px;">ITC</a> <a href="/tags/Lua/" style="font-size: 15px;">Lua</a> <a href="/tags/MagicalRecord/" style="font-size: 17.5px;">MagicalRecord</a> <a href="/tags/PhysicsEngine/" style="font-size: 10px;">PhysicsEngine</a> <a href="/tags/PhysicsJointDistance/" style="font-size: 10px;">PhysicsJointDistance</a> <a href="/tags/Prelease/" style="font-size: 10px;">Prelease</a> <a href="/tags/Python/" style="font-size: 12.5px;">Python</a> <a href="/tags/RGBA8888/" style="font-size: 10px;">RGBA8888</a> <a href="/tags/ShoeBox/" style="font-size: 10px;">ShoeBox</a> <a href="/tags/TheNatureOfCode/" style="font-size: 10px;">TheNatureOfCode</a> <a href="/tags/UDID/" style="font-size: 10px;">UDID</a> <a href="/tags/UUID/" style="font-size: 10px;">UUID</a> <a href="/tags/WorldOfWarcraft/" style="font-size: 10px;">WorldOfWarcraft</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/build/" style="font-size: 10px;">build</a> <a href="/tags/categorybitmask/" style="font-size: 10px;">categorybitmask</a> <a href="/tags/chainable/" style="font-size: 10px;">chainable</a> <a href="/tags/cocos2d/" style="font-size: 15px;">cocos2d</a> <a href="/tags/cocos2dx/" style="font-size: 15px;">cocos2dx</a> <a href="/tags/collision/" style="font-size: 12.5px;">collision</a> <a href="/tags/collisionBitmask/" style="font-size: 10px;">collisionBitmask</a> <a href="/tags/contactBitmask/" style="font-size: 10px;">contactBitmask</a> <a href="/tags/cpPinJont/" style="font-size: 10px;">cpPinJont</a> <a href="/tags/credentials/" style="font-size: 10px;">credentials</a> <a href="/tags/exporter/" style="font-size: 10px;">exporter</a> <a href="/tags/filter/" style="font-size: 10px;">filter</a> <a href="/tags/focusbooster/" style="font-size: 10px;">focusbooster</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iPhone/" style="font-size: 10px;">iPhone</a> <a href="/tags/ios/" style="font-size: 12.5px;">ios</a> <a href="/tags/ios模拟器/" style="font-size: 10px;">ios模拟器</a> <a href="/tags/ipad/" style="font-size: 10px;">ipad</a> <a href="/tags/leak/" style="font-size: 10px;">leak</a> <a href="/tags/libLua-a/" style="font-size: 10px;">libLua.a</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/objective-c/" style="font-size: 10px;">objective-c</a> <a href="/tags/performselector/" style="font-size: 10px;">performselector</a> <a href="/tags/physicseditor/" style="font-size: 10px;">physicseditor</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/query/" style="font-size: 10px;">query</a> <a href="/tags/quick/" style="font-size: 12.5px;">quick</a> <a href="/tags/quick-cocos2dx/" style="font-size: 10px;">quick-cocos2dx</a> <a href="/tags/quick-x/" style="font-size: 10px;">quick-x</a> <a href="/tags/remove/" style="font-size: 10px;">remove</a> <a href="/tags/replace/" style="font-size: 10px;">replace</a> <a href="/tags/scene/" style="font-size: 10px;">scene</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/statemachine/" style="font-size: 10px;">statemachine</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/table/" style="font-size: 10px;">table</a> <a href="/tags/tolua/" style="font-size: 10px;">tolua</a> <a href="/tags/v1-1-0/" style="font-size: 10px;">v1.1.0</a> <a href="/tags/venture-partners/" style="font-size: 10px;">venture-partners</a> <a href="/tags/warning/" style="font-size: 10px;">warning</a> <a href="/tags/wax/" style="font-size: 10px;">wax</a> <a href="/tags/中文/" style="font-size: 10px;">中文</a> <a href="/tags/事件流/" style="font-size: 10px;">事件流</a> <a href="/tags/位图字体/" style="font-size: 10px;">位图字体</a> <a href="/tags/创业/" style="font-size: 12.5px;">创业</a> <a href="/tags/删除/" style="font-size: 12.5px;">删除</a> <a href="/tags/发布/" style="font-size: 10px;">发布</a> <a href="/tags/吞噬/" style="font-size: 10px;">吞噬</a> <a href="/tags/多重继承/" style="font-size: 10px;">多重继承</a> <a href="/tags/心城/" style="font-size: 20px;">心城</a> <a href="/tags/情境/" style="font-size: 10px;">情境</a> <a href="/tags/情感/" style="font-size: 15px;">情感</a> <a href="/tags/拒绝/" style="font-size: 10px;">拒绝</a> <a href="/tags/搜索引擎/" style="font-size: 10px;">搜索引擎</a> <a href="/tags/数据采集/" style="font-size: 10px;">数据采集</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/概念图/" style="font-size: 10px;">概念图</a> <a href="/tags/添加图片/" style="font-size: 10px;">添加图片</a> <a href="/tags/爬虫/" style="font-size: 12.5px;">爬虫</a> <a href="/tags/版本/" style="font-size: 10px;">版本</a> <a href="/tags/物理引擎/" style="font-size: 10px;">物理引擎</a> <a href="/tags/状态机/" style="font-size: 10px;">状态机</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/番茄工作法/" style="font-size: 10px;">番茄工作法</a> <a href="/tags/碰撞查询/" style="font-size: 10px;">碰撞查询</a> <a href="/tags/碰撞过滤/" style="font-size: 10px;">碰撞过滤</a> <a href="/tags/移除/" style="font-size: 10px;">移除</a> <a href="/tags/纹理/" style="font-size: 10px;">纹理</a> <a href="/tags/编程模拟自然系统/" style="font-size: 10px;">编程模拟自然系统</a> <a href="/tags/联想词/" style="font-size: 10px;">联想词</a> <a href="/tags/触摸/" style="font-size: 10px;">触摸</a> <a href="/tags/设备信息/" style="font-size: 10px;">设备信息</a> <a href="/tags/账户密码/" style="font-size: 10px;">账户密码</a> <a href="/tags/距离关节/" style="font-size: 10px;">距离关节</a> <a href="/tags/输入/" style="font-size: 10px;">输入</a> <a href="/tags/链式语法/" style="font-size: 10px;">链式语法</a> <a href="/tags/销关节/" style="font-size: 10px;">销关节</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zengrong.net/">曾嵘</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://post.justbilt.com/">justblit</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yulingtianxia.com">玉令天下</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mokai.github.io">mokai</a>
-			        
-			        </div>
-				</section>
-				
 
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">热爱编码，希望家人幸福安康</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HappyCoding:)ChildhoodAndy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
 </div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">ChildhoodAndy</a></h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<a href="/" class="profilepic">
-				<img lazy-src="/img/avatar.png" class="js-avatar">
-			</a>
-			<hgroup>
-			  <h1 class="header-author"><a href="/" title="回到主页">ChildhoodAndy</a></h1>
-			</hgroup>
-			
-			<p class="header-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives/">所有文章</a></li>
-		        
-					<li><a href="/tags/">标签云</a></li>
-		        
-					<li><a href="/about/">关于我</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-						<ul class="social">
-							
-								<li id="Email"><a class="Email" target="_blank" href="/dabing1022@gmail.com" title="Email"></a></li>
-					        
-								<li id="GitHub"><a class="GitHub" target="_blank" href="http://www.github.com/dabing1022" title="GitHub"></a></li>
-					        
-								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
-					        
-								<li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/childhoodandy" title="Twitter"></a></li>
-					        
-								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/1986621" title="StackOverflow"></a></li>
-					        
-						</ul>
-			</nav>
-		</header>				
-	</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
 </nav>
-      <div class="body-wrap"><article id="post-details-using-shoebox-produce-bitmap-fonts" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/03/26/details-using-shoebox-produce-bitmap-fonts/" class="article-date">
-  	<time datetime="2014-03-25T23:42:00.000Z" itemprop="datePublished">3月 26 2014</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+
   
-    <h1 class="article-title" itemprop="name">
-      详解利用ShoeBox制作位图字体
-    </h1>
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                详解利用ShoeBox制作位图字体
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2014-03-26T07:42:00+08:00" content="Mar 26 2014">
+              Mar 26 2014
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GameProgramming/" itemprop="url" rel="index">
+                    <span itemprop="name">GameProgramming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/03/26/details-using-shoebox-produce-bitmap-fonts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/03/26/details-using-shoebox-produce-bitmap-fonts/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
       </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/GameProgramming/">GameProgramming</a>
-	</div>
-
-
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BMFont/">BMFont</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bitmap-Font-Generator/">Bitmap Font Generator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glyph-Designer/">Glyph Designer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ShoeBox/">ShoeBox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/位图字体/">位图字体</a></li></ul>
-	</div>
-
-        <div class="clearfix"></div>
-      </div>
-      
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body">
+
       
-        <h2 id="1_ShoeBox_简介">1 ShoeBox 简介</h2><p><img src="http://childhoodgamedev.qiniudn.com/shoebox_screenshot_shoebox3.jpg" alt=""></p>
+      
+
+      
+        <span itemprop="articleBody"><h2 id="1_ShoeBox_简介">1 ShoeBox 简介</h2><p><img src="http://childhoodgamedev.qiniudn.com/shoebox_screenshot_shoebox3.jpg" alt=""></p>
 <ul>
 <li><a href="http://renderhjs.net/shoebox/" target="_blank" rel="external">ShoeBox官网</a></li>
 </ul>
@@ -396,250 +425,505 @@ ShoeBox是一个基于AdobeAIR实现的免费跨平台的工具。这个工具�
 <li><a href="http://v.youku.com/v_show/id_XNjkwMjY1ODg0.html" target="_blank" rel="external">【优酷视频ShoeBox 汉字位图例子】</a></li>
 </ul>
 <p>Happy Designing!</p>
-
+</span>
       
+    </div>
+
+    <footer class="post-footer">
       
-    </div>
-    
-  </div>
-  
-    
-<div class="copyright">
-  <p><span>本文标题:</span><a href="/2014/03/26/details-using-shoebox-produce-bitmap-fonts/">详解利用ShoeBox制作位图字体</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 ChildhoodAndy 的个人博客">ChildhoodAndy</a></p>
-  <p><span>发布时间:</span>2014年3月26日 - 07时03分</p>
-  <p><span>最后更新:</span>2015年1月17日 - 00时01分</p>
-  <p>
-    <span>原始链接:</span><a href="/2014/03/26/details-using-shoebox-produce-bitmap-fonts/" title="详解利用ShoeBox制作位图字体">dabing1022.github.io/2014/03/26/details-using-shoebox-produce-bitmap-fonts/</a>
-    <span class="btn" data-clipboard-text="原文: dabing1022.github.io/2014/03/26/details-using-shoebox-produce-bitmap-fonts/　　作者: ChildhoodAndy" title="点击复制文章链接">
-        <i class="fa fa-clipboard"></i>
-    </span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
-  <script src="/js/clipboard.min.js"></script>
-  <script> var clipboard = new Clipboard('.btn'); </script>
-</div>
-<style type="text/css">
-  .copyright p .btn {
-    margin-left: 1em;
-  }
-  .copyright:hover p .btn::after {
-    content: "复制"
-  }
-  .copyright p .btn:hover {
-      color: gray;
-      cursor: pointer;
-    };
-</style>
-
-
-
-<nav id="article-nav">
-  
-    <div id="article-nav-newer" class="article-nav-title">
-      <a href="/2014/04/06/chipmunk-collision-in-detailed-cocos2dx-filter/">
-        详解Cocos2DX中Chipmunk碰撞过滤
-      </a>
-    </div>
-  
-  
-    <div id="article-nav-older" class="article-nav-title">
-      <a href="/2014/03/23/worldofwarcraft-novel-here/">
-        WorldOfWarcraft小说到了！
-      </a>
-    </div>
-  
-</nav>
-
-  
-</article>
-
-<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
-<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
-<div id="toc" class="toc-article">
-<strong class="toc-title">文章目录</strong>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1_ShoeBox_简介"><span class="toc-number">1.</span> <span class="toc-text">1 ShoeBox 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2_功能概括介绍"><span class="toc-number">2.</span> <span class="toc-text">2 功能概括介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sprites"><span class="toc-number">2.1.</span> <span class="toc-text">Sprites</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GUI"><span class="toc-number">2.2.</span> <span class="toc-text">GUI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Animation"><span class="toc-number">2.3.</span> <span class="toc-text">Animation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmaps"><span class="toc-number">2.4.</span> <span class="toc-text">Bitmaps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc"><span class="toc-number">2.5.</span> <span class="toc-text">Misc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3_言归正传_创建位图字体"><span class="toc-number">3.</span> <span class="toc-text">3 言归正传 创建位图字体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工作流程"><span class="toc-number">3.1.</span> <span class="toc-text">工作流程</span></a></li></ol></li></ol>
-</div>
-<style type="text/css">
-  .left-col .switch-btn {
-    display: none;
-  }
-  .left-col .switch-area {
-    display: none;
-  }
-</style>
-
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-<script type="text/javascript">
-  var toc_button= document.getElementById("tocButton");
-  var toc_div= document.getElementById("toc");
-  /* Show or hide toc when click on tocButton.
-  通过点击设置的按钮显示或者隐藏文章目录.*/
-  toc_button.onclick=function(){
-  if(toc_div.style.display=="none"){
-  toc_div.style.display="block";
-  toc_button.value="隐藏目录";
-  document.getElementById("switch-btn").style.display="none";
-  document.getElementById("switch-area").style.display="none";
-  }
-  else{
-  toc_div.style.display="none";
-  toc_button.value="显示目录";
-  document.getElementById("switch-btn").style.display="block";
-  document.getElementById("switch-area").style.display="block";
-  }
-  }
-</script>
-
-
-<div class="share">
-	<div class="bdsharebuttonbox">
-	<a href="#" class="bds_more" data-cmd="more"></a>
-	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
-	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-	</div>
-	<script>
-	window._bd_share_config={
-		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-	</script>
-</div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2014/03/26/details-using-shoebox-produce-bitmap-fonts/" data-title="详解利用ShoeBox制作位图字体" data-url="dabing1022.github.io/2014/03/26/details-using-shoebox-produce-bitmap-fonts/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"ChildhoodAndy"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-
-
-    <style type="text/css">
-    #scroll {
-      display: none;
-    }
-    </style>
-    <div class="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#ds-thread" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
-    </div>
-
-
-  
-  
-    
-    <div  class="post-nav-button">
-    <a href="/2014/04/06/chipmunk-collision-in-detailed-cocos2dx-filter/" title="上一篇: 详解Cocos2DX中Chipmunk碰撞过滤">
-    <i class="fa fa-angle-left"></i>
-    </a>
-    <a href="/2014/03/23/worldofwarcraft-novel-here/" title="下一篇: WorldOfWarcraft小说到了！">
-    <i class="fa fa-angle-right"></i>
-    </a>
-    </div>
-  
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2015 ChildhoodAndy
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        <div class="post-tags">
+          
+            <a href="/tags/BMFont/" rel="tag">#BMFont</a>
+          
+            <a href="/tags/Bitmap-Font-Generator/" rel="tag">#Bitmap Font Generator</a>
+          
+            <a href="/tags/Glyph-Designer/" rel="tag">#Glyph Designer</a>
+          
+            <a href="/tags/ShoeBox/" rel="tag">#ShoeBox</a>
+          
+            <a href="/tags/位图字体/" rel="tag">#位图字体</a>
+          
         </div>
-    </div>
-    <div class="visit">
-      <span id="busuanzi_container_site_pv" style='display:none'>
-        <span id="site-visit" >本站到访数: 
-        <span id="busuanzi_value_site_uv"></span>
-        </span>
-      </span>
-      <span id="busuanzi_container_page_pv" style='display:none'>
-        <span id="page-visit">, 本页阅读量: 
-        <span id="busuanzi_value_page_pv"></span>
-        </span>
-      </span>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/03/23/worldofwarcraft-novel-here/" rel="next" title="WorldOfWarcraft小说到了！">
+                <i class="fa fa-chevron-left"></i> WorldOfWarcraft小说到了！
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/04/06/chipmunk-collision-in-detailed-cocos2dx-filter/" rel="prev" title="详解Cocos2DX中Chipmunk碰撞过滤">
+                详解Cocos2DX中Chipmunk碰撞过滤 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2014/03/26/details-using-shoebox-produce-bitmap-fonts/"
+     data-title="详解利用ShoeBox制作位图字体"
+     data-content=""
+     data-url="dabing1022.github.io/2014/03/26/details-using-shoebox-produce-bitmap-fonts/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
     </div>
   </div>
-</footer>
+</div>
+      
     </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+      <div class="ds-thread" data-thread-key="2014/03/26/details-using-shoebox-produce-bitmap-fonts/"
+           data-title="详解利用ShoeBox制作位图字体" data-url="dabing1022.github.io/2014/03/26/details-using-shoebox-produce-bitmap-fonts/">
+      </div>
+    
+  </div>
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+      </div>
 
-<script type="text/javascript">
-  var backgroundList = ["url(/background/bg-1.jpg)", "url(/background/bg-2.jpg)","url(/background/bg-3.jpg)","url(/background/bg-4.jpg)","url(/background/bg-5.jpg)"];
-  var background = Math.floor(Math.random() * backgroundList.length);
-  $("body").css({"background": backgroundList[background], "background-attachment": "fixed", "background-size": "cover"});
-</script>
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/uploads/avatar.png" alt="ChildhoodAndy" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">109</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.github.com/dabing1022" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/childhoodandy" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1297984304" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/1986621" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> StackOverflow
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友链</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://zengrong.net/" target="_blank">曾嵘</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://post.justbilt.com/" target="_blank">justblit</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mokai.github.io" target="_blank">mokai</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1_ShoeBox_简介"><span class="nav-number">1.</span> <span class="nav-text">1 ShoeBox 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_功能概括介绍"><span class="nav-number">2.</span> <span class="nav-text">2 功能概括介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sprites"><span class="nav-number">2.1.</span> <span class="nav-text">Sprites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GUI"><span class="nav-number">2.2.</span> <span class="nav-text">GUI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation"><span class="nav-number">2.3.</span> <span class="nav-text">Animation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmaps"><span class="nav-number">2.4.</span> <span class="nav-text">Bitmaps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Misc"><span class="nav-number">2.5.</span> <span class="nav-text">Misc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_言归正传_创建位图字体"><span class="nav-number">3.</span> <span class="nav-text">3 言归正传 创建位图字体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流程"><span class="nav-number">3.1.</span> <span class="nav-text">工作流程</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
 
 
+      
+    </main>
 
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<div class="scroll" id="scroll">
-<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
 </div>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
   </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ChildhoodAndy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
 </body>
 </html>
