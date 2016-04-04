@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.5.0" />
 
 
 
@@ -66,10 +72,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -78,15 +90,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +97,16 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,7 +135,7 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -189,7 +199,6 @@
       
 
       
-      
     </ul>
   
 
@@ -201,14 +210,147 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/01/ios-performselector-may-cause-a-leak-because-its-selector-is-unknown-warning-cause-and-its-solution/" itemprop="url">
+                  ios之"performSelector may cause a leak because its selector is unknown"警告原因及其解决办法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-12-01T08:36:00+08:00" content="Dec 1 2014">
+              Dec 1 2014
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/01/ios-performselector-may-cause-a-leak-because-its-selector-is-unknown-warning-cause-and-its-solution/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/01/ios-performselector-may-cause-a-leak-because-its-selector-is-unknown-warning-cause-and-its-solution/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="问题描述">问题描述</h2><p>项目中使用到了从字符串创建选择器，编译时发现警告：”performSelector may cause a leak because its selector is unknown”（因为performSelector的选择器未知可能会引起泄漏），为什么在ARC模式下会出现这个警告？</p>
+<p>经过搜索后，在Stackoverflow上发现了一个令人满意的答案。见<a href="http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown" target="_blank" rel="external">http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown</a>。</p>
+<h2 id="原因">原因</h2><p>在ARC模式下，运行时需要知道如何处理你正在调用的方法的返回值。这个返回值可以是任意值，如<code>void</code>,<code>int</code>,<code>char</code>,<code>NSString</code>,<code>id</code>等等。ARC通过头文件的函数定义来得到这些信息。所以平时我们用到的静态选择器就不会出现这个警告。因为在编译期间，这些信息都已经确定。</p>
+<p>如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...&#10;[someController performSelector:@selector(someMethod)];&#10;...&#10;- (void)someMethod&#10;&#123;&#10;  //bla bla...&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>而使用<code>[someController performSelector: NSSelectorFromString(@&quot;someMethod&quot;)];</code>时ARC并不知道该方法的返回值是什么，以及该如何处理？该忽略？还是标记为<code>ns_returns_retained</code>还是<code>ns_returns_autoreleased</code>?</p>
+<h2 id="解决办法">解决办法</h2><h3 id="1-使用函数指针方式">1.使用函数指针方式</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SEL selector = NSSelectorFromString(@&#34;someMethod&#34;);&#10;IMP imp = [_controller methodForSelector:selector];&#10;void (*func)(id, SEL) = (void *)imp;&#10;func(_controller, selector);</span><br></pre></td></tr></table></figure>
+<p>当有额外参数时，如</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SEL selector = NSSelectorFromString(@&#34;processRegion:ofView:&#34;);&#10;IMP imp = [_controller methodForSelector:selector];&#10;CGRect (*func)(id, SEL, CGRect, UIView *) = (void *)imp;&#10;CGRect result = func(_controller, selector, someRect, someView);</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用宏忽略警告">2.使用宏忽略警告</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#pragma clang diagnostic push&#10;#pragma clang diagnostic ignored &#34;-Warc-performSelector-leaks&#34;&#10;   [someController performSelector: NSSelectorFromString(@&#34;someMethod&#34;)]&#10;#pragma clang diagnostic pop</span><br></pre></td></tr></table></figure>
+<p>通过使用<code>#pragma clang diagnostic push/pop</code>，你可以告诉Clang编译器仅仅为某一特定部分的代码来忽视特定警告。</p>
+<p>如果需要忽视的警告有多处，可以定义一个宏</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define SuppressPerformSelectorLeakWarning(Stuff) \&#10;    do &#123; \&#10;        _Pragma(&#34;clang diagnostic push&#34;) \&#10;        _Pragma(&#34;clang diagnostic ignored \&#34;-Warc-performSelector-leaks\&#34;&#34;) \&#10;        Stuff; \&#10;        _Pragma(&#34;clang diagnostic pop&#34;) \&#10;    &#125; while (0)</span><br></pre></td></tr></table></figure>
+<p>在产生警告也就是<code>performSelector</code>的地方用使用该宏，如</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SuppressPerformSelectorLeakWarning(&#10;    [_target performSelector:_action withObject:self]&#10;);</span><br></pre></td></tr></table></figure>
+<p>如果需要<code>performSelector</code>返回值的话，</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id result;&#10;SuppressPerformSelectorLeakWarning(&#10;    result = [_target performSelector:_action withObject:self]&#10;);</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用afterDelay">3.使用afterDelay</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self performSelector:aSelector withObject:nil afterDelay:0.0];</span><br></pre></td></tr></table></figure>
+<p>如果在接受范围内，允许在下一个runloop执行，可以这么做。xCode5没问题，但据反映，xCode6的话这个不能消除警告。</p>
+<p>原文链接：<a href="https://github.com/dabing1022/Blog/issues/2" target="_blank" rel="external">https://github.com/dabing1022/Blog/issues/2</a></p>
+
+          
+        
+      
+    </div>
     
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -242,7 +384,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-11-08T06:29:00+08:00" content="Nov 8 2014">
               Nov 8 2014
             </time>
@@ -250,7 +395,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/创业/" itemprop="url" rel="index">
@@ -278,21 +427,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>2014年11月08号，心城v1.1.0通过了苹果的审核。如果阅读过前面<a href="http://childhood.logdown.com/posts/238638/110-today-submitted-for-review" target="_blank" rel="external">心城1.1.0今天提交审核了</a>的朋友们会发现，时间俨然过了2周多。期间发生了什么事情？正常的Waiting For Review进入InReview大概1周差不多，这次怎么两周多了？</p>
+          
+            <p>2014年11月08号，心城v1.1.0通过了苹果的审核。如果阅读过前面<a href="http://childhood.logdown.com/posts/238638/110-today-submitted-for-review" target="_blank" rel="external">心城1.1.0今天提交审核了</a>的朋友们会发现，时间俨然过了2周多。期间发生了什么事情？正常的Waiting For Review进入InReview大概1周差不多，这次怎么两周多了？</p>
 <p>被拒了一次。</p>
 <p>来看下被拒的原因吧，希望后面的朋友别和我一样。</p>
 <h1 id="1-问题描述">1.问题描述</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Reasons</span><br><span class="line">2.23: Apps must follow the iOS Data Storage Guidelines or they will be rejected</span><br><span class="line">3.3: Apps with names, descriptions, screenshots, or previews not relevant to the content and functionality of the App will be rejected</span><br><span class="line">----- 2.23 -----</span><br><span class="line"></span><br><span class="line">We found that your app does not follow the iOS Data Storage Guidelines, which is required per the App Store Review Guidelines.</span><br><span class="line"></span><br><span class="line">In particular, we found that on launch and/or content download, your app stores 2.04MB. To check how much data your app is storing:</span><br><span class="line"></span><br><span class="line">- Install and launch your app</span><br><span class="line">- Go to Settings &gt; iCloud &gt; Storage &amp; Backup &gt; Manage Storage</span><br><span class="line">- If necessary, tap "Show all apps"</span><br><span class="line">- Check your app's storage</span><br><span class="line"></span><br><span class="line">The iOS Data Storage Guidelines indicate that only content that the user creates using your app, e.g., documents, new files, edits, etc., should be backed up by iCloud.</span><br><span class="line"></span><br><span class="line">Temporary files used by your app should only be stored in the /tmp directory; please remember to delete the files stored in this location when the user exits the app.</span><br><span class="line"></span><br><span class="line">Data that can be recreated but must persist for proper functioning of your app - or because customers expect it to be available for offline use - should be marked with the "do not back up" attribute. For NSURL objects, add the NSURLIsExcludedFromBackupKey attribute to prevent the corresponding file from being backed up. For CFURLRef objects, use the corresponding kCFURLIsExcludedFromBackupKey attribute.</span><br><span class="line"></span><br><span class="line">For more information, please see Technical Q&amp;A 1719: How do I prevent files from being backed up to iCloud and iTunes?.</span><br><span class="line"></span><br><span class="line">It is necessary to revise your app to meet the requirements of the iOS Data Storage Guidelines.</span><br><span class="line"></span><br><span class="line">----- 3.3 -----</span><br><span class="line"></span><br><span class="line">In addition, your marketing screenshots do not sufficiently reflect the app in use, which does not give the user an accurate understanding of what the app does, as required by the App Store Review Guidelines.</span><br><span class="line"></span><br><span class="line">We’ve attached the relevant screenshot(s) for your reference.</span><br><span class="line"></span><br><span class="line">It would be appropriate to revise your screenshots to demonstrate the app functionality in use.</span><br><span class="line"></span><br><span class="line">If your iTunes Connect Application State is Rejected, a new binary will be required. Make the desired metadata changes when you upload the new binary.</span><br><span class="line"></span><br><span class="line">For discrete code-level questions, you may wish to consult with Apple Developer Technical Support. When the DTS engineer follows up with you, please be ready to provide:</span><br><span class="line"></span><br><span class="line">- complete details of your rejection issue(s)</span><br><span class="line">- screenshots</span><br><span class="line">- steps to reproduce the issue(s)</span><br><span class="line">- symbolicated crash logs - if your issue results in a crash log</span><br></pre></td></tr></table></figure>
@@ -310,9 +461,16 @@
 <p>襁褓中的心城，并不完美也并不强大，虽然收到了负面的反馈，但不妨碍我把TA坚持做下去做好的决心。</p>
 <p>行走在黑暗中，也许某天，会看到光明。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -361,7 +519,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-10-24T05:11:00+08:00" content="Oct 24 2014">
               Oct 24 2014
             </time>
@@ -382,21 +543,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p><img src="http://childhoodgamedev.qiniudn.com/xincheng_capicon.png" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_capicon2.png" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_capicon4.png" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_2.jpg" width="700"></p>
+          
+            <p><img src="http://childhoodgamedev.qiniudn.com/xincheng_capicon.png" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_capicon2.png" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_capicon4.png" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_2.jpg" width="700"></p>
 <p><img src="http://childhoodgamedev.qiniudn.com/xincheng_xincheng1.1.0.png" align="right"></p>
 <h1 id="心城"><a href="https://itunes.apple.com/cn/app/xin-cheng/id923226261?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">心城</a></h1><p>在心城前期的开发过程中，因为暂时还没有美术人员，所以UI上我们会选择一些”开源“的一些好的设计。这里不得不提 mariodelvalle 的 <a href="http://mariodelvalle.github.io/CaptainIconWeb/" target="_blank" rel="external">http://mariodelvalle.github.io/CaptainIconWeb/</a> 这些优秀的设计。网站中提供有所有ICON的PSD源文件，甚至也包括了EPS、SVG矢量源文件，方便了在Illustrator下无限放大不失精度的要求。</p>
 <p>感谢开源！</p>
@@ -405,9 +568,16 @@
 <hr>
 <p><em>海纳百川，有容乃大。心城会在一路的荆棘和鼓励下逐渐成长。</em></p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -456,7 +626,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-10-22T02:35:00+08:00" content="Oct 22 2014">
               Oct 22 2014
             </time>
@@ -464,7 +637,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/创业/" itemprop="url" rel="index">
@@ -492,21 +669,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <center><img src="http://childhoodgamedev.qiniudn.com/xincheng_xincheng1.1.0.png" alt=""></center>
+          
+            <center><img src="http://childhoodgamedev.qiniudn.com/xincheng_xincheng1.1.0.png" alt=""></center>
 
 <p>今天是2014年10月22号，距离上次心城1.0.0版本的提交快到了三周。在这三周里，我们围绕着身边朋友的反馈以及我们预计要做的功能，完成了1.1.0版本。</p>
 <center><br><div><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_appintro1.png" width="300" height="300"><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_appintro2.png" width="300" height="300"><br></div><br></center>
@@ -531,9 +710,16 @@
 <p>作为一个ios开发新入门的选手，在开发的过程中遇到了许多问题，有些问题我记录在了印象笔记里，但我觉得仍然有必要把我一路过来遇到的杂七杂八的问题与大家一起分享下，在后面的文章中会陆续记录些我在心城的开发中，遇到的技术问题以及一些想法。</p>
 <p>也许你曾经遇到过，也许你没有，能一起有所收获，这么做便值了。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -582,7 +768,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-10-09T09:03:00+08:00" content="Oct 9 2014">
               Oct 9 2014
             </time>
@@ -590,7 +779,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/创业/" itemprop="url" rel="index">
@@ -618,21 +811,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>今天，《心城》的1.0.0版本总算正式在App Store上发布了，这里是<a href="https://itunes.apple.com/cn/app/xin-cheng/id923226261?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">地址</a>。因为我前期对应用开发的不熟悉，所以花了不少时间才敢推出最基本的功能。暂时没有美术，设计上也欠缺一些。</p>
+          
+            <p>今天，《心城》的1.0.0版本总算正式在App Store上发布了，这里是<a href="https://itunes.apple.com/cn/app/xin-cheng/id923226261?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">地址</a>。因为我前期对应用开发的不熟悉，所以花了不少时间才敢推出最基本的功能。暂时没有美术，设计上也欠缺一些。</p>
 <p>它既迟，也令我们感到羞愧。</p>
 <p>这么说，是因为有个老外那么说：如果你发布第一个版本时没有感到羞愧，那么它发布的一定是太晚了。</p>
 <p>现有的功能，已经有用户反馈说感觉无事可做。我们只能这么解释：它不是游戏，是不会粘用户的。当用户想起某人，感觉这人是重要的，就可以在心城里添加头像，录上一段话。它不是必需的，取决于用户表达情感的意愿。决不至于让用户自作多情。</p>
@@ -660,9 +855,16 @@
 <p>～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～<br>我不怕板砖，我只是认真。相信后面的版本迭代，会让心城成熟起来。</p>
 <h2 id="补充说明">补充说明</h2><p>【心城】 这个关键字不是特别好，在搜索方面有些吃亏。不少应用的关键字里面，带有心字，如果在 App Store 里面搜索，输入“心城”后，类别选择【社交】，可以快速的找到。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -711,7 +913,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-10-07T03:45:00+08:00" content="Oct 7 2014">
               Oct 7 2014
             </time>
@@ -719,7 +924,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -747,26 +956,35 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>在app开发的时候，有时候需要用到ios模拟器中的相册图片。添加的方法非常简单，做个备注。</p>
+          
+            <p>在app开发的时候，有时候需要用到ios模拟器中的相册图片。添加的方法非常简单，做个备注。</p>
 <p>让模拟器显示Home页，拖放电脑中的图片到模拟器中，这时候模拟器的Safari浏览器会打开该图片，轻按图片数秒，会有保存菜单，保存即可。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -815,7 +1033,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-22T02:42:00+08:00" content="Jul 22 2014">
               Jul 22 2014
             </time>
@@ -823,7 +1044,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -851,21 +1076,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>我们接着上一篇 <a href="http://childhood.logdown.com/posts/211016/easy-magicalrecord-03" target="_blank" rel="external">深入浅出MagicalRecord-03</a>。</p>
+          
+            <p>我们接着上一篇 <a href="http://childhood.logdown.com/posts/211016/easy-magicalrecord-03" target="_blank" rel="external">深入浅出MagicalRecord-03</a>。</p>
 <p>这节我们来一起学习下 MagicalRecord 对数据的存储，内容主要来自于 <a href="https://github.com/magicalpanda/MagicalRecord/blob/develop/Docs/Saving.md" target="_blank" rel="external">MagicalRecord的github资料</a>。</p>
 <h1 id="存储的时机"><i class="icon-save"> 存储的时机</i></h1><p>一般情况下，我们应该在数据发生变化时就进行存储操作。有些应用选择在退出的时候存储，然而在大多数情况下这是不必要的。<strong><em>事实上，如果你只是当应用退出的时候进行存储，你有可能会丢失数据！</em></strong>如果你的应用崩溃了呢？用户会丢失他们改变的数据，这是很糟糕的体验，应该极力去避免出现这种情况。</p>
 <p>如果你发现存储比较耗时，有下面几点你可以考虑下：</p>
@@ -885,9 +1112,16 @@
 <h2 id="b)标记为废弃的函数">b)标记为废弃的函数</h2><p>下面这些函数被标记为“废弃的”，将会在 MagicalRecord 3.0 版本移除掉，推荐使用替代的函数。</p>
 <h3 id="NSManagedObjectContext+MagicalSaves-1">NSManagedObjectContext+MagicalSaves</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) MR_save;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveWithErrorCallback:(<span class="keyword">void</span>(^)(NSError *error))errorCallback;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveInBackgroundCompletion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveInBackgroundErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveInBackgroundErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveNestedContexts;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveNestedContextsErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback;</span><br><span class="line">- (<span class="keyword">void</span>) MR_saveNestedContextsErrorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorCallback completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion;</span><br></pre></td></tr></table></figure>
 <h3 id="MagicalRecord+Actions-1">MagicalRecord+Actions</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>) saveWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block;</span><br><span class="line">+ (<span class="keyword">void</span>) saveInBackgroundWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block;</span><br><span class="line">+ (<span class="keyword">void</span>) saveInBackgroundWithBlock:(<span class="keyword">void</span>(^)(NSManagedObjectContext *localContext))block completion:(<span class="keyword">void</span>(^)(<span class="keyword">void</span>))completion;</span><br><span class="line">+ (<span class="keyword">void</span>) saveInBackgroundUsingCurrentContextWithBlock:(<span class="keyword">void</span> (^)(NSManagedObjectContext *localContext))block completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion errorHandler:(<span class="keyword">void</span> (^)(NSError *error))errorHandler;</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -936,7 +1170,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-21T08:26:00+08:00" content="Jul 21 2014">
               Jul 21 2014
             </time>
@@ -944,7 +1181,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -972,21 +1213,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>我们接着上一篇 <a href="http://childhood.logdown.com/posts/209933/easy-magicalrecord-02" target="_blank" rel="external">深入浅出MagicalRecord-02</a>。</p>
+          
+            <p>我们接着上一篇 <a href="http://childhood.logdown.com/posts/209933/easy-magicalrecord-02" target="_blank" rel="external">深入浅出MagicalRecord-02</a>。</p>
 <p>这节我们来一起学习下MagicalRecord对数据的<em>增删改查</em>，内容主要来自于 <a href="https://github.com/magicalpanda/MagicalRecord/blob/develop/Docs/Fetching.md" target="_blank" rel="external">MagicalRecord的github资料</a>。</p>
 <h1 id="1-_增-创建实体">1. 增-创建实体</h1><figure class="highlight js"><figcaption><span>创建实体</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person *myPerson = [Person MR_createEntity];</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><figcaption><span>指定创建的上下文中创建实体</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person *myPerson = [Person MR_createInContext:otherContext];</span><br></pre></td></tr></table></figure>
@@ -1010,9 +1253,16 @@
 <h2 id="f)合计操作">f)合计操作</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSInteger totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@<span class="string">"sum:"</span> onAttribute:@<span class="string">"fatCalories"</span> withPredicate:predicate] integerValue];</span><br><span class="line"></span><br><span class="line">NSInteger fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@<span class="string">"max:"</span> onAttribute:@<span class="string">"fatCalories"</span> withPredicate:predicate] integerValue];</span><br><span class="line"></span><br><span class="line">NSArray *caloriesByMonth = [CTFoodDiaryEntry MR_aggregateOperation:@<span class="string">"sum:"</span> onAttribute:@<span class="string">"fatCalories"</span> withPredicate:predicate groupBy:@<span class="string">"month"</span>];</span><br></pre></td></tr></table></figure>
 <h2 id="g)从指定上下文中查询">g)从指定上下文中查询</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *peopleFromAnotherContext = [Person MR_findAllInContext:someOtherContext];</span><br><span class="line"></span><br><span class="line">Person *personFromContext = [Person MR_findFirstByAttribute:@<span class="string">"lastName"</span> withValue:@<span class="string">"Gump"</span> inContext:someOtherContext];</span><br><span class="line"></span><br><span class="line">NSUInteger count = [Person MR_numberOfEntitiesWithContext:someOtherContext];</span><br></pre></td></tr></table></figure>
 <center>下一篇：<a href="http://childhood.logdown.com/posts/211076/easy-magicalrecord-04" target="_blank" rel="external">深入浅出MagicalRecord-04</a></center>
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1061,7 +1311,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-19T02:05:00+08:00" content="Jul 19 2014">
               Jul 19 2014
             </time>
@@ -1069,7 +1322,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/创业/" itemprop="url" rel="index">
@@ -1097,21 +1354,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>2012年3月份的时候，当我终于把欠大学3年学费还掉拿到毕业证后，我离开了北京来到了上海。离开了众享乐学教育，离开了可爱的同事们，离开了好哥们，还好上海还有个铁哥们在。</p>
+          
+            <p>2012年3月份的时候，当我终于把欠大学3年学费还掉拿到毕业证后，我离开了北京来到了上海。离开了众享乐学教育，离开了可爱的同事们，离开了好哥们，还好上海还有个铁哥们在。</p>
 <p>来到上海，第一件事就是换电话卡了。在我换号后，短信和qq通知了家人和朋友们，便开始了我的找工作之旅。大学的专业是计算机，那时候对计算机编程却一点也不感冒，偏要跷课去自学动画，毕业后3年都在从事动画相关的工作。来到上海后，我仔细思考了下我自身的状况，发现并不适合从事动画。</p>
 <p>何去何从？我思考了很久。</p>
 <p>我还是回到了大学的专业，起码除下动画，还有游戏开发是我一直想探寻的宝地。在从事动画的时候，大部分情况在flash下工作，所以也接触到了flash的当家语言actionscript。所以在网投简历的时候，我定了个方向就是actionscript的游戏开发。而2012年的时候，actionscript游戏开发，当属页游最火了。经过一些面试后，我最后被上海视速录用。</p>
@@ -1152,9 +1411,16 @@
 <p>也许正是你们不经意的推荐，会给与我们一个坚实的团队，打磨出一个动人的无与伦比的产品！</p>
 <p>我们坚信且一路前行！</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1203,7 +1469,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-17T15:11:00+08:00" content="Jul 17 2014">
               Jul 17 2014
             </time>
@@ -1211,7 +1480,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/python/" itemprop="url" rel="index">
@@ -1239,21 +1512,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <center><img src="http://childhoodgamedev.qiniudn.com/scrapy_LogdownBlogSpider.png"></center>
+          
+            <center><img src="http://childhoodgamedev.qiniudn.com/scrapy_LogdownBlogSpider.png"></center>
 
 <blockquote>
 <p><strong>前言</strong><br>业余时间在接触 python，从兴趣点着手是个不错的办法。而爬虫正是我感兴趣的一个方向。我根据 <a href="http://blog.csdn.net/u012150179" target="_blank" rel="external">younghz</a> 的 Scrapy 教程一步一步来，试着将 Logdown 的博文相关数据抓去下来，作为练手之用，这里做个记录。</p>
@@ -1293,9 +1568,16 @@
 <li><a href="http://blog.csdn.net/column/details/younghz-scrapy.html" target="_blank" rel="external">younghz的Scrapy原创精华教程系列</a></li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1313,117 +1595,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/07/16/solving-git-push-operation-every-time-you-enter-your-account-password-problem/" itemprop="url">
-                  解决git push操作每次输入账户密码问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-07-16T14:53:00+08:00" content="Jul 16 2014">
-              Jul 16 2014
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/07/16/solving-git-push-operation-every-time-you-enter-your-account-password-problem/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/16/solving-git-push-operation-every-time-you-enter-your-account-password-problem/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <center><img src="http://childhoodgamedev.qiniudn.com/git_QQ20140716-3.png"></center>
-
-<p>在命令行操作<code>git push</code>的时候，总是要输入帐号密码，找到了解决方法，做个记录。这里以 github 帐号为例，如果用的 bitbucket 等其他帐号，原理一样。</p>
-<h1 id="环境：MacOSX、Linux"><i class="icon-desktop"> 环境：MacOSX、Linux</i></h1><h1 id="步骤"><i class="icon-edit"> 步骤</i></h1><ul>
-<li><figure class="highlight"><figcaption><span>.git-credentials```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-  ```vim .git-credentials```&#65292;&#36755;&#20837; `https://&#123;username&#125;:&#123;password&#125;@github.com`&#65292;username &#21644; password &#20998;&#21035;&#26159;&#20320;&#30340;&#36134;&#25143;&#21644;&#23494;&#30721;&#10;-  ```git config --global credential.helper store</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>完毕后重启终端。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-
   </section>
 
   
@@ -1433,17 +1604,15 @@
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1462,31 +1631,37 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.png" alt="ChildhoodAndy" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="ChildhoodAndy" />
           <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+          <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">12</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">109</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -1505,32 +1680,36 @@
               <span class="links-of-author-item">
                 <a href="http://www.github.com/dabing1022" target="_blank">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://twitter.com/childhoodandy" target="_blank">
                   
-                    <i class="fa fa-twitter"></i> Twitter
+                    <i class="fa fa-twitter"></i>
                   
+                  Twitter
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://weibo.com/1297984304" target="_blank">
                   
-                    <i class="fa fa-weibo"></i> Weibo
+                    <i class="fa fa-weibo"></i>
                   
+                  Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://stackoverflow.com/users/1986621" target="_blank">
                   
-                    <i class="fa fa-globe"></i> StackOverflow
+                    <i class="fa fa-globe"></i>
                   
+                  StackOverflow
                 </a>
               </span>
             
@@ -1540,30 +1719,37 @@
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
-            <p class="site-author-name">友链</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://zengrong.net/" target="_blank">曾嵘</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://post.justbilt.com/" target="_blank">justblit</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://mokai.github.io" target="_blank">mokai</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
-              </span>
-            
+            <div class="links-of-blogroll-title">友链</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zengrong.net/" target="_blank">曾嵘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://post.justbilt.com/" target="_blank">justblit</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mokai.github.io" target="_blank">mokai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.ibireme.com/" target="_blank">ibireme</a>
+                </li>
+              
+            </ul>
           
         </div>
 
@@ -1575,17 +1761,18 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
 </div>
@@ -1606,16 +1793,61 @@
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
   
   
 
   
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
 
   
     
@@ -1633,36 +1865,21 @@
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
-    
-     
 
-
+  
     
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
-
   
   
 
   
+
   
 
 </body>

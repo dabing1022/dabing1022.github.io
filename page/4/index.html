@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.5.0" />
 
 
 
@@ -66,10 +72,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -78,15 +90,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +97,16 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,7 +135,7 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -189,7 +199,6 @@
       
 
       
-      
     </ul>
   
 
@@ -201,14 +210,110 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/05/09/chipmunk-pivot-joint-test-demo/" itemprop="url">
+                  Chipmunk枢轴关节测试Demo
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-05-09T11:54:00+08:00" content="May 9 2014">
+              May 9 2014
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/05/09/chipmunk-pivot-joint-test-demo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/05/09/chipmunk-pivot-joint-test-demo/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://childhoodgamedev.qiniudn.com/Screenflick%20Movie1.gif" alt=""></p>
+<p>to be finished…</p>
+
+          
+        
+      
+    </div>
     
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -242,7 +347,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-04-28T14:08:00+08:00" content="Apr 28 2014">
               Apr 28 2014
             </time>
@@ -250,7 +358,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -278,21 +390,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h1 id="PhysicsEditorExporter_for_QuickCocos2dx_使用说明">PhysicsEditorExporter for QuickCocos2dx 使用说明</h1><h2 id="前言">前言</h2><blockquote>
+          
+            <h1 id="PhysicsEditorExporter_for_QuickCocos2dx_使用说明">PhysicsEditorExporter for QuickCocos2dx 使用说明</h1><h2 id="前言">前言</h2><blockquote>
 <p>写这篇文章的时候，我用的是quick-cocos2d-x 2.2.1rc版本，最近quick将要升级2.2.3，但不影响使用。</p>
 </blockquote>
 <p>在quick-cocos2d-x引擎目录的tool文件夹内，有个physics_editor_exporter，这东西是干嘛用的呢？</p>
@@ -327,9 +441,16 @@
 <p>这两点不用担心，PhysicsEditor都为我们做好了工作，当我们编辑的图形顶点形成的是凹多边形时，它会将之计算拆分为若干的凸多边形组合，导出的数据完全满足上面提到的两条。朋友们如果看导出的.lua文件会发现，polygons里面如果有若干数组的话，正是凹多边形拆分而来的凸多边形数据。</p>
 <h2 id="最后">最后</h2><p>如果有问题，欢迎留言，HappyCoding:)</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -378,7 +499,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-04-12T13:12:00+08:00" content="Apr 12 2014">
               Apr 12 2014
             </time>
@@ -386,7 +510,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/GameProgramming/" itemprop="url" rel="index">
@@ -414,21 +542,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h1 id="探讨Chipmunk2D碰撞查询">探讨Chipmunk2D碰撞查询</h1><p>先借用《游戏引擎架构》一书中的一段话，来解释下物理引擎中的碰撞查询是用来干啥的。</p>
+          
+            <h1 id="探讨Chipmunk2D碰撞查询">探讨Chipmunk2D碰撞查询</h1><p>先借用《游戏引擎架构》一书中的一段话，来解释下物理引擎中的碰撞查询是用来干啥的。</p>
 <blockquote>
 <p>碰撞检测的另一任务是回答有关游戏世界中碰撞体积的假想问题。例如：<br>1）若从玩家武器的的某方向射出子弹，若能击中目标，那目标是什么？<br>2）汽车从A点移动至B点是否会碰到任何障碍物？<br>3）找出玩家在给定半径范围内的所有敌人对象。<br>一般而言，这些操作成为碰撞查询（collision query）。最常用的查询类型是碰撞投射（collision cast），或简称作投射（cast）。投射用于判断，若放置某假想物体于碰撞世界，并沿光线或线段移动，是否会碰到世界中的物体。投射与正常的碰撞检测操作有别，因为投射的实体并不真正存在于碰撞世界，它完全不会影响世界中的其他物体。这就是为什么我们称，碰撞投射是回答关于世界中碰撞体的假想问题。</p>
 </blockquote>
@@ -445,9 +575,16 @@
 <p>（截图来自cocos2dx3.0 demo中的RayCast  模式：multiple（多个点））</p>
 <hr>
 <h1 id="未完待续">未完待续</h1>
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -496,7 +633,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-04-06T05:34:00+08:00" content="Apr 6 2014">
               Apr 6 2014
             </time>
@@ -504,7 +644,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -532,21 +676,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p><img src="http://childhoodgamedev.qiniudn.com/collisionFilterTitle.png" alt=""></p>
+          
+            <p><img src="http://childhoodgamedev.qiniudn.com/collisionFilterTitle.png" alt=""></p>
 <p>这节让我们来一起探讨下Chipmunk对碰撞过滤（collision filtering）的处理。碰撞过滤，顾名思义，就是要筛选出发生碰撞的一些刚体，将不会发生碰撞的刚体过滤出去，从而在后续回调中对碰撞进行处理。比如《AngryBird》里面，小鸟和箱子碰撞后，小鸟羽毛飞散、死亡，箱子爆破等的处理。</p>
 <p>很多人更熟悉Box2D，为了更好的理解碰撞过滤，让我们先看瞅瞅Box2D是怎么实现碰撞过滤的，然后过渡到Chipmunk。</p>
 <h2 id="1-Box2D_碰撞过滤实现机制">1.Box2D 碰撞过滤实现机制</h2><p>在Box2D中，通过标志位和掩码的设计来实现碰撞过滤。其中有两个标志位和一个组别索引，分别是</p>
@@ -639,9 +785,16 @@
 </ul>
 <p>欢迎朋友们交流，HappyCoding:)</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -690,7 +843,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-03-26T07:42:00+08:00" content="Mar 26 2014">
               Mar 26 2014
             </time>
@@ -698,7 +854,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/GameProgramming/" itemprop="url" rel="index">
@@ -726,21 +886,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="1_ShoeBox_简介">1 ShoeBox 简介</h2><p><img src="http://childhoodgamedev.qiniudn.com/shoebox_screenshot_shoebox3.jpg" alt=""></p>
+          
+            <h2 id="1_ShoeBox_简介">1 ShoeBox 简介</h2><p><img src="http://childhoodgamedev.qiniudn.com/shoebox_screenshot_shoebox3.jpg" alt=""></p>
 <ul>
 <li><a href="http://renderhjs.net/shoebox/" target="_blank" rel="external">ShoeBox官网</a></li>
 </ul>
@@ -838,9 +1000,16 @@
 </ul>
 <p>Happy Designing!</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -889,7 +1058,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-03-23T03:42:00+08:00" content="Mar 23 2014">
               Mar 23 2014
             </time>
@@ -897,7 +1069,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/life/" itemprop="url" rel="index">
@@ -925,29 +1101,38 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p><img src="http://childhoodgamedev.qiniudn.com/wow_4.JPG" alt=""></p>
+          
+            <p><img src="http://childhoodgamedev.qiniudn.com/wow_4.JPG" alt=""></p>
 <p><img src="http://childhoodgamedev.qiniudn.com/wow_2.JPG" alt=""></p>
 <p><img src="http://childhoodgamedev.qiniudn.com/wow_3.JPG" alt=""></p>
 <p><img src="http://childhoodgamedev.qiniudn.com/wow_1.JPG" alt=""></p>
 <p>作为暴雪资深迷，一口气买了3本小说，《巨龙的黄昏》《战争之潮》主要是围绕《大地的裂变》资料片，分别以萨尔、吉安娜为主线讲述了大地的裂变所发生的故事，而《部落的暗影》以巨魔领袖暗影猎手沃金、熊猫人陈·风暴烈酒、祝踏岚以及人类提尔森为主线讲述了发生在潘达利亚的传奇。工作累了阅读放松下，美哉！</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -996,7 +1181,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-03-18T07:10:00+08:00" content="Mar 18 2014">
               Mar 18 2014
             </time>
@@ -1004,7 +1192,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/lua/" itemprop="url" rel="index">
@@ -1032,21 +1224,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>今天看到咱们quick群里有人在问如何实现多重继承，想想自己好像还真没用过lua中的多重继承，确切的说没用过。但如果真用到多重继承的时候，我会想想是不是非得用多重继承，总觉得多重继承有点“重”。好了废话不说，查阅手册，研究了下。看来在Lua中实现多重继承还是挺简单的。</p>
+          
+            <p>今天看到咱们quick群里有人在问如何实现多重继承，想想自己好像还真没用过lua中的多重继承，确切的说没用过。但如果真用到多重继承的时候，我会想想是不是非得用多重继承，总觉得多重继承有点“重”。好了废话不说，查阅手册，研究了下。看来在Lua中实现多重继承还是挺简单的。</p>
 <h2 id="多重继承例子">多重继承例子</h2><figure class="highlight lua"><figcaption><span>多重继承例子</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">search</span><span class="params">(k, tables)</span></span></span><br><span class="line">	<span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(tables) <span class="keyword">do</span></span><br><span class="line">		<span class="keyword">if</span> v[k] <span class="keyword">then</span></span><br><span class="line">			<span class="keyword">return</span> v[k]</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">nil</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 这里实现多重继承，参数arg为多重父类表</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createClassFrom</span><span class="params">(...)</span></span></span><br><span class="line">	<span class="comment">-- c为返回值的目标表，为实现多重继承的子类表</span></span><br><span class="line">	<span class="keyword">local</span> c = &#123;&#125;	</span><br><span class="line">	<span class="keyword">local</span> parents = &#123;...&#125;</span><br><span class="line">	<span class="built_in">setmetatable</span>(c, &#123;__index = <span class="function"><span class="keyword">function</span><span class="params">(t, k)</span></span></span><br><span class="line">		<span class="keyword">return</span> search(k, parents)</span><br><span class="line">	<span class="keyword">end</span>&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">c:new</span><span class="params">(o)</span></span></span><br><span class="line">		o = o <span class="keyword">or</span> &#123;&#125;</span><br><span class="line">		<span class="built_in">setmetatable</span>(o, &#123;__index = c&#125;)</span><br><span class="line">		<span class="keyword">return</span> o</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> c</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 人 吃饭</span></span><br><span class="line">Human = &#123;name = <span class="string">"human"</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Human:eat</span><span class="params">()</span></span></span><br><span class="line">	<span class="built_in">print</span>(<span class="string">"human eat"</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 程序员 写代码</span></span><br><span class="line">Programmer = &#123;name = <span class="string">"coder"</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Programmer:doProgramming</span><span class="params">()</span></span></span><br><span class="line">	<span class="built_in">print</span>(<span class="string">"do coding"</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 女程序员 继承 人和程序员</span></span><br><span class="line"><span class="comment">-- 性别女</span></span><br><span class="line">FemaleProgrammer = createClassFrom(Human, Programmer)</span><br><span class="line"><span class="keyword">local</span> femaleCoder = FemaleProgrammer:new(&#123;sex = <span class="string">"female"</span>, canBear = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="string">"Female: can give birth a baby!"</span>) <span class="keyword">end</span>&#125;)</span><br><span class="line">femaleCoder:eat() <span class="comment">-- human eat</span></span><br><span class="line">femaleCoder:doProgramming() <span class="comment">-- do coding</span></span><br></pre></td></tr></table></figure>
 <p>上面代码难点在于理解lua中<code>__index</code>的用法。我们在lua中实现继承的时候，会用到这个<code>__index</code>。我们再次看看这个<code>__index</code>究竟是怎么回事。元表的<code>__index</code>可以是一个表，也可以是一个函数。</p>
 <h2 id="1-___index是个表的情况">1. __index是个表的情况</h2><figure class="highlight lua"><figcaption><span>__index是个表的情况</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> Test = &#123; group = <span class="string">"quick"</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test:new</span><span class="params">(o)</span></span></span><br><span class="line">	o = o <span class="keyword">or</span> &#123;&#125;</span><br><span class="line">	<span class="built_in">setmetatable</span>(o, &#123;__index = Test&#125;)</span><br><span class="line">	<span class="keyword">return</span> o</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test:getName</span><span class="params">()</span></span></span><br><span class="line">	<span class="keyword">return</span> self.name</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test:setName</span><span class="params">(name)</span></span></span><br><span class="line">	self.name = name</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> a = Test:new(&#123;name = <span class="string">"Just a test"</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(a:getName()) <span class="comment">-- Just a test</span></span><br><span class="line"><span class="built_in">print</span>(a.group) <span class="comment">-- quick</span></span><br></pre></td></tr></table></figure>
@@ -1063,9 +1257,16 @@
 </ul>
 <h2 id="最后">最后</h2><p>如果代码有问题或者其他疑问，欢迎一起探讨学习<br>Happy Coding:)</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1114,7 +1315,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-03-17T09:44:00+08:00" content="Mar 17 2014">
               Mar 17 2014
             </time>
@@ -1122,7 +1326,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/C-C/" itemprop="url" rel="index">
@@ -1150,21 +1358,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h1 id="Effective_C++">Effective C++</h1><p>=====================================</p>
+          
+            <h1 id="Effective_C++">Effective C++</h1><p>=====================================</p>
 <blockquote>
 <p>改善程序与设计的55个具体做法</p>
 <p>55 Specific Ways to Improve Your Programs and Designs</p>
@@ -1228,9 +1438,16 @@
 <li>让自己熟悉 Boost</li>
 </ol>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1279,7 +1496,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-03-13T16:23:00+08:00" content="Mar 13 2014">
               Mar 13 2014
             </time>
@@ -1287,7 +1507,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/GameProgramming/" itemprop="url" rel="index">
@@ -1315,21 +1539,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>这一节让我们来理解下Chipmunk2D中的销关节约束。</p>
+          
+            <p>这一节让我们来理解下Chipmunk2D中的销关节约束。</p>
 <p>首先看文档中的一些解释</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">cpPinJoint *<span class="title">cpPinJointAlloc</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line">cpPinJoint *<span class="title">cpPinJointInit</span><span class="params">(cpPinJoint *joint, cpBody *a, cpBody *b, cpVect anchr1, cpVect anchr2)</span></span><br><span class="line">cpConstraint *<span class="title">cpPinJointNew</span><span class="params">(cpBody *a, cpBody *b, cpVect anchr1, cpVect anchr2)</span></span></span><br></pre></td></tr></table></figure>
 <p>a和b是被连接的两个刚体，anchr1和anchr2是这两个刚体的锚点。当关节被创建的时候距离便被确定，如果你想要设定一个特定的距离，使用setter函数来重新设定该值。</p>
@@ -1359,9 +1585,16 @@
 <p>图示3</p>
 <p><img src="http://childhoodgamedev.qiniudn.com/github1.png" alt=""><a href="https://github.com/ChipmunkCommunityCN/RockChipmunkWithCocos2DX/blob/master/Classes/JointsDemo/PinJointScene.cpp" target="_blank" rel="external">图示3 Github地址</a></p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1410,7 +1643,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-03-12T05:41:00+08:00" content="Mar 12 2014">
               Mar 12 2014
             </time>
@@ -1418,7 +1654,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -1446,21 +1686,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p><img src="https://rb7uxa.blu.livefilestore.com/y2pmYoXb1Na_cvhS0eo0GkXePFOt0KDnK0n2o1vuXwt1_7J36L_yEkW3Z-gRlCSepn5Ov0e77WXEhpua8PBdKCSU0SGt3RHadjVZS7SZk6uyWk/cocos2dx_box2d_chipmunk.png?psid=1" alt=""></p>
+          
+            <p><img src="https://rb7uxa.blu.livefilestore.com/y2pmYoXb1Na_cvhS0eo0GkXePFOt0KDnK0n2o1vuXwt1_7J36L_yEkW3Z-gRlCSepn5Ov0e77WXEhpua8PBdKCSU0SGt3RHadjVZS7SZk6uyWk/cocos2dx_box2d_chipmunk.png?psid=1" alt=""></p>
 <h1 id="走进COCOS2DX的物理世界">走进COCOS2DX的物理世界</h1><hr>
 <p><strong>Box2D作者</strong></p>
 <p><img src="https://rb7uxa.blu.livefilestore.com/y2pdfpxZvF93tXEN2V-fHJle1_cZ7pOBtSdSDepYiskW92ukBAubHmycfTS0SaS9siYQRE_fZmPQ_QGtJiwzNUKCK3lfrYtb5Z486GJBHDJSLQ/authorOfBox2D.png?psid=1" alt=""></p>
@@ -1545,9 +1787,16 @@
 <li><a href="https://github.com/ChipmunkCommunityCN" target="_blank" rel="external">Chipmunk中文交流社区</a></li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1565,103 +1814,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/03/02/chipmunk2d-chinese-manual-translation/" itemprop="url">
-                  Chipmunk2D中文手册翻译
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-03-02T03:22:00+08:00" content="Mar 2 2014">
-              Mar 2 2014
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/03/02/chipmunk2d-chinese-manual-translation/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/03/02/chipmunk2d-chinese-manual-translation/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>原github项目地址：<a href="https://github.com/ChipmunkCommunityCN/ChipmunkDocsCN" target="_blank" rel="external">https://github.com/ChipmunkCommunityCN/ChipmunkDocsCN</a>暂时停止更新，最近翻译工作移步到了泰然<a href="https://github.com/iTyran" target="_blank" rel="external">https://github.com/iTyran</a>，翻译校正结束后会将仓库公开，并发布PDF等便携格式。</p>
-<h2 id="10/03/2014_更新：">10/03/2014 更新：</h2><p>翻译版本v1.0</p>
-<ul>
-<li><a href="https://github.com/iTyran/ChipmunkDocsCN/releases" target="_blank" rel="external">GithubPDF下载地址</a></li>
-<li><a href="http://vdisk.weibo.com/s/AwDfqaiaVO5-" target="_blank" rel="external">新浪微盘下载地址</a></li>
-</ul>
-<p>下面是预览图：</p>
-<p><img src="https://eapnaq.blu.livefilestore.com/y2pEsf_8z6tyvhHsvIGQ1yfBvWjBQoF90Ozp0CjjHTNJuYwnMCifqah-tqJfYC0TRe-eVoRhIDY0itORfruWvoH_xE613N79erCIyYHnj5bQZQ/preview2.png?psid=1" alt="PREVIEW1"></p>
-<p><img src="https://eapnaq.blu.livefilestore.com/y2pTZmXPnQgyPbQ14Sa-7BfOYPiSZV_74ArCyIqVoeeiseewSjR8yRugwdn7sSlxf6WqqN3zgklS2eshFZ6D7YoT_ZA9s8c7tII4kIzxf27MvE/preview.png?psid=1" alt="PREVIEW2"></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-
   </section>
 
   
@@ -1671,17 +1823,15 @@
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1700,31 +1850,37 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.png" alt="ChildhoodAndy" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="ChildhoodAndy" />
           <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+          <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">12</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">109</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -1743,32 +1899,36 @@
               <span class="links-of-author-item">
                 <a href="http://www.github.com/dabing1022" target="_blank">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://twitter.com/childhoodandy" target="_blank">
                   
-                    <i class="fa fa-twitter"></i> Twitter
+                    <i class="fa fa-twitter"></i>
                   
+                  Twitter
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://weibo.com/1297984304" target="_blank">
                   
-                    <i class="fa fa-weibo"></i> Weibo
+                    <i class="fa fa-weibo"></i>
                   
+                  Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://stackoverflow.com/users/1986621" target="_blank">
                   
-                    <i class="fa fa-globe"></i> StackOverflow
+                    <i class="fa fa-globe"></i>
                   
+                  StackOverflow
                 </a>
               </span>
             
@@ -1778,30 +1938,37 @@
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
-            <p class="site-author-name">友链</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://zengrong.net/" target="_blank">曾嵘</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://post.justbilt.com/" target="_blank">justblit</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://mokai.github.io" target="_blank">mokai</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
-              </span>
-            
+            <div class="links-of-blogroll-title">友链</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zengrong.net/" target="_blank">曾嵘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://post.justbilt.com/" target="_blank">justblit</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mokai.github.io" target="_blank">mokai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.ibireme.com/" target="_blank">ibireme</a>
+                </li>
+              
+            </ul>
           
         </div>
 
@@ -1813,17 +1980,18 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
 </div>
@@ -1844,16 +2012,61 @@
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
   
   
 
   
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
 
   
     
@@ -1871,36 +2084,21 @@
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
-    
-     
 
-
+  
     
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
-
   
   
 
   
+
   
 
 </body>

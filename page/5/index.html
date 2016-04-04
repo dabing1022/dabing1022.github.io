@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.5.0" />
 
 
 
@@ -66,10 +72,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -78,15 +90,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +97,16 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,7 +135,7 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -189,7 +199,6 @@
       
 
       
-      
     </ul>
   
 
@@ -201,14 +210,117 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/03/02/chipmunk2d-chinese-manual-translation/" itemprop="url">
+                  Chipmunk2D中文手册翻译
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-03-02T03:22:00+08:00" content="Mar 2 2014">
+              Mar 2 2014
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/03/02/chipmunk2d-chinese-manual-translation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/03/02/chipmunk2d-chinese-manual-translation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>原github项目地址：<a href="https://github.com/ChipmunkCommunityCN/ChipmunkDocsCN" target="_blank" rel="external">https://github.com/ChipmunkCommunityCN/ChipmunkDocsCN</a>暂时停止更新，最近翻译工作移步到了泰然<a href="https://github.com/iTyran" target="_blank" rel="external">https://github.com/iTyran</a>，翻译校正结束后会将仓库公开，并发布PDF等便携格式。</p>
+<h2 id="10/03/2014_更新：">10/03/2014 更新：</h2><p>翻译版本v1.0</p>
+<ul>
+<li><a href="https://github.com/iTyran/ChipmunkDocsCN/releases" target="_blank" rel="external">GithubPDF下载地址</a></li>
+<li><a href="http://vdisk.weibo.com/s/AwDfqaiaVO5-" target="_blank" rel="external">新浪微盘下载地址</a></li>
+</ul>
+<p>下面是预览图：</p>
+<p><img src="https://eapnaq.blu.livefilestore.com/y2pEsf_8z6tyvhHsvIGQ1yfBvWjBQoF90Ozp0CjjHTNJuYwnMCifqah-tqJfYC0TRe-eVoRhIDY0itORfruWvoH_xE613N79erCIyYHnj5bQZQ/preview2.png?psid=1" alt="PREVIEW1"></p>
+<p><img src="https://eapnaq.blu.livefilestore.com/y2pTZmXPnQgyPbQ14Sa-7BfOYPiSZV_74ArCyIqVoeeiseewSjR8yRugwdn7sSlxf6WqqN3zgklS2eshFZ6D7YoT_ZA9s8c7tII4kIzxf27MvE/preview.png?psid=1" alt="PREVIEW2"></p>
+
+          
+        
+      
+    </div>
     
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -242,7 +354,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-02-17T02:47:00+08:00" content="Feb 17 2014">
               Feb 17 2014
             </time>
@@ -250,7 +365,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/lua/" itemprop="url" rel="index">
@@ -278,26 +397,35 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>lua的字符串操作向来很强大，强大到一些用法有时候经常得回头翻阅手册 :(。在实践中发现模式匹配这块掌握的尤其不熟练，原因是可能我对正则表达式不熟悉的缘故吧。特地做了一个总结，该总结的测试例子来源于<a href="http://ishare.iask.sina.com.cn/f/16196455.html" target="_blank" rel="external">《Lua程序设计第二版（ProgrammingInLua）》</a>这本书, 总结了常用的字符串操作。</p>
+          
+            <p>lua的字符串操作向来很强大，强大到一些用法有时候经常得回头翻阅手册 :(。在实践中发现模式匹配这块掌握的尤其不熟练，原因是可能我对正则表达式不熟悉的缘故吧。特地做了一个总结，该总结的测试例子来源于<a href="http://ishare.iask.sina.com.cn/f/16196455.html" target="_blank" rel="external">《Lua程序设计第二版（ProgrammingInLua）》</a>这本书, 总结了常用的字符串操作。</p>
 <p><a href="https://github.com/dabing1022/LuaAndLove2dLearningTest/blob/master/ProgrammingInLua/understanding(20" target="_blank" rel="external"><img src="http://childhoodgamedev.qiniudn.com/scrapy_gitHub-download-button.png" alt=""></a>.lua)</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -346,7 +474,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-01-31T01:49:00+08:00" content="Jan 31 2014">
               Jan 31 2014
             </time>
@@ -354,7 +485,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/drawing/" itemprop="url" rel="index">
@@ -382,25 +517,34 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h1 id="绘画练习">绘画练习</h1><p><img src="https://dl.dropboxusercontent.com/u/76275795/BlogPictures/20140131/animestudioDrawing.JPEG" alt=""></p>
+          
+            <h1 id="绘画练习">绘画练习</h1><p><img src="https://dl.dropboxusercontent.com/u/76275795/BlogPictures/20140131/animestudioDrawing.JPEG" alt=""></p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -449,7 +593,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2013-12-27T16:36:00+08:00" content="Dec 27 2013">
               Dec 27 2013
             </time>
@@ -470,21 +617,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <hr>
+          
+            <hr>
 <p>这篇文章让我们来理解下QuickCocos2dx的继承机制，关于继承这个概念，是OO思想里提出来的。在C++中，我们就不说了; 在lua中，是用table配合元表metatable来实现面向对象的。下面分两部分来理解Quick中的继承机制。</p>
 <p>##第一部分：LUA的继承</p>
 <p>###充电站：元表</p>
@@ -533,9 +682,16 @@
 <p>你我是朋友，各拿一个苹果彼此交换，交换后仍然是各有一个苹果；倘若你有一个思想，我也有一种思想，而朋友间交流思想，那我们每个人就有两种思想了。 ——爱尔兰剧作家 萧伯纳 </p>
 </blockquote>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -584,7 +740,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2013-12-24T06:12:00+08:00" content="Dec 24 2013">
               Dec 24 2013
             </time>
@@ -592,7 +751,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/lua/" itemprop="url" rel="index">
@@ -620,21 +783,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p><img src="https://dl.dropboxusercontent.com/u/76275795/BlogPictures/20131224/logo.gif" alt=""><img src="https://dl.dropboxusercontent.com/u/76275795/BlogPictures/20131224/toluapp.gif" alt=""> by Waldemar Celes, Ariel Manzur.</p>
+          
+            <p><img src="https://dl.dropboxusercontent.com/u/76275795/BlogPictures/20131224/logo.gif" alt=""><img src="https://dl.dropboxusercontent.com/u/76275795/BlogPictures/20131224/toluapp.gif" alt=""> by Waldemar Celes, Ariel Manzur.</p>
 <h1 id="tolua++中文参考手册【完整翻译】">tolua++中文参考手册【完整翻译】</h1><h5 id="官网：http://www-codenix-com/~tolua/tolua++-html">官网：<a href="http://www.codenix.com/~tolua/tolua++.html" target="_blank" rel="external">http://www.codenix.com/~tolua/tolua++.html</a></h5><h5 id="翻_译：_ChildhoodAndy">翻 译：  ChildhoodAndy</h5><h5 id="BLOG:_childhood-logdown-com">BLOG: <a href="http://childhood.logdown.com" target="_blank" rel="external">childhood.logdown.com</a></h5><h5 id="EMAIL：dabing1022@gmail-com">EMAIL：dabing1022@gmail.com</h5><hr>
 <p>译者前言：<br>由于工作接触<a href="https://github.com/dualface/quick-cocos2d-x" target="_blank" rel="external">quick-cocos2d-x</a>的缘故，接触到了luabinding。对luabinding的理解在一定程度上会加深对quick框架的理解（也包括cocos2dx的lua绑定），在学习的过程中便涉及到了tolua++。先到官网上大概看了下，有个参考手册，谷歌百度之，现在网络存在的版本有两种，一种是谷歌机器人直接翻译，非常生涩，一种是其他朋友自己翻译的，但不完整，其中的翻译也不是很理想，所以萌生了自己翻译的这么一个想法。我不能保证这个完整版没有错误，但会尽我最大的努力去还原作者的本意。如果读者发现部分的翻译有问题，非常欢迎在我的博客留言或者给我发送email邮件，我会认真阅读，如果正确我将会更新翻译，以便呈现在大家面前的是一个准确描述的译本。</p>
 <hr>
@@ -770,9 +935,16 @@
 <p>绑定这样的代码之后，我们可以在lua中这么写：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = Point&#123; x=2, y=3 &#125; &#10;p:print() &#10;...</span><br></pre></td></tr></table></figure>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -821,7 +993,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2013-12-13T09:48:00+08:00" content="Dec 13 2013">
               Dec 13 2013
             </time>
@@ -829,7 +1004,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -857,21 +1036,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <hr>
+          
+            <hr>
 <p>#<i class="icon-paper-clip"> 目录</i></p>
 <p><img src="http://childhoodgamedev.qiniudn.com/quick_content.png" alt="目录"></p>
 <p>注：写这篇文章的时候，笔者所用的是quick-cocos2d-x 2.2.1rc版本。</p>
@@ -996,9 +1177,16 @@
 <hr>
 <p>本文如果有写的不对的地方，还请大家指出，交流学习:)<br>如果朋友们有关于状态机的使用心得，也非常欢迎分享。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1047,7 +1235,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2013-11-29T10:51:00+08:00" content="Nov 29 2013">
               Nov 29 2013
             </time>
@@ -1055,7 +1246,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -1083,21 +1278,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>###QuickCocos2dx创建描边效果###</p>
+          
+            <p>###QuickCocos2dx创建描边效果###</p>
 <p>@[quick|cocos2d|描边]</p>
 <hr>
 <p><img src="http://childhoodgamedev.qiniudn.com/lua_QQ20131129-1.png" alt="效果"></p>
@@ -1119,9 +1316,16 @@
 <p>那对应的描边renderTexture也需要改变，我想是得先remove掉然后重新创建纹理，那各位可以简单封装下，当文本重新<code>setString</code>的时候，相应去创建下方的描边纹理就可以了。</p>
 <p>###最后###<br>如果代码有问题或者其他疑问，欢迎一起探讨学习:)</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1170,7 +1374,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2013-11-27T15:47:00+08:00" content="Nov 27 2013">
               Nov 27 2013
             </time>
@@ -1178,7 +1385,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -1206,21 +1417,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>@[Cocos2d|纹理]</p>
+          
+            <p>@[Cocos2d|纹理]</p>
 <p>###写在前面###<br>在cocos2d中，<strong>纹理</strong>与图形渲染有着密不可分的关系。纹理会存储在GPU内存中，纹理的像素格式决定了图片所占用的GPU内存，跟加载的所用的时间没有关系，但可以通过减小<code>PNG/GIF/TIFF/TMP</code>等图片的大小来缩短加载的时间，也可以将图像格式导出成<code>PVR</code>格式，IOS设备通常使用PowerVR显示芯片，而<code>PVR</code>格式的图片可以直接被该显示芯片直接读取，不需要解析直接显示，渲染速度更快，更节省内存，<code>pvr.ccz</code>图像格式是<code>pvr</code>的压缩格式，占用空间更小。</p>
 <p><img src="http://childhoodgamedev.qiniudn.com/lua_QQ20131127-1.png" alt="TexturePacker中所列举的纹理像素格式"></p>
 <p>我们可能用到像素格式有：</p>
@@ -1296,9 +1509,16 @@
 <li><a href="http://www.cnblogs.com/zilongshanren/archive/2011/03/18/1988097.html" target="_blank" rel="external">在cocos2d里面如何使用Texture Packer和像素格式来优化spritesheet</a></li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1347,7 +1567,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2013-11-20T06:15:00+08:00" content="Nov 20 2013">
               Nov 20 2013
             </time>
@@ -1355,7 +1578,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -1383,21 +1610,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <blockquote>
+          
+            <blockquote>
 <p>本文针对版本：2.2.1rc版或者之前的版本，最新2.2.3版本廖大对触摸做了不少改动，具体的触摸改动可以查看samples里的touch测试例子</p>
 </blockquote>
 <p>刚开始接触quick，在用的过程中，对于触摸以及吞噬的使用有些问题。在浏览谷歌邮件组的时候，发现廖大对quick的触摸事件流作了一些说明。</p>
@@ -1421,9 +1650,16 @@
 <figure class="highlight lua"><figcaption><span>模态层示例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 场景中的按钮</span></span><br><span class="line">	<span class="keyword">local</span> leftMenu = cc.ui.UIPushButton.new(<span class="string">"somePic.png"</span>)</span><br><span class="line">		:onButtonPressed(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">"left menu pressed"</span>)</span><br><span class="line">		<span class="keyword">end</span>)</span><br><span class="line">		:onButtonRelease(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">"left menu release"</span>)</span><br><span class="line">		<span class="keyword">end</span>)</span><br><span class="line">		:onButtonClicked(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">"left menu clicked"</span>)</span><br><span class="line">		<span class="keyword">end</span>)</span><br><span class="line">		:align(display.CENTER, display.cx - <span class="number">100</span>, display.cy)</span><br><span class="line">		:addTo(self)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 模态层</span></span><br><span class="line">	<span class="keyword">local</span> poplayer = display.newSprite():addTo(self)</span><br><span class="line">	poplayer:setCascadeBoundingBox(CCRectMake(<span class="number">0</span>, <span class="number">0</span>, display.width, display.height))</span><br><span class="line">	poplayer:setTouchEnabled(<span class="keyword">true</span>)</span><br><span class="line">	poplayer:addTouchEventListener(<span class="function"><span class="keyword">function</span><span class="params">(event, x, y)</span></span></span><br><span class="line">		<span class="keyword">if</span> event == <span class="string">"began"</span> <span class="keyword">then</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span></span><br><span class="line">		<span class="keyword">elseif</span> event == <span class="string">"ended"</span> <span class="keyword">then</span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">"pop layer touch ended......"</span>)</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">end</span>)</span><br><span class="line">  </span><br><span class="line"><span class="comment">-- 模态层中的按钮</span></span><br><span class="line">	<span class="keyword">local</span> rightMenu = cc.ui.UIPushButton.new(<span class="string">"somePic.png"</span>)</span><br><span class="line">		:onButtonPressed(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">"right menu pressed"</span>)</span><br><span class="line">		<span class="keyword">end</span>)</span><br><span class="line">		:onButtonRelease(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">"right menu release"</span>)</span><br><span class="line">		<span class="keyword">end</span>)</span><br><span class="line">		:onButtonClicked(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">"right menu clicked"</span>)</span><br><span class="line">		<span class="keyword">end</span>)</span><br><span class="line">		:align(display.CENTER, display.cx + <span class="number">100</span>, display.cy)</span><br><span class="line">		:addTo(poplayer)</span><br></pre></td></tr></table></figure>
 <p>可以将上面代码拷贝到工程中进行测试，将图片<code>somePic.png</code>换成你自己的按钮图片，测试发现，<code>leftMenu</code>位于<code>poplayer</code>之下，触摸是不响应的，<code>poplayer</code>中的<code>rightMenu</code>能够响应。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1472,7 +1708,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2013-11-15T09:29:00+08:00" content="Nov 15 2013">
               Nov 15 2013
             </time>
@@ -1480,7 +1719,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/cocos2d/" itemprop="url" rel="index">
@@ -1508,21 +1751,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="##Cocos2dX中CCTableView使用中遇到的一个问题##">##Cocos2dX中CCTableView使用中遇到的一个问题##</h2><p>最近在做一个游戏原型，其中用到了CCTableView，在使用的过程中遇到了一个疑问。<br>为了方便说明问题，我用了Cocos2dx项目中的<code>cocos2d-x-2.2/samples/Cpp/TestCpp</code>测试例子中的<code>ExtensionsTest</code>下<code>TableViewTest</code>来举例。</p>
+          
+            <h2 id="##Cocos2dX中CCTableView使用中遇到的一个问题##">##Cocos2dX中CCTableView使用中遇到的一个问题##</h2><p>最近在做一个游戏原型，其中用到了CCTableView，在使用的过程中遇到了一个疑问。<br>为了方便说明问题，我用了Cocos2dx项目中的<code>cocos2d-x-2.2/samples/Cpp/TestCpp</code>测试例子中的<code>ExtensionsTest</code>下<code>TableViewTest</code>来举例。</p>
 <blockquote>
 <p><strong>问题描述</strong>：当点击其中一个cell的时候，我为了记录我点击是哪个cell，我将该cell下的的背景图（tag设置为了100）设置显示为红色，当我点击了index为0也就是第一个cell的时候，第一个被设置成了红色，但是当我滑动这个tableView的时候，发现还有其他cell也被变成了红色。如下图所示。</p>
 </blockquote>
@@ -1533,9 +1778,16 @@
 <p>##我的做法是这样的，不知道有啥问题，为什么会出现这个现象？##</p>
 <figure class="highlight c++"><figcaption><span>修改tableCellAtIndex函数，增加一行代码：`sprite->setTag(100)`</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">CCTableViewCell* TableViewTestLayer::tableCellAtIndex(CCTableView *table, <span class="keyword">unsigned</span> <span class="keyword">int</span> idx)</span><br><span class="line">&#123;</span><br><span class="line">    CCString *<span class="built_in">string</span> = CCString::createWithFormat(<span class="string">"%d"</span>, idx);</span><br><span class="line">    CCTableViewCell *cell = table-&gt;dequeueCell();</span><br><span class="line">    <span class="keyword">if</span> (!cell) &#123;</span><br><span class="line">        cell = <span class="keyword">new</span> CustomTableViewCell();</span><br><span class="line">        cell-&gt;autorelease();</span><br><span class="line">        CCSprite *sprite = CCSprite::create(<span class="string">"Images/Icon.png"</span>);</span><br><span class="line">        sprite-&gt;setAnchorPoint(CCPointZero);</span><br><span class="line">        sprite-&gt;setPosition(ccp(<span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">        sprite-&gt;setTag(<span class="number">100</span>);</span><br><span class="line">        cell-&gt;addChild(sprite);</span><br><span class="line">        CCLabelTTF *label = CCLabelTTF::create(<span class="built_in">string</span>-&gt;getCString(), <span class="string">"Helvetica"</span>, <span class="number">20.0</span>);</span><br><span class="line">        label-&gt;setPosition(CCPointZero);</span><br><span class="line">		label-&gt;setAnchorPoint(CCPointZero);</span><br><span class="line">        label-&gt;setTag(<span class="number">123</span>);</span><br><span class="line">        cell-&gt;addChild(label);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        CCLabelTTF *label = (CCLabelTTF*)cell-&gt;getChildByTag(<span class="number">123</span>);</span><br><span class="line">        label-&gt;setString(<span class="built_in">string</span>-&gt;getCString());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><figcaption><span>修改tableCellTouched函数</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> TableViewTestLayer::tableCellTouched(CCTableView* table, CCTableViewCell* cell)</span><br><span class="line">&#123;</span><br><span class="line">    CCLOG(<span class="string">"cell touched at index: %i"</span>, cell-&gt;getIdx());</span><br><span class="line">    </span><br><span class="line">    CCSprite* sprite = (CCSprite*)cell-&gt;getChildByTag(<span class="number">100</span>);</span><br><span class="line">    sprite-&gt;setColor(ccc3(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1553,135 +1805,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2013/09/25/cocos2d-iphone-calling-lua/" itemprop="url">
-                  Cocos2d-iPhone调用lua
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2013-09-25T10:55:00+08:00" content="Sep 25 2013">
-              Sep 25 2013
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/cocos2d/" itemprop="url" rel="index">
-                    <span itemprop="name">cocos2d</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2013/09/25/cocos2d-iphone-calling-lua/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/09/25/cocos2d-iphone-calling-lua/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="Cocos2d-iPhone调用lua">Cocos2d-iPhone调用lua</h1><p>@[Cocos2d-iPhone|lua|wax|libLua.a]</p>
-<ul>
-<li>安装cocos2d-iPhone模板到Xcode下，这个这里就不说了。</li>
-<li>我新建了一个cocos2d项目，名称为Cocos2d-iPhoneLuaTest，在Xcode界面下的左侧选中项目，然后在右边界面点击下方的”AddTarget”。<br><img src="http://childhoodgamedev.qiniudn.com/lua_10dddf0adb9b0a7011aac0424b1b1827.png" alt="Alt text">  </li>
-<li>在弹出的对话框中创建静态库，如下图所示<br><img src="http://childhoodgamedev.qiniudn.com/lua_496653782551c9bb7f6a9239107509cb.png" alt="Alt text">  </li>
-<li>然后点击下一步（next），在对话框中填写加入的静态库名字，确定。</li>
-<li>在Xcode界面下的左侧选中项目，右键加入外部文件</li>
-<li>在弹出的对话框中选择解压好的lua，我用的是lua-5.2.2,注意要将其加到Lua目标中<br><img src="http://childhoodgamedev.qiniudn.com/lua_624f4f523f3a40f870abdfbe513dc656.png" alt="Alt text">  </li>
-<li>如下图所示，要将静态库libLua.a加入到链接库中<br><img src="http://childhoodgamedev.qiniudn.com/lua_2ceadbcfb213cc70bc0d5d9f180d59e2.png" alt="Alt text">  </li>
-<li>准备工作完毕。  </li>
-</ul>
-<hr>
-<h3 id="简单的编码实现">简单的编码实现</h3><ul>
-<li>将HelloWorldLayer.m文件后缀改成mm，支持Objective-C和C++混编。</li>
-<li><p>在HelloWorldLayer.mm文件中加入如下代码  </p>
-<pre><code class="Objective-C">extern &#34;C&#34;&#10;{&#10;        #include &#34;lua.h&#34;&#10;        #include &#34;lualib.h&#34;&#10;        #include &#34;lauxlib.h&#34;&#10;};&#10;&#10;int runlua(void)&#10;{&#10;            lua_State *L = luaL_newstate();&#10;        luaL_openlibs(L);&#10;        printf(&#34;\nLua done!&#34;);&#10;        lua_close(L);&#10;        return 0;&#10;}
-</code></pre>
-</li>
-<li><p>在HelloWorldLayer.mm的init方法里面，添加对runLua方法的调用  </p>
-<pre><code class="Objective-C">-(id) init&#10;{&#10;    if( (self=[super init]) ) {&#10;          CCLOG(@&#34;HelloWorldLayer init.&#34;);&#10;&#10;          runlua();&#10;    }&#10;    return self;&#10;}
-</code></pre>
-</li>
-<li>ok,run,日志里”Lua done!”  </li>
-</ul>
-<hr>
-<p>最后说下，cocos2d-iPhone没有内置lua，不过有个开源的lua实现框架wax，《愤怒的小鸟》正是采用了wax。cocos2d-x集成了lua，而且最新的版本也集成了jsbinding，十分强大，有兴趣的可以自行查找研究学习。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-
   </section>
 
   
@@ -1691,17 +1814,15 @@
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1720,31 +1841,37 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.png" alt="ChildhoodAndy" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="ChildhoodAndy" />
           <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+          <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">12</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">109</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -1763,32 +1890,36 @@
               <span class="links-of-author-item">
                 <a href="http://www.github.com/dabing1022" target="_blank">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://twitter.com/childhoodandy" target="_blank">
                   
-                    <i class="fa fa-twitter"></i> Twitter
+                    <i class="fa fa-twitter"></i>
                   
+                  Twitter
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://weibo.com/1297984304" target="_blank">
                   
-                    <i class="fa fa-weibo"></i> Weibo
+                    <i class="fa fa-weibo"></i>
                   
+                  Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://stackoverflow.com/users/1986621" target="_blank">
                   
-                    <i class="fa fa-globe"></i> StackOverflow
+                    <i class="fa fa-globe"></i>
                   
+                  StackOverflow
                 </a>
               </span>
             
@@ -1798,30 +1929,37 @@
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
-            <p class="site-author-name">友链</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://zengrong.net/" target="_blank">曾嵘</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://post.justbilt.com/" target="_blank">justblit</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://mokai.github.io" target="_blank">mokai</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
-              </span>
-            
+            <div class="links-of-blogroll-title">友链</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zengrong.net/" target="_blank">曾嵘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://post.justbilt.com/" target="_blank">justblit</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mokai.github.io" target="_blank">mokai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.ibireme.com/" target="_blank">ibireme</a>
+                </li>
+              
+            </ul>
           
         </div>
 
@@ -1833,17 +1971,18 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
 </div>
@@ -1864,16 +2003,61 @@
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
   
   
 
   
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
 
   
     
@@ -1891,36 +2075,21 @@
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
-    
-     
 
-
+  
     
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
-
   
   
 
   
+
   
 
 </body>

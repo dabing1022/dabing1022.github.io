@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.5.0" />
 
 
 
@@ -66,10 +72,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -78,15 +90,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +97,16 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,7 +135,7 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -189,7 +199,6 @@
       
 
       
-      
     </ul>
   
 
@@ -201,14 +210,135 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/07/16/solving-git-push-operation-every-time-you-enter-your-account-password-problem/" itemprop="url">
+                  解决git push操作每次输入账户密码问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-07-16T14:53:00+08:00" content="Jul 16 2014">
+              Jul 16 2014
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/07/16/solving-git-push-operation-every-time-you-enter-your-account-password-problem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/16/solving-git-push-operation-every-time-you-enter-your-account-password-problem/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <center><img src="http://childhoodgamedev.qiniudn.com/git_QQ20140716-3.png"></center>
+
+<p>在命令行操作<code>git push</code>的时候，总是要输入帐号密码，找到了解决方法，做个记录。这里以 github 帐号为例，如果用的 bitbucket 等其他帐号，原理一样。</p>
+<h1 id="环境：MacOSX、Linux"><i class="icon-desktop"> 环境：MacOSX、Linux</i></h1><h1 id="步骤"><i class="icon-edit"> 步骤</i></h1><ul>
+<li><figure class="highlight"><figcaption><span>.git-credentials```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-  ```vim .git-credentials```&#65292;&#36755;&#20837; `https://&#123;username&#125;:&#123;password&#125;@github.com`&#65292;username &#21644; password &#20998;&#21035;&#26159;&#20320;&#30340;&#36134;&#25143;&#21644;&#23494;&#30721;&#10;-  ```git config --global credential.helper store</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>完毕后重启终端。</p>
+
+          
+        
+      
+    </div>
     
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -242,7 +372,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-14T11:32:00+08:00" content="Jul 14 2014">
               Jul 14 2014
             </time>
@@ -250,7 +383,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -278,21 +415,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>我们接着上一篇 <a href="http://childhood.logdown.com/posts/208957/easy-magicalrecord-01" target="_blank" rel="external">深入浅出MagicalRecord-01</a>。</p>
+          
+            <p>我们接着上一篇 <a href="http://childhood.logdown.com/posts/208957/easy-magicalrecord-01" target="_blank" rel="external">深入浅出MagicalRecord-01</a>。</p>
 <p>这一节我们一起粗略的了解下 CoreData 中的一些核心概念以及 MagicalRecord 的入门准备。只有对 CoreData 理解深入了，才能更轻松的使用 MagicalRecord。</p>
 <h1 id="1-_CoreData_的核心概念"><i class="icon-heart"> 1. CoreData 的核心概念</i></h1><p>先上两幅关键的概念图</p>
 <p><img src="http://childhoodgamedev.qiniudn.com/ios_CoreData1.jpeg" alt="概念图1"></p>
@@ -342,9 +481,16 @@
 <li><a href="http://blog.csdn.net/kesalin/article/details/6739319" target="_blank" rel="external">[Cocoa]深入浅出 Cocoa 之 Core Data（1）- 框架详解</a></li>
 </ul>
 <center>下一篇：<a href="http://childhood.logdown.com/posts/211016/easy-magicalrecord-03" target="_blank" rel="external">深入浅出MagicalRecord-03</a></center>
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -393,7 +539,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-10T02:10:00+08:00" content="Jul 10 2014">
               Jul 10 2014
             </time>
@@ -401,7 +550,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -429,21 +582,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <blockquote>
+          
+            <blockquote>
 <p>《深入浅出MagicalRecord》我准备做成一个系列，记录我从0开始学习这个框架的所有心得、记录。希望能和大家一起探讨交流。</p>
 <ol>
 <li><a href="http://childhood.logdown.com/posts/208957/easy-magicalrecord-01" target="_blank" rel="external">深入浅出MagicalRecord-01</a></li>
@@ -483,9 +638,16 @@
 <li>使用Xcode5来运行github仓库中包含的测试Tests，但MagicalRecord库建立在Xcode4上。</li>
 </ul>
 <center>下一篇：<a href="http://childhood.logdown.com/posts/209933/easy-magicalrecord-02" target="_blank" rel="external">深入浅出MagicalRecord-02</a></center>
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -534,7 +696,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-07T08:14:00+08:00" content="Jul 7 2014">
               Jul 7 2014
             </time>
@@ -542,7 +707,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -570,21 +739,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h1 id="Github项目地址"><i class="icon-github icon-2x"></i><a href="https://github.com/dabing1022/PhotoPicker" target="_blank" rel="external">Github项目地址</a></h1><p>================</p>
+          
+            <h1 id="Github项目地址"><i class="icon-github icon-2x"></i><a href="https://github.com/dabing1022/PhotoPicker" target="_blank" rel="external">Github项目地址</a></h1><p>================</p>
 <p><img src="http://childhoodgamedev.qiniudn.com/ios_01.PNG" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/ios_02.PNG" alt=""></p>
 <p>项目来自于苹果官方文档中的一个范例。</p>
 <p>针对这个范例，我对一些英文注释做了中文说明，并尝试着加入自动保存到相簿的这个小功能。好吧，有些过于简单了。</p>
@@ -594,9 +765,16 @@
 <li>将拍照的照片存储到应用沙盒中</li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -645,7 +823,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-05T14:03:00+08:00" content="Jul 5 2014">
               Jul 5 2014
             </time>
@@ -653,7 +834,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/python/" itemprop="url" rel="index">
@@ -681,21 +866,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>这是一个我在业余时间学习python的一个小练习，纯属新手，有不对的地方，还恳朋友们留言指出。</p>
+          
+            <p>这是一个我在业余时间学习python的一个小练习，纯属新手，有不对的地方，还恳朋友们留言指出。</p>
 <h1 id="1-_Google搜索"><i class="icon-heart"></i> 1. Google搜索</h1><p>当我们在google搜索引擎中输入关键字的时候，会实时弹出一些联想提示短语的列表。这篇文章想通过python做这样一个数据采集的工作。我们使用 Chrome 浏览器来分析下。（Google服务被GFW禁掉，我采用了VPN。）</p>
 <center><b>第一步【输入关键字】</b></center><br><center><img src="http://childhoodgamedev.qiniudn.com/python_QQ20140705-1.png"></center>
 
@@ -711,9 +898,16 @@
 
 <p>这个仍然有待改进。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -762,7 +956,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-04T07:41:00+08:00" content="Jul 4 2014">
               Jul 4 2014
             </time>
@@ -770,7 +967,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/life/" itemprop="url" rel="index">
@@ -798,29 +999,38 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>番茄工作法是一个非常有效的工作方法，不了解的朋友<a href="http://baike.baidu.com/link?url=lMm6uLHBwDis6xWGUvSn0rNr-TE7RMSDF348jmCCmByoDL1V2s5MAHwSugJaaxJFxUSYPmcNRUTSRtDunhyQgq" target="_blank" rel="external">点击这里看百科介绍</a>。</p>
+          
+            <p>番茄工作法是一个非常有效的工作方法，不了解的朋友<a href="http://baike.baidu.com/link?url=lMm6uLHBwDis6xWGUvSn0rNr-TE7RMSDF348jmCCmByoDL1V2s5MAHwSugJaaxJFxUSYPmcNRUTSRtDunhyQgq" target="_blank" rel="external">点击这里看百科介绍</a>。</p>
 <p>今天为大家推荐一款 Mac 下免费好用的番茄工作法软件</p>
 <h2 id="focus_booster"><a href="http://www.focusboosterapp.com" target="_blank" rel="external">focus booster</a></h2><p>这款软件的界面很清爽，相信你会喜欢上TA。使用起来也很简单，不用看什么帮助。基本上，25分钟 的工作时间，5分钟 的休息时间，当然这两个时间可以视个人情况进行调整。不过 25分钟 和 5分钟 是一个比较科学合理的时间，过长过短都不太好，推荐使用默认设置。</p>
 <p><img src="http://childhoodgamedev.qiniudn.com/fanqie_QQ20140704-1.png" alt=""></p>
 <p><img src="http://childhoodgamedev.qiniudn.com/fanqie_QQ20140704-2.png" alt=""></p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -869,7 +1079,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-03T08:36:00+08:00" content="Jul 3 2014">
               Jul 3 2014
             </time>
@@ -877,7 +1090,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -905,21 +1122,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h1 id="1-_常用方法_GithubGist地址">1. 常用方法 <a href="https://gist.github.com/dabing1022/55ce189c87c0b752f7c6" target="_blank" rel="external">GithubGist地址</a></h1><figure class="highlight c"><figcaption><span>常用方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">    NSLog(@<span class="string">"HostName: %@"</span>, [[NSProcessInfo processInfo] hostName]);</span><br><span class="line">    <span class="comment">//globallyUniqueString 唯一的标示符，每次调用都会不一样，可以用作一些临时缓存文件的名字</span></span><br><span class="line">    NSLog(@<span class="string">"GlobalUniqueString: %@"</span>, [[NSProcessInfo processInfo] globallyUniqueString]);</span><br><span class="line">    <span class="comment">//操作系统名称</span></span><br><span class="line">    NSLog(@<span class="string">"OperatingSystemName: %@"</span>, [[NSProcessInfo processInfo] operatingSystemName]);</span><br><span class="line">    <span class="comment">//操作系统版本</span></span><br><span class="line">    NSLog(@<span class="string">"OperatingSystemVersion: %@"</span>, [[NSProcessInfo processInfo] operatingSystemVersionString]);</span><br><span class="line">    <span class="comment">//物理内存</span></span><br><span class="line">    NSLog(@<span class="string">"PhysicalMem: %llu"</span>, [[NSProcessInfo processInfo] physicalMemory]);</span><br><span class="line">    <span class="comment">//进程名称</span></span><br><span class="line">    NSLog(@<span class="string">"ProcessName: %@"</span>, [[NSProcessInfo processInfo] processName]);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//供应商标识</span></span><br><span class="line">    NSLog(@<span class="string">"UniqueId: %@"</span>, [UIDevice currentDevice].identifierForVendor);</span><br><span class="line">    <span class="comment">//设备类型（iPhone、iPad）</span></span><br><span class="line">    NSLog(@<span class="string">"userInterfaceIdiom: %d"</span>, [UIDevice currentDevice].userInterfaceIdiom);</span><br><span class="line">    <span class="comment">//设备名字</span></span><br><span class="line">    NSLog(@<span class="string">"Name: %@"</span>, [UIDevice currentDevice].name);</span><br><span class="line">    <span class="comment">//系统名字</span></span><br><span class="line">    NSLog(@<span class="string">"SystemName: %@"</span>, [UIDevice currentDevice].systemName);</span><br><span class="line">    <span class="comment">//系统版本</span></span><br><span class="line">    NSLog(@<span class="string">"SystemVersion: %@"</span>, [UIDevice currentDevice].systemVersion);</span><br><span class="line">    <span class="comment">//模型</span></span><br><span class="line">    NSLog(@<span class="string">"Model: %@"</span>, [UIDevice currentDevice].model);</span><br><span class="line">    <span class="comment">//本地化的模型</span></span><br><span class="line">    NSLog(@<span class="string">"LocalizeModel: %@"</span>, [UIDevice currentDevice].localizedModel);</span><br><span class="line">    <span class="comment">//电池状态</span></span><br><span class="line">    NSLog(@<span class="string">"BatteryLevel: %f"</span>, [UIDevice currentDevice].batteryLevel);</span><br><span class="line">    </span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.055 CityOfHeart[3528:60b] HostName: dounen</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.058 CityOfHeart[3528:60b] GlobalUniqueString: B4B1EC8C-A805-434B-9D57-106ED70C214A-3528-00000AF6A42D73D7</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.059 CityOfHeart[3528:60b] OperatingSystemName: NSMACHOperatingSystem</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.061 CityOfHeart[3528:60b] OperatingSystemVersion: Version 7.1.1 (Build 11D201)</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.063 CityOfHeart[3528:60b] PhysicalMem: 1035976704</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.064 CityOfHeart[3528:60b] ProcessName: CityOfHeart</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.074 CityOfHeart[3528:60b] UniqueId: &lt;__NSConcreteUUID 0x16693c80&gt; 5ACF8DA1-FAC1-4D70-AB1F-BB696188C5CA</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.075 CityOfHeart[3528:60b] userInterfaceIdiom: 0</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.157 CityOfHeart[3528:60b] Name: 童年</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.159 CityOfHeart[3528:60b] SystemName: iPhone OS</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.161 CityOfHeart[3528:60b] SystemVersion: 7.1.1</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.162 CityOfHeart[3528:60b] Model: iPad</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.163 CityOfHeart[3528:60b] LocalizeModel: iPad</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.165 CityOfHeart[3528:60b] BatteryLevel: -1.000000</span></span><br></pre></td></tr></table></figure>
+          
+            <h1 id="1-_常用方法_GithubGist地址">1. 常用方法 <a href="https://gist.github.com/dabing1022/55ce189c87c0b752f7c6" target="_blank" rel="external">GithubGist地址</a></h1><figure class="highlight c"><figcaption><span>常用方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">    NSLog(@<span class="string">"HostName: %@"</span>, [[NSProcessInfo processInfo] hostName]);</span><br><span class="line">    <span class="comment">//globallyUniqueString 唯一的标示符，每次调用都会不一样，可以用作一些临时缓存文件的名字</span></span><br><span class="line">    NSLog(@<span class="string">"GlobalUniqueString: %@"</span>, [[NSProcessInfo processInfo] globallyUniqueString]);</span><br><span class="line">    <span class="comment">//操作系统名称</span></span><br><span class="line">    NSLog(@<span class="string">"OperatingSystemName: %@"</span>, [[NSProcessInfo processInfo] operatingSystemName]);</span><br><span class="line">    <span class="comment">//操作系统版本</span></span><br><span class="line">    NSLog(@<span class="string">"OperatingSystemVersion: %@"</span>, [[NSProcessInfo processInfo] operatingSystemVersionString]);</span><br><span class="line">    <span class="comment">//物理内存</span></span><br><span class="line">    NSLog(@<span class="string">"PhysicalMem: %llu"</span>, [[NSProcessInfo processInfo] physicalMemory]);</span><br><span class="line">    <span class="comment">//进程名称</span></span><br><span class="line">    NSLog(@<span class="string">"ProcessName: %@"</span>, [[NSProcessInfo processInfo] processName]);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//供应商标识</span></span><br><span class="line">    NSLog(@<span class="string">"UniqueId: %@"</span>, [UIDevice currentDevice].identifierForVendor);</span><br><span class="line">    <span class="comment">//设备类型（iPhone、iPad）</span></span><br><span class="line">    NSLog(@<span class="string">"userInterfaceIdiom: %d"</span>, [UIDevice currentDevice].userInterfaceIdiom);</span><br><span class="line">    <span class="comment">//设备名字</span></span><br><span class="line">    NSLog(@<span class="string">"Name: %@"</span>, [UIDevice currentDevice].name);</span><br><span class="line">    <span class="comment">//系统名字</span></span><br><span class="line">    NSLog(@<span class="string">"SystemName: %@"</span>, [UIDevice currentDevice].systemName);</span><br><span class="line">    <span class="comment">//系统版本</span></span><br><span class="line">    NSLog(@<span class="string">"SystemVersion: %@"</span>, [UIDevice currentDevice].systemVersion);</span><br><span class="line">    <span class="comment">//模型</span></span><br><span class="line">    NSLog(@<span class="string">"Model: %@"</span>, [UIDevice currentDevice].model);</span><br><span class="line">    <span class="comment">//本地化的模型</span></span><br><span class="line">    NSLog(@<span class="string">"LocalizeModel: %@"</span>, [UIDevice currentDevice].localizedModel);</span><br><span class="line">    <span class="comment">//电池状态</span></span><br><span class="line">    NSLog(@<span class="string">"BatteryLevel: %f"</span>, [UIDevice currentDevice].batteryLevel);</span><br><span class="line">    </span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.055 CityOfHeart[3528:60b] HostName: dounen</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.058 CityOfHeart[3528:60b] GlobalUniqueString: B4B1EC8C-A805-434B-9D57-106ED70C214A-3528-00000AF6A42D73D7</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.059 CityOfHeart[3528:60b] OperatingSystemName: NSMACHOperatingSystem</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.061 CityOfHeart[3528:60b] OperatingSystemVersion: Version 7.1.1 (Build 11D201)</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.063 CityOfHeart[3528:60b] PhysicalMem: 1035976704</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.064 CityOfHeart[3528:60b] ProcessName: CityOfHeart</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.074 CityOfHeart[3528:60b] UniqueId: &lt;__NSConcreteUUID 0x16693c80&gt; 5ACF8DA1-FAC1-4D70-AB1F-BB696188C5CA</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.075 CityOfHeart[3528:60b] userInterfaceIdiom: 0</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.157 CityOfHeart[3528:60b] Name: 童年</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.159 CityOfHeart[3528:60b] SystemName: iPhone OS</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.161 CityOfHeart[3528:60b] SystemVersion: 7.1.1</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.162 CityOfHeart[3528:60b] Model: iPad</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.163 CityOfHeart[3528:60b] LocalizeModel: iPad</span></span><br><span class="line"><span class="comment">//2014-07-03 16:52:01.165 CityOfHeart[3528:60b] BatteryLevel: -1.000000</span></span><br></pre></td></tr></table></figure>
 <h1 id="2-_判断设备是否是7-0以上系统">2. 判断设备是否是7.0以上系统</h1><p><code>[[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 7.0f</code></p>
 <blockquote>
 <p>注意：<br>假如我们的设备版本号为<code>7.1.1</code>（为字符串类型），对其进行<code>floatValue</code>浮点化后值为<code>7.100000</code>。</p>
@@ -929,9 +1148,16 @@
 <li>iPhone: <code>[[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone</code></li>
 </ul>
 <figure class="highlight c"><figcaption><span>UIUserInterfaceIdiom in UIDevice.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">NS_ENUM</span><span class="params">(NSInteger, UIUserInterfaceIdiom)</span> </span>&#123;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">if</span> __IPHONE_3_2 &lt;= __IPHONE_OS_VERSION_MAX_ALLOWED</span></span><br><span class="line">    UIUserInterfaceIdiomPhone,           <span class="comment">// iPhone and iPod touch style UI</span></span><br><span class="line">    UIUserInterfaceIdiomPad,             <span class="comment">// iPad style UI</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -980,7 +1206,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-01T02:56:00+08:00" content="Jul 1 2014">
               Jul 1 2014
             </time>
@@ -1001,28 +1230,37 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>Dropbox最近被墙掉，我才意识到以前写的博客，采用dropbox的图片外链通通打不开了。</p>
+          
+            <p>Dropbox最近被墙掉，我才意识到以前写的博客，采用dropbox的图片外链通通打不开了。</p>
 <h2 id="WTF!">WTF!</h2><p>后面准备采用七牛云存储。这个稳定，速度还不错。</p>
 <p>等闲下来，我会将以前博客的dropbox图片外链地址修正下。</p>
 <p>2014/07/02：图片地址修复完毕。</p>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1071,7 +1309,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-06-20T03:44:00+08:00" content="Jun 20 2014">
               Jun 20 2014
             </time>
@@ -1079,7 +1320,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ios/" itemprop="url" rel="index">
@@ -1107,21 +1352,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p><img src="http://childhoodgamedev.qiniudn.com/life_1.jpg" alt=""></p>
+          
+            <p><img src="http://childhoodgamedev.qiniudn.com/life_1.jpg" alt=""></p>
 <p>从去年从公司离职到现在，已有半年多。选择走了这条路，注定一路艰辛。从之前的游戏开发，到现在的IOS开发，从我的程序员生涯上来看，算是接触到了新的一面。我时常在想，这样做是否正确？这个问题也常常深夜扰乱我的心。</p>
 <blockquote>
 <p>不要永远呆在自己的舒适区，走出去看看。</p>
@@ -1135,9 +1382,16 @@
 <li>Email：dabing@qioji.com</li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1186,7 +1440,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-05-20T02:46:00+08:00" content="May 20 2014">
               May 20 2014
             </time>
@@ -1194,7 +1451,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/lua/" itemprop="url" rel="index">
@@ -1222,21 +1483,23 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>在Lua中，table如何安全的移除元素这点挺重要，因为如果不小心，会没有正确的移除，造成内存泄漏。</p>
+          
+            <p>在Lua中，table如何安全的移除元素这点挺重要，因为如果不小心，会没有正确的移除，造成内存泄漏。</p>
 <h1 id="引子">引子</h1><p>比如有些朋友常常这么做，大家看有啥问题</p>
 <figure class="highlight lua"><figcaption><span>将test表中的偶数移除掉</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> test = &#123; <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">100</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">7</span>, <span class="number">11</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>( test ) <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">if</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">table</span>.remove(test, i)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>( test ) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(i .. <span class="string">"===="</span> .. v)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>打印结果：</p>
@@ -1256,9 +1519,16 @@
 </li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1276,96 +1546,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/05/09/chipmunk-pivot-joint-test-demo/" itemprop="url">
-                  Chipmunk枢轴关节测试Demo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-05-09T11:54:00+08:00" content="May 9 2014">
-              May 9 2014
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/05/09/chipmunk-pivot-joint-test-demo/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/05/09/chipmunk-pivot-joint-test-demo/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p><img src="http://childhoodgamedev.qiniudn.com/Screenflick%20Movie1.gif" alt=""></p>
-<p>to be finished…</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-
   </section>
 
   
@@ -1375,17 +1555,15 @@
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1404,31 +1582,37 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.png" alt="ChildhoodAndy" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="ChildhoodAndy" />
           <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+          <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">12</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">109</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -1447,32 +1631,36 @@
               <span class="links-of-author-item">
                 <a href="http://www.github.com/dabing1022" target="_blank">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://twitter.com/childhoodandy" target="_blank">
                   
-                    <i class="fa fa-twitter"></i> Twitter
+                    <i class="fa fa-twitter"></i>
                   
+                  Twitter
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://weibo.com/1297984304" target="_blank">
                   
-                    <i class="fa fa-weibo"></i> Weibo
+                    <i class="fa fa-weibo"></i>
                   
+                  Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://stackoverflow.com/users/1986621" target="_blank">
                   
-                    <i class="fa fa-globe"></i> StackOverflow
+                    <i class="fa fa-globe"></i>
                   
+                  StackOverflow
                 </a>
               </span>
             
@@ -1482,30 +1670,37 @@
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
-            <p class="site-author-name">友链</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://zengrong.net/" target="_blank">曾嵘</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://post.justbilt.com/" target="_blank">justblit</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://mokai.github.io" target="_blank">mokai</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
-              </span>
-            
+            <div class="links-of-blogroll-title">友链</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zengrong.net/" target="_blank">曾嵘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://post.justbilt.com/" target="_blank">justblit</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mokai.github.io" target="_blank">mokai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.ibireme.com/" target="_blank">ibireme</a>
+                </li>
+              
+            </ul>
           
         </div>
 
@@ -1517,17 +1712,18 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
 </div>
@@ -1548,16 +1744,61 @@
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
   
   
 
   
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
 
   
     
@@ -1575,36 +1816,21 @@
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
-    
-     
 
-
+  
     
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
-
   
   
 
   
+
   
 
 </body>
