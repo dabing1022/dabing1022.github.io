@@ -27,18 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -52,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=5.0.1" />
 
 
 
@@ -84,6 +111,11 @@
     }
   };
 </script>
+
+
+
+
+  <link rel="canonical" href="dabing1022.github.io/"/>
 
   <title> HappyCoding:) </title>
 </head>
@@ -141,7 +173,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +183,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -161,7 +193,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -171,7 +203,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -181,7 +213,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -191,7 +223,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
             公益404
           </a>
@@ -214,6 +246,393 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/16/hello-block-03/" itemprop="url">
+                  iOS block备忘录03
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-16T20:24:20+08:00" content="Jun 16 2016">
+              Jun 16 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/16/hello-block-03/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/16/hello-block-03/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Block的常见几个用途">Block的常见几个用途</h1><p>1.简化枚举</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSArray</span> *array = ...</span><br><span class="line">    [array enumerateObjectsUsingBlock:^ (id obj, <span class="type">NSUInteger</span> idx, <span class="type">BOOL</span> *stop) &#123;</span><br><span class="line">        <span class="type">NSLog</span>(@<span class="string">"Object at index %lu is %@"</span>, idx, obj);</span><br><span class="line">    &#125;];</span><br></pre></td></tr></table></figure>
+<p>2.简化并发任务</p>
+<ul>
+<li>使用于OperationQueue</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSBlockOperation</span> *operation = [<span class="type">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">// schedule task on main queue:</span></span><br><span class="line"><span class="type">NSOperationQueue</span> *mainQueue = [<span class="type">NSOperationQueue</span> mainQueue];</span><br><span class="line">[mainQueue addOperation:operation];</span><br><span class="line"></span><br><span class="line"><span class="comment">// schedule task on background queue:</span></span><br><span class="line"><span class="type">NSOperationQueue</span> *queue = [[<span class="type">NSOperationQueue</span> alloc] <span class="keyword">init</span>];</span><br><span class="line">[queue addOperation:operation];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用于GCD</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(<span class="type">DISPATCH_QUEUE_PRIORITY_DEFAULT</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    <span class="type">NSLog</span>(@<span class="string">"Block for asynchronous execution"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/15/hello-block-02/" itemprop="url">
+                  iOS block备忘录02
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-15T20:24:20+08:00" content="Jun 15 2016">
+              Jun 15 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/15/hello-block-02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/hello-block-02/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="循环引用的问题">循环引用的问题</h1><p>让我们先来看一段代码。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@interface MyClass ()</span><br><span class="line">@property (readonly) int val;</span><br><span class="line">@property (strong) dispatch_block_t work;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p><code>Capturing self strongly in this block is likely to lead to a retain cycle</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">@interface BlockTestView2 ()</span><br><span class="line"></span><br><span class="line">@property (readonly) int val;</span><br><span class="line">@property (nonatomic, strong) id obj;</span><br><span class="line"></span><br><span class="line">@property (strong) dispatch_block_t work;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation BlockTestView2</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</span><br><span class="line">    self = [super initWithFrame:frame];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">        _obj = @1;</span><br><span class="line">        [self setup];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setup &#123;</span><br><span class="line">    _val = 5;</span><br><span class="line"></span><br><span class="line">    // retain cycle</span><br><span class="line">    self.work = ^&#123;</span><br><span class="line">        NSLog(@"BlockTestView2 %d", _val);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 1. Scoping</span><br><span class="line">// Avoid capturing self</span><br><span class="line">- (void)setup1 &#123;</span><br><span class="line">    int local = self.val;</span><br><span class="line">    self.work = ^&#123;</span><br><span class="line">        NSLog(@"BlockTestView2 %d", local);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2. Programmatically</span><br><span class="line">// nil the block property</span><br><span class="line">- (void)setup2 &#123;</span><br><span class="line">#pragma clang diagnostic push</span><br><span class="line">#pragma clang diagnostic ignored "-Warc-retain-cycles"</span><br><span class="line">    self.work = ^&#123;</span><br><span class="line">        NSLog(@"BlockTestView2 %d", _val);</span><br><span class="line">    &#125;;</span><br><span class="line">#pragma clang diagnostic pop</span><br><span class="line"></span><br><span class="line">    // nil the block property somewhere, please ignore</span><br><span class="line">    // this call at this point</span><br><span class="line">    [self cancel];</span><br><span class="line">&#125;</span><br><span class="line">- (void)cancel &#123;</span><br><span class="line">    self.work = nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 3. Attributes</span><br><span class="line">// Use __weak</span><br><span class="line">- (void)setup3 &#123;</span><br><span class="line">    __weak __typeof(self) weakSelf = self;</span><br><span class="line">    self.work = ^&#123;</span><br><span class="line">        __strong __typeof(self) strongSelf = weakSelf;</span><br><span class="line">        NSLog(@"BlockTestView2 %@", strongSelf.obj);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/15/hello-block-01/" itemprop="url">
+                  iOS block备忘录01
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-15T20:22:20+08:00" content="Jun 15 2016">
+              Jun 15 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/15/hello-block-01/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/hello-block-01/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何声明、定义一个Block">如何声明、定义一个Block</h1><ul>
+<li><p>作为局部变量<br><code>returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};</code><br>例如：<br><code>int (^addByOneBlock)(int) = ^int(int number) { return number + 1; }</code></p>
+</li>
+<li><p>作为属性<br><code>@property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);</code><br>例如：<br><code>@property (nonatomic, assign) int (^addByOneBlock)(int)</code></p>
+</li>
+<li><p>作为方法参数（声明）<br><code>(void)someMethodThatTakesABlock:(returnType (^nullability)(parameterTypes))blockName;</code><br>例如：<br><code>(void)someMethod:(int (^)(int))addByOneBlock;</code></p>
+</li>
+<li><p>方法调用的参数（调用）<br><code>[someObject someMethodThatTakesABlock:^returnType (parameters) {...}];</code><br>例如：<br><code>[someObject someMethod:^int (int number) { return number + 1; }];</code></p>
+</li>
+<li><p>typedef</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef returnType (^<span class="type">TypeName</span>)(parameterTypes);</span><br><span class="line"><span class="type">TypeName</span> blockName = ^returnType(parameters) &#123;...&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例如：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef void(^<span class="type">SDWebImageQueryCompletedBlock</span>)(<span class="type">UIImage</span> *image, <span class="type">SDImageCacheType</span> cacheType);</span><br><span class="line"></span><br><span class="line">typedef void(^<span class="type">SDWebImageCheckCacheCompletionBlock</span>)(<span class="type">BOOL</span> isInCache);</span><br><span class="line"></span><br><span class="line">typedef void(^<span class="type">SDWebImageCalculateSizeBlock</span>)(<span class="type">NSUInteger</span> fileCount, <span class="type">NSUInteger</span> totalSize);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^ &#36820;&#22238;&#20540;&#31867;&#22411; (&#21442;&#25968;&#21015;&#34920;) &#123; &#34920;&#36798;&#24335; &#125;&#10;          |&#10;          | &#30465;&#30053; &#36820;&#22238;&#20540;&#31867;&#22411;&#10;          |&#10;^ (&#21442;&#25968;&#21015;&#34920;) &#123; &#34920;&#36798;&#24335; &#125;&#10;          |&#10;          | &#24403;&#19981;&#20351;&#29992;&#21442;&#25968;&#26102;&#65292;&#21487;&#20197;&#30465;&#30053; (&#21442;&#25968;&#21015;&#34920;)&#10;          |&#10;^ &#123; &#34920;&#36798;&#24335; &#125;&#10;&#10;-------------------&#10;Example:&#10;&#10;^int (int count) &#123; return count + 1; &#125;&#10;          |&#10;          |&#10;          |&#10;^(int count) &#123; return count + 1; &#125;&#10;          |&#10;          |&#10;          |&#10;^ &#123; NSLog(@&#34;HelloWorld!&#34;); &#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -292,6 +711,7 @@
           
           
 
+          
         </div>
       </header>
     
@@ -306,7 +726,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_cimlseaqu000v1sm8ziygp0gp"
+                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_ciphsek33000vnsfu3a5t15qq"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" itemprop="contentUrl"/>
               </a>
@@ -329,7 +749,7 @@
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -429,6 +849,7 @@
           
           
 
+          
         </div>
       </header>
     
@@ -458,7 +879,7 @@
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -558,6 +979,7 @@
           
           
 
+          
         </div>
       </header>
     
@@ -585,7 +1007,7 @@
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -685,6 +1107,7 @@
           
           
 
+          
         </div>
       </header>
     
@@ -710,7 +1133,7 @@
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -810,6 +1233,7 @@
           
           
 
+          
         </div>
       </header>
     
@@ -831,7 +1255,7 @@
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -931,6 +1355,7 @@
           
           
 
+          
         </div>
       </header>
     
@@ -952,7 +1377,7 @@
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1052,6 +1477,7 @@
           
           
 
+          
         </div>
       </header>
     
@@ -1075,385 +1501,7 @@
         
       
     </div>
-    
-    <div>
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/02/how-to-implement-chained-in-objective-c-syntax/" itemprop="url">
-                  如何在Objective-C中实现链式语法？
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-01-02T10:54:00+08:00" content="Jan 2 2015">
-              Jan 2 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-C/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-C</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/02/how-to-implement-chained-in-objective-c-syntax/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/02/how-to-implement-chained-in-objective-c-syntax/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在接触到开源项目 <a href="https://github.com/Masonry/Masonry">Masonry</a> 后，里面的布局约束的链式写法让我颇感兴趣，就像下面这样</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);&#10;&#10;[view1 mas_makeConstraints:^(MASConstraintMaker *make) &#123;&#10;    make.top.equalTo(superview.mas_top).with.offset(padding.top); //with is an optional semantic filler&#10;    make.left.equalTo(superview.mas_left).with.offset(padding.left);&#10;    make.bottom.equalTo(superview.mas_bottom).with.offset(-padding.bottom);&#10;    make.right.equalTo(superview.mas_right).with.offset(-padding.right);&#10;&#125;];</span><br></pre></td></tr></table></figure>
-<p>其他语言比如 Lua， 实现链式语法很容易。但在 Objective-C 中，如何实现链式语法呢？<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/02/how-to-implement-chained-in-objective-c-syntax/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/29/new-labels-data-concept-map/" itemprop="url">
-                  新版标签、数据概念图
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-29T06:26:00+08:00" content="Dec 29 2014">
-              Dec 29 2014
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/创业/" itemprop="url" rel="index">
-                    <span itemprop="name">创业</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/29/new-labels-data-concept-map/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/29/new-labels-data-concept-map/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>《心城》1.3.0版本目前可以在AppStore<a href="https://itunes.apple.com/cn/app/xin-cheng/id923226261?l=zh&amp;mt=8" target="_blank" rel="external">下载</a>。</p>
-<p>迭代的这几个版本，还没有正式迈入到我们设想的功能点。</p>
-<p>在下面的1.4.0版本中，我们俩决定按照之前设想的，加入标签系统，这套系统会成为组织数据的一个核心，今天上午我自己出了个概念图，不过当务之急要将功能、流程走通。</p>
-<p><img src="http://childhoodgamedev.qiniudn.com/xincheng_2.png" alt=""></p>
-<p><img src="http://childhoodgamedev.qiniudn.com/xincheng_1.png" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/26/resolving-pod-search-the-warehouse-below-the-github-repository-version-of-method/" itemprop="url">
-                  解决pod search出来的仓库版本低于github仓库版本的方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-26T02:19:00+08:00" content="Dec 26 2014">
-              Dec 26 2014
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/26/resolving-pod-search-the-warehouse-below-the-github-repository-version-of-method/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/26/resolving-pod-search-the-warehouse-below-the-github-repository-version-of-method/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="问题描述">问题描述</h1><p>我们在用 Cocoapods 做第三方开源库管理的时候，有时候发现</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pod search XXX</span><br></pre></td></tr></table></figure>
-<p>版本低于github上仓库的最新release版本 （注：XXX为仓库名称）</p>
-<h1 id="解决方法–&gt;升级Cocoapods版本">解决方法–&gt;升级Cocoapods版本</h1><p>查看当前系统Cocoapods版本命令：<code>pod --version</code></p>
-<h2 id="升级方法">升级方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem update --system</span><br><span class="line">$ gem sources --remove https://rubygems.org/ </span><br><span class="line">$ gem sources <span class="operator">-a</span> http://ruby.taobao.org/ </span><br><span class="line">$ sudo gem install cocoapods</span><br><span class="line">$ pod setup</span><br></pre></td></tr></table></figure>
-<p>其中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gem sources --remove https://rubygems.org/ </span><br><span class="line">$ gem sources <span class="operator">-a</span> http://ruby.taobao.org/</span><br></pre></td></tr></table></figure></p>
-<p>这两句话可以省略，但我们在天朝，还是加上的好。国内网络原因（你懂的），如果使用原来的<code>https://rubygems.org/</code>，那么在<code>sudo gem install cocoapods</code>的时候，存放在 Amazon S3 上面的资源文件间歇性连接失败。</p>
-<p>升级结束后再次<code>pod --version</code>，会发现 Cocoapods 版本号高于之前的版本，升级成功了。</p>
-<p>再次<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pod search XXX</span><br></pre></td></tr></table></figure></p>
-<p>OK，github仓库的最新版已经有了。</p>
-<ul>
-<li>原文链接：<a href="https://github.com/dabing1022/Blog/issues/3" target="_blank" rel="external">https://github.com/dabing1022/Blog/issues/3</a></li>
-<li>问题经过：<a href="https://github.com/HeshamMegid/HMSegmentedControl/issues/77" target="_blank" rel="external">https://github.com/HeshamMegid/HMSegmentedControl/issues/77</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
     <div>
       
     </div>
@@ -1521,7 +1569,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1529,7 +1577,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1538,7 +1586,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-count">111</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1559,36 +1607,36 @@
           
             
               <span class="links-of-author-item">
-                <a href="http://www.github.com/dabing1022" target="_blank">
+                <a href="http://www.github.com/dabing1022" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/childhoodandy" target="_blank">
+                <a href="https://twitter.com/childhoodandy" target="_blank" title="Twitter">
                   
-                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-fw fa-twitter"></i>
                   
                   Twitter
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/1297984304" target="_blank">
+                <a href="http://weibo.com/1297984304" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-weibo"></i>
+                    <i class="fa fa-fw fa-weibo"></i>
                   
                   Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://stackoverflow.com/users/1986621" target="_blank">
+                <a href="http://stackoverflow.com/users/1986621" target="_blank" title="StackOverflow">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   StackOverflow
                 </a>
@@ -1601,38 +1649,41 @@
         
 
         
-        <div class="links-of-blogroll motion-element">
-          
-            <div class="links-of-blogroll-title">友链</div>
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友链
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://zengrong.net/" target="_blank">曾嵘</a>
+                  <a href="http://zengrong.net/" title="曾嵘" target="_blank">曾嵘</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://post.justbilt.com/" target="_blank">justblit</a>
+                  <a href="http://post.justbilt.com/" title="justblit" target="_blank">justblit</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://yulingtianxia.com" target="_blank">玉令天下</a>
+                  <a href="http://yulingtianxia.com" title="玉令天下" target="_blank">玉令天下</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://mokai.github.io" target="_blank">mokai</a>
+                  <a href="http://mokai.github.io" title="mokai" target="_blank">mokai</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT-Help</a>
+                  <a href="http://theme-next.iissnan.com/" title="NexT-Help" target="_blank">NexT-Help</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://blog.ibireme.com/" target="_blank">ibireme</a>
+                  <a href="http://blog.ibireme.com/" title="ibireme" target="_blank">ibireme</a>
                 </li>
               
             </ul>
-          
-        </div>
+          </div>
+        
 
       </section>
 
@@ -1669,8 +1720,9 @@
   </a>
 </div>
 
+        
 
-
+        
       </div>
     </footer>
 
@@ -1681,12 +1733,6 @@
 
   
 
-
-  
-
-
-
-
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
@@ -1694,44 +1740,61 @@
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
   
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -1757,6 +1820,7 @@
   
     
   
+
 
 
 
