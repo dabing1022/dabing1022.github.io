@@ -268,6 +268,146 @@
             
               
                 
+                <a class="post-title-link" href="/2013/11/29/quickcocos2dx-create-a-stroke-effect/" itemprop="url">
+                  QuickCocos2dx创建描边效果
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2013-11-29T10:51:00+08:00" content="Nov 29 2013">
+              Nov 29 2013
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/cocos2d/" itemprop="url" rel="index">
+                    <span itemprop="name">cocos2d</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/11/29/quickcocos2dx-create-a-stroke-effect/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/29/quickcocos2dx-create-a-stroke-effect/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###QuickCocos2dx创建描边效果###</p>
+<p>@[quick|cocos2d|描边]</p>
+<hr>
+<p><img src="http://childhoodgamedev.qiniudn.com/lua_QQ20131129-1.png" alt="效果"></p>
+<p>参考：</p>
+<ul>
+<li><a href="http://www.cocos2d-x.org/forums/6/topics/22335" target="_blank" rel="external">Stroke example for CCLabelTTF and CCSprite</a></li>
+<li><a href="http://www.cocos2d-iphone.org/forums/topic/font-stroke/" target="_blank" rel="external">Font Stroke</a></li>
+</ul>
+<hr>
+<p>CCRenderTexture这个类平时没怎么用过，想不到用TA来创建描边效果轻松并且效果也还不错。</p>
+<p>上面2个帖子的实现，抛开一个c++，一个oc语言来看，我发现思路其实是一样的，这里我翻译了成quick的lua版本，并在代码中相应做了些注释，朋友们可以看下。</p>
+<figure class="highlight lua"><figcaption><span>描边函数</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- @param:node 欲描边的显示对象</span></span><br><span class="line"><span class="comment">-- @param:strokeWidth 描边宽度</span></span><br><span class="line"><span class="comment">-- @param:color 描边颜色</span></span><br><span class="line"><span class="comment">-- @param:opacity 描边透明度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createStroke</span><span class="params">(node, strokeWidth, color, opacity)</span></span></span><br><span class="line">	<span class="keyword">local</span> w = node:getTexture():getContentSize().width + strokeWidth * <span class="number">2</span></span><br><span class="line">	<span class="keyword">local</span> h = node:getTexture():getContentSize().height + strokeWidth * <span class="number">2</span></span><br><span class="line">	<span class="keyword">local</span> rt = CCRenderTexture:create(w, h)</span><br><span class="line"></span><br><span class="line">	<span class="comment">-- 记录原始位置</span></span><br><span class="line">	<span class="keyword">local</span> originX, originY = node:getPosition()</span><br><span class="line">	<span class="comment">-- 记录原始颜色RGB信息</span></span><br><span class="line">	<span class="keyword">local</span> originColorR = node:getColor().r</span><br><span class="line">	<span class="keyword">local</span> originColorG = node:getColor().g</span><br><span class="line">	<span class="keyword">local</span> originColorB = node:getColor().b</span><br><span class="line">	<span class="comment">-- 记录原始透明度信息</span></span><br><span class="line">	<span class="keyword">local</span> originOpacity = node:getOpacity()</span><br><span class="line">	<span class="comment">-- 记录原始是否显示</span></span><br><span class="line">	<span class="keyword">local</span> originVisibility = node:isVisible()</span><br><span class="line">	<span class="comment">-- 记录原始混合模式</span></span><br><span class="line">	<span class="keyword">local</span> originBlend = node:getBlendFunc()</span><br><span class="line"></span><br><span class="line">	<span class="comment">-- 设置颜色、透明度、显示</span></span><br><span class="line">	node:setColor(color)</span><br><span class="line">	node:setOpacity(opacity)</span><br><span class="line">	node:setVisible(<span class="keyword">true</span>)</span><br><span class="line">	<span class="comment">-- 设置新的混合模式</span></span><br><span class="line">	<span class="keyword">local</span> blendFuc = ccBlendFunc:new()</span><br><span class="line">	blendFuc.src = GL_SRC_ALPHA</span><br><span class="line">	blendFuc.dst = GL_ONE</span><br><span class="line">	<span class="comment">-- blendFuc.dst = GL_ONE_MINUS_SRC_COLOR</span></span><br><span class="line">	node:setBlendFunc(blendFuc)</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 这里考虑到锚点的位置，如果锚点刚好在中心处，代码可能会更好理解点</span></span><br><span class="line">	<span class="keyword">local</span> bottomLeftX = node:getTexture():getContentSize().width * node:getAnchorPoint().x + strokeWidth </span><br><span class="line">	<span class="keyword">local</span> bottomLeftY = node:getTexture():getContentSize().height * node:getAnchorPoint().y + strokeWidth</span><br><span class="line"></span><br><span class="line">	<span class="keyword">local</span> positionOffsetX = node:getTexture():getContentSize().width * node:getAnchorPoint().x - node:getTexture():getContentSize().width / <span class="number">2</span></span><br><span class="line">	<span class="keyword">local</span> positionOffsetY = node:getTexture():getContentSize().height * node:getAnchorPoint().y - node:getTexture():getContentSize().height / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">local</span> rtPosition = ccp(originX - positionOffsetX, originY - positionOffsetY)</span><br><span class="line"></span><br><span class="line">	rt:begin()</span><br><span class="line">	<span class="comment">-- 步进值这里为10，不同的步进值描边的精细度也不同</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">0</span>, <span class="number">360</span>, <span class="number">10</span> <span class="keyword">do</span></span><br><span class="line">		<span class="comment">-- 这里解释了为什么要保存原来的初始信息</span></span><br><span class="line">		node:setPosition(ccp(bottomLeftX + <span class="built_in">math</span>.sin(degrees2radians(i)) * strokeWidth, bottomLeftY + <span class="built_in">math</span>.cos(degrees2radians(i)) * strokeWidth))</span><br><span class="line">		node:visit()</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	rt:endToLua()</span><br><span class="line"></span><br><span class="line">	<span class="comment">-- 恢复原状</span></span><br><span class="line">	node:setPosition(originX, originY)</span><br><span class="line">	node:setColor(ccc3(originColorR, originColorG, originColorB))</span><br><span class="line">	node:setBlendFunc(originBlend)</span><br><span class="line">	node:setVisible(originVisibility)</span><br><span class="line">	node:setOpacity(originOpacity)</span><br><span class="line"></span><br><span class="line">	rt:setPosition(rtPosition)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> rt</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>###补充###</p>
+<figure class="highlight lua"><figcaption><span>弧度与角度转换函数</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">degrees2radians</span><span class="params">(angle)</span></span></span><br><span class="line">    <span class="keyword">return</span> angle * <span class="number">0.01745329252</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">radians2degrees</span><span class="params">(angle)</span></span></span><br><span class="line">    <span class="keyword">return</span> angle * <span class="number">57.29577951</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>###举个例子###</p>
+<p>```lua 测试例子<br>– 文本、图片一样，这里用文本举个例子<br>local quickLabel = ui.newTTFLabel({<br>        text = “QuickCocos2dX-createStroke”,<br>        color = display.COLOR_RED,<br>        size = 60,<br>        align = ui.TEXT_ALIGN_CENTER,<br>        x = display.cx,<br>        y = display.cy + 150<br>    }):addTo(self, 1)</p>
+<p>local  renderTexture = createStroke(quickLabel, 4, ccc3(0xca, 0xa5, 0x5f), 100)<br>– 设置反锯齿<br>renderTexture:getSprite():getTexture():setAntiAliasTexParameters()<br>self:addChild(renderTexture, quickLabel:getZOrder()-1)<br>```<br>这样的方法，会drawcall2次。</p>
+<p>群里有朋友提到，如果文本改变，那下方的描边如何做?</p>
+<p>那对应的描边renderTexture也需要改变，我想是得先remove掉然后重新创建纹理，那各位可以简单封装下，当文本重新<code>setString</code>的时候，相应去创建下方的描边纹理就可以了。</p>
+<p>###最后###<br>如果代码有问题或者其他疑问，欢迎一起探讨学习:)</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2013/11/27/about-cocos2d-textures/" itemprop="url">
                   聊聊Cocos2d纹理
                 </a>
@@ -1144,7 +1284,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1161,7 +1301,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-count">114</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

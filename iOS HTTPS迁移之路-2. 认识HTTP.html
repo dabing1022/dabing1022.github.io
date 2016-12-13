@@ -1,0 +1,817 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HappyCoding:)" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="HTTP全名HyperText Transfer Protocol，意为“超文本传输协议”，它是一个简单的请求-响应协议。
+HTTP的缺点HTTP并不是个加密的协议，会天然的存在几个缺点：
+1.明文通信，内容很容易被窃听互联网上的任何一个角落都存在通信内容被窃听的风险，被广泛使用的抓包工具如Wireshark,Charles等，都可以获取HTTP协议的请求（Request）和响应（Response">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iOS HTTPS迁移之路-2. 认识HTTP">
+<meta property="og:url" content="dabing1022.github.io/iOS HTTPS迁移之路-2. 认识HTTP.html">
+<meta property="og:site_name" content="HappyCoding:)">
+<meta property="og:description" content="HTTP全名HyperText Transfer Protocol，意为“超文本传输协议”，它是一个简单的请求-响应协议。
+HTTP的缺点HTTP并不是个加密的协议，会天然的存在几个缺点：
+1.明文通信，内容很容易被窃听互联网上的任何一个角落都存在通信内容被窃听的风险，被广泛使用的抓包工具如Wireshark,Charles等，都可以获取HTTP协议的请求（Request）和响应（Response">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/HTTP.001.png">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/http-keep-alive.png">
+<meta property="og:updated_time" content="2016-08-20T09:48:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS HTTPS迁移之路-2. 认识HTTP">
+<meta name="twitter:description" content="HTTP全名HyperText Transfer Protocol，意为“超文本传输协议”，它是一个简单的请求-响应协议。
+HTTP的缺点HTTP并不是个加密的协议，会天然的存在几个缺点：
+1.明文通信，内容很容易被窃听互联网上的任何一个角落都存在通信内容被窃听的风险，被广泛使用的抓包工具如Wireshark,Charles等，都可以获取HTTP协议的请求（Request）和响应（Response">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="dabing1022.github.io/iOS HTTPS迁移之路-2. 认识HTTP.html"/>
+
+  <title> iOS HTTPS迁移之路-2. 认识HTTP | HappyCoding:) </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HappyCoding:)</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS HTTPS迁移之路-2. 认识HTTP
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-18T07:20:00+08:00" content="Aug 18 2016">
+              Aug 18 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/" itemprop="url" rel="index">
+                    <span itemprop="name"></span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/" itemprop="url" rel="index">
+                    <span itemprop="name"></span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/" itemprop="url" rel="index">
+                    <span itemprop="name"></span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/iOS HTTPS迁移之路-2. 认识HTTP.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="iOS HTTPS迁移之路-2. 认识HTTP.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>HTTP全名<code>HyperText Transfer Protocol</code>，意为“超文本传输协议”，它是一个简单的请求-响应协议。</p>
+<h2 id="HTTP的缺点">HTTP的缺点</h2><p>HTTP并不是个加密的协议，会天然的存在几个缺点：</p>
+<h3 id="1-明文通信，内容很容易被窃听">1.明文通信，内容很容易被窃听</h3><p>互联网上的任何一个角落都存在通信内容被窃听的风险，被广泛使用的抓包工具如<code>Wireshark</code>,<code>Charles</code>等，都可以获取HTTP协议的请求（Request）和响应（Response）的内容，并对其处理。</p>
+<p>如何解决呢？</p>
+<p>通过HTTPS或者简单点对通信的内容进行加密。对通信内容加密要求客户端对HTTP报文主体内容进行加密，然后发送给服务器，为了保证这点，要求客户端和服务器同时具备加密和解密机制。该方式不同于SSL/TLS对通信线路的加密处理，所以内容仍然有可能被篡改。</p>
+<h3 id="2-不验证通信双方身份，因此有可能遭遇黑客伪装客户端或者服务器的情况">2.不验证通信双方身份，因此有可能遭遇黑客伪装客户端或者服务器的情况</h3><p>在 HTTP 协议通信中，因为不存在确认通信双方身份的步骤，对于请求发送者来说，所以任何人都可以发起请求；对于服务器来说，只要接收到请求，对于不在IP和端口不在限制黑名单的发送者都会返回一个响应。</p>
+<p>不验证通信双方身份，会带来什么隐患呢？</p>
+<ul>
+<li>通信的服务器可能是伪装的服务器</li>
+<li>通信的客户端可能是伪装的客户端</li>
+<li>无法抵挡DoS攻击（Denial of Service，拒绝服务器攻击）</li>
+</ul>
+<p>如何解决呢？</p>
+<p>使用SSL/TSL证书确认机制来确认双方身份。对于 iOS 开发而言，我们可以在 App 内预埋证书，在SSL/TSL握手阶段完成与服务器双向证书的认证。关于这点，我会在后面的文章中详细提及。</p>
+<h3 id="3-无法验证报文的完整性，因此可能会接收到被篡改的报文。">3.无法验证报文的完整性，因此可能会接收到被篡改的报文。</h3><p>在 HTTP 协议通信中，常常会遇到中间人攻击（Man-In-The-Middle-Attack，MITMA），通信的报文会被中间人篡改，那么怎么防止这种情况？</p>
+<p>通常业内用的是 MD5 或 SHA-1 等散列值校验的方式，结合用来确认文件的数字签名方法。</p>
+<h2 id="HTTP协议版本">HTTP协议版本</h2><p>目前主流的 HTTP 协议版本是 HTTP/1.1，而1.1版本却是1997年发布的。在1.1之前还有几个版本，但1.1解决了一个重要的问题。我们来看下先辈们是如何解决网络传输问题的。</p>
+<p>在 HTTP/1.0 版本的时候，每进行一次 HTTP 通信就要断开一次 TCP 连接。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/HTTP.001.png" alt=""></p>
+<p>在1.0版本的时候，浏览器在打开 web 页面的时候，会使用“并行连接”（parallel connection）的方式来同时打开多个 TCP 连接，这么做会带来什么影响？</p>
+<ul>
+<li>我们从图中可以看到，每次 TCP 连接的建立，需要三次握手（1.客户端：你好，我给你讲个笑话；（SYN）2.服务端：好的（ACK），你讲吧（SYN）；3.客户端：好的，我准备开始讲了（ACK）），这样会带来1.5个RTT（round-trip-time）往返延迟，这种情况在高延迟的情况下比较明显；</li>
+<li>每次 TCP 的连接开始阶段，会有一个慢启动的过程，这个过程是用来了解网络路径行为，所以如果能重用要比不重用要好一些；</li>
+<li>并行连接会抢夺资源，会造成一定的丢包率。</li>
+</ul>
+<p>而 HTTP/1.1 使用“持久连接”（persistent connection）的机制解决了这个问题。这种策略也被成为“连接重用”（connection reuse）或者“keep-alive”。通过一次 TCP 的建立，可以进行多次 HTTP 请求、响应，这种做法无疑会降低 TCP 建立、断开释放带来的开销。持续连接的机制使得 HTTP 请求可以以“管线化”（pipelining）的方式进行发送，不过 pipelining 只适用于幂等请求（如GET/HEAD等方法），非幂等请求（如PUT/POST等方法）不能使用，因为非幂等请求之间可能有前后依赖。在1.1以前的版本中，每一个 HTTP 请求都需要等待收到上一个请求响应后才能发送。管线化使得 HTTP 请求可以并行发送。1.1版本这里的进步无疑是巨大的。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/http-keep-alive.png" alt=""></p>
+<p>基于 HTTP/1.1 或者 HTTP/2.0 的 web 通信，我们看到，connection 都是 keep-alive 的方式。为了连接重用，很少见到显式将 connection 置为 close 的。那我们想一下，什么时候会断开 TCP 连接呢？事实上，客户端和服务器通常会持久连接保持打开状态，当它们已经闲置一小段时间或者当存在大量的连接时，一些 TCP 连接会被关闭。</p>
+<p>那 HTTP/1.1 这么好，为什么互联网工程任务组（IETF）还要开发 HTTP/2.0 版本？2.0解决的问题正是 1.1 版本的弊端所在。包括了几个重要的改进：</p>
+<ul>
+<li>多路复用</li>
+<li>优先级请求</li>
+<li>请求头部压缩</li>
+<li>服务器推送</li>
+</ul>
+<p>事实上，HTTP/2.0 版本正是基于谷歌2012年提出的 SPDY 方案为原型，所以我们下一节来一起了解学习下 SPDY。</p>
+<p><a href="https://github.com/AFNetworking/AFNetworking/issues/3296" target="_blank" rel="external">How I start use Http2.0 with AFNetworking?</a><br><a href="http://stackoverflow.com/questions/33119161/does-afnetworking-support-http2-now" target="_blank" rel="external">Does AFNetworking support HTTP2 now?</a><br><a href="https://github.com/AFNetworking/AFNetworking/issues/3430" target="_blank" rel="external">Do we have Http 2 support already?</a></p>
+<p><a href="https://developer.apple.com/videos/play/wwdc2015/711/" target="_blank" rel="external">Networking with NSURLSession</a></p>
+<p><a href="http://www.jianshu.com/p/a9bca62d8dab" target="_blank" rel="external">与时俱进，HTTP/2下的iOS网络层架构设计</a></p>
+<p><a href="http://mrpeak.cn/blog/http2/" target="_blank" rel="external">HTTP 2.0的那些事</a></p>
+<p><a href="http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/" target="_blank" rel="external">HTTP,HTTP2.0,SPDY,HTTPS你应该知道的一些事</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7u2lyz.com1.z0.glb.clouddn.com/wechatpay.jpg" alt="ChildhoodAndy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7u2lyz.com1.z0.glb.clouddn.com/alipay.jpg" alt="ChildhoodAndy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="iOS HTTPS迁移之路-2. 认识HTTP.html"
+     data-title="iOS HTTPS迁移之路-2. 认识HTTP"
+     data-content=""
+     data-url="dabing1022.github.io/iOS HTTPS迁移之路-2. 认识HTTP.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="iOS HTTPS迁移之路-2. 认识HTTP.html"
+           data-title="iOS HTTPS迁移之路-2. 认识HTTP" data-url="dabing1022.github.io/iOS HTTPS迁移之路-2. 认识HTTP.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="ChildhoodAndy" />
+          <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+          <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">114</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.github.com/dabing1022" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/childhoodandy" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1297984304" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/1986621" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zengrong.net/" title="曾嵘" target="_blank">曾嵘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://post.justbilt.com/" title="justblit" target="_blank">justblit</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yulingtianxia.com" title="玉令天下" target="_blank">玉令天下</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mokai.github.io" title="mokai" target="_blank">mokai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT-Help" target="_blank">NexT-Help</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.ibireme.com/" title="ibireme" target="_blank">ibireme</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP的缺点"><span class="nav-number">1.</span> <span class="nav-text">HTTP的缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-明文通信，内容很容易被窃听"><span class="nav-number">1.1.</span> <span class="nav-text">1.明文通信，内容很容易被窃听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不验证通信双方身份，因此有可能遭遇黑客伪装客户端或者服务器的情况"><span class="nav-number">1.2.</span> <span class="nav-text">2.不验证通信双方身份，因此有可能遭遇黑客伪装客户端或者服务器的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-无法验证报文的完整性，因此可能会接收到被篡改的报文。"><span class="nav-number">1.3.</span> <span class="nav-text">3.无法验证报文的完整性，因此可能会接收到被篡改的报文。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议版本"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议版本</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ChildhoodAndy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
