@@ -268,8 +268,163 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/18/iOS HTTPS迁移之路-2. 认识HTTP/" itemprop="url">
+                  iOS HTTPS迁移之路-2. 认识HTTP
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-18T07:20:00+08:00" content="Aug 18 2016">
+              Aug 18 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/18/iOS HTTPS迁移之路-2. 认识HTTP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/iOS HTTPS迁移之路-2. 认识HTTP/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>HTTP全名<code>HyperText Transfer Protocol</code>，意为“超文本传输协议”，它是一个简单的请求-响应协议。</p>
+<h2 id="HTTP的缺点">HTTP的缺点</h2><p>HTTP并不是个加密的协议，会天然的存在几个缺点：</p>
+<h3 id="1-明文通信，内容很容易被窃听">1.明文通信，内容很容易被窃听</h3><p>互联网上的任何一个角落都存在通信内容被窃听的风险，被广泛使用的抓包工具如<code>Wireshark</code>,<code>Charles</code>等，都可以获取HTTP协议的请求（Request）和响应（Response）的内容，并对其处理。</p>
+<p>如何解决呢？</p>
+<p>通过HTTPS或者简单点对通信的内容进行加密。对通信内容加密要求客户端对HTTP报文主体内容进行加密，然后发送给服务器，为了保证这点，要求客户端和服务器同时具备加密和解密机制。该方式不同于SSL/TLS对通信线路的加密处理，所以内容仍然有可能被篡改。</p>
+<h3 id="2-不验证通信双方身份，因此有可能遭遇黑客伪装客户端或者服务器的情况">2.不验证通信双方身份，因此有可能遭遇黑客伪装客户端或者服务器的情况</h3><p>在 HTTP 协议通信中，因为不存在确认通信双方身份的步骤，对于请求发送者来说，所以任何人都可以发起请求；对于服务器来说，只要接收到请求，对于不在IP和端口不在限制黑名单的发送者都会返回一个响应。</p>
+<p>不验证通信双方身份，会带来什么隐患呢？</p>
+<ul>
+<li>通信的服务器可能是伪装的服务器</li>
+<li>通信的客户端可能是伪装的客户端</li>
+<li>无法抵挡DoS攻击（Denial of Service，拒绝服务器攻击）</li>
+</ul>
+<p>如何解决呢？</p>
+<p>使用SSL/TSL证书确认机制来确认双方身份。对于 iOS 开发而言，我们可以在 App 内预埋证书，在SSL/TSL握手阶段完成与服务器双向证书的认证。关于这点，我会在后面的文章中详细提及。</p>
+<h3 id="3-无法验证报文的完整性，因此可能会接收到被篡改的报文。">3.无法验证报文的完整性，因此可能会接收到被篡改的报文。</h3><p>在 HTTP 协议通信中，常常会遇到中间人攻击（Man-In-The-Middle-Attack，MITMA），通信的报文会被中间人篡改，那么怎么防止这种情况？</p>
+<p>通常业内用的是 MD5 或 SHA-1 等散列值校验的方式，结合用来确认文件的数字签名方法。</p>
+<h2 id="HTTP协议版本">HTTP协议版本</h2><p>目前主流的 HTTP 协议版本是 HTTP/1.1，而1.1版本却是1997年发布的。在1.1之前还有几个版本，但1.1解决了一个重要的问题。我们来看下先辈们是如何解决网络传输问题的。</p>
+<p>在 HTTP/1.0 版本的时候，每进行一次 HTTP 通信就要断开一次 TCP 连接。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/HTTP.001.png" alt=""></p>
+<p>在1.0版本的时候，浏览器在打开 web 页面的时候，会使用“并行连接”（parallel connection）的方式来同时打开多个 TCP 连接，这么做会带来什么影响？</p>
+<ul>
+<li>我们从图中可以看到，每次 TCP 连接的建立，需要三次握手（1.客户端：你好，我给你讲个笑话；（SYN）2.服务端：好的（ACK），你讲吧（SYN）；3.客户端：好的，我准备开始讲了（ACK）），这样会带来1.5个RTT（round-trip-time）往返延迟，这种情况在高延迟的情况下比较明显；</li>
+<li>每次 TCP 的连接开始阶段，会有一个慢启动的过程，这个过程是用来了解网络路径行为，所以如果能重用要比不重用要好一些；</li>
+<li>并行连接会抢夺资源，会造成一定的丢包率。</li>
+</ul>
+<p>而 HTTP/1.1 使用“持久连接”（persistent connection）的机制解决了这个问题。这种策略也被成为“连接重用”（connection reuse）或者“keep-alive”。通过一次 TCP 的建立，可以进行多次 HTTP 请求、响应，这种做法无疑会降低 TCP 建立、断开释放带来的开销。持续连接的机制使得 HTTP 请求可以以“管线化”（pipelining）的方式进行发送，不过 pipelining 只适用于幂等请求（如GET/HEAD等方法），非幂等请求（如PUT/POST等方法）不能使用，因为非幂等请求之间可能有前后依赖。在1.1以前的版本中，每一个 HTTP 请求都需要等待收到上一个请求响应后才能发送。管线化使得 HTTP 请求可以并行发送。1.1版本这里的进步无疑是巨大的。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/http-keep-alive.png" alt=""></p>
+<p>基于 HTTP/1.1 或者 HTTP/2.0 的 web 通信，我们看到，connection 都是 keep-alive 的方式。为了连接重用，很少见到显式将 connection 置为 close 的。那我们想一下，什么时候会断开 TCP 连接呢？事实上，客户端和服务器通常会持久连接保持打开状态，当它们已经闲置一小段时间或者当存在大量的连接时，一些 TCP 连接会被关闭。</p>
+<p>那 HTTP/1.1 这么好，为什么互联网工程任务组（IETF）还要开发 HTTP/2.0 版本？2.0解决的问题正是 1.1 版本的弊端所在。包括了几个重要的改进：</p>
+<ul>
+<li>多路复用</li>
+<li>优先级请求</li>
+<li>请求头部压缩</li>
+<li>服务器推送</li>
+</ul>
+<p>事实上，HTTP/2.0 版本正是基于谷歌2012年提出的 SPDY 方案为原型，所以我们下一节来一起了解学习下 SPDY。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/17/iOS HTTPS迁移之路-1. 开篇/" itemprop="url">
-                  iOS HTTPS迁移之路-开篇
+                  iOS HTTPS迁移之路-1. 开篇
                 </a>
               
             
@@ -862,7 +1017,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_ciwnkpdag0011vzfugiayya1b"
+                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_ciwnkvv3e00101jfyz6wxiix1"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" itemprop="contentUrl"/>
               </a>
@@ -1414,128 +1569,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/02/03/新版本提交以及一些想法记录/" itemprop="url">
-                  新版本提交以及一些想法记录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-02-03T10:15:55+08:00" content="Feb 3 2015">
-              Feb 3 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/创业/" itemprop="url" rel="index">
-                    <span itemprop="name">创业</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/02/03/新版本提交以及一些想法记录/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/03/新版本提交以及一些想法记录/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          新版本提交以及一些想法记录
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/03/新版本提交以及一些想法记录/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1581,7 +1614,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

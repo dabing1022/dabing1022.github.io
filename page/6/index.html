@@ -268,6 +268,249 @@
             
               
                 
+                <a class="post-title-link" href="/2013/12/13/detailed-quickcocos2dx-state-machine-design/" itemprop="url">
+                  详解QuickCocos2dX状态机模式设计
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2013-12-13T09:48:00+08:00" content="Dec 13 2013">
+              Dec 13 2013
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/cocos2d/" itemprop="url" rel="index">
+                    <span itemprop="name">cocos2d</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/12/13/detailed-quickcocos2dx-state-machine-design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/12/13/detailed-quickcocos2dx-state-machine-design/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>#<i class="icon-paper-clip"> 目录</i></p>
+<p><img src="http://childhoodgamedev.qiniudn.com/quick_content.png" alt="目录"></p>
+<p>注：写这篇文章的时候，笔者所用的是quick-cocos2d-x 2.2.1rc版本。</p>
+<p>##<i class="icon-file-alt"> quick状态机<br>状态机的设计，目的就是为了避免大量状态的判断带来的复杂性，消除庞大的条件分支语句，因为大量的分支判断会使得程序难以修改和扩展。但quick状态机的设计又不同设计模式的状态模式，TA没有将各个状态单独划分成单独的状态类，相反根据js、lua语言的特点，特别设计了写法，使用起来也比较方便。</i></p>
+<p>quick框架中的状态机，是根据<a href="https://github.com/jakesgordon/javascript-state-machine" target="_blank" rel="external">javascript-state-machine</a>重新设计改写而成，同时<code>sample/statemachine</code>范例也是根据js版demo改写而来。该js库现在是<code>2.2.0</code>版本。基于js版的README.md，结合廖大的lua版重构，我针对状态机的使用做了点说明，如果有不对的地方，感谢指出:)。</p>
+<p>推荐大家在理解的时候结合<code>sample/statemachine</code>范例进行理解，注意player设置成竖屏模式，demo里面的按钮在横屏模式下看不见。</p>
+<p>#<i class="icon-paper-clip"> sample图示<br><img src="http://childhoodgamedev.qiniudn.com/quick_statemachine.png" alt="StateMachine"></i></p>
+<hr>
+<p>#<i class="icon-paper-clip"> 用法<br>创建一个状态机<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line"><span class="comment">-- （注：和demo不同的是，demo采用组件形式完成的初始化）</span></span><br><span class="line">fsm:setupState(&#123;</span><br><span class="line">    initial = <span class="string">"green"</span>,</span><br><span class="line">    events  = &#123;</span><br><span class="line">            &#123;name = <span class="string">"warn"</span>,  from = <span class="string">"green"</span>,  to = <span class="string">"yellow"</span>&#125;,</span><br><span class="line">            &#123;name = <span class="string">"panic"</span>, from = <span class="string">"green"</span>,  to = <span class="string">"red"</span>   &#125;,</span><br><span class="line">            &#123;name = <span class="string">"calm"</span>,  from = <span class="string">"red"</span>,    to = <span class="string">"yellow"</span>&#125;,</span><br><span class="line">            &#123;name = <span class="string">"clear"</span>, from = <span class="string">"yellow"</span>, to = <span class="string">"green"</span> &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></i></p>
+<p>之后我们就可以通过</p>
+<ul>
+<li>fsm:doEvent(“start”)-从”none”状态转换到”green”状态</li>
+<li>fsm:doEvent(“warn”)-从”green”状态转换到”yellow”状态</li>
+<li>fsm:doEvent(“panic”)-从”green”状态转换到”red”状态</li>
+<li>fsm:doEvent(“calm”)-从”red”状态转换到”yellow”状态</li>
+<li>fsm:doEvent(“clear”)-从”yellow”状态转换到”green”状态</li>
+</ul>
+<p>同时，</p>
+<ul>
+<li>fsm:isReady()-返回状态机是否就绪</li>
+<li>fsm:getState()-返回当前状态</li>
+<li>fsm:isState(state)-判断当前状态是否是参数state状态</li>
+<li>fsm:canDoEvent(eventName)-当前状态如果能完成eventName对应的event的状态转换，则返回true</li>
+<li>fsm:cannotDoEvent(eventName)-当前状态如果不能完成eventName对应的event的状态转换，则返回true</li>
+<li>fsm:isFinishedState()-当前状态如果是最终状态，则返回true</li>
+<li>fsm:doEventForce(name, …)-强制对当前状态进行转换</li>
+</ul>
+<hr>
+<p>#<i class="icon-paper-clip"> 单一事件的多重from和to状态<br>如果一个事件允许我们从多个状态(from)转换到同一个状态(to), 我们可以通过用一个集合来构建from状态。如下面的”rest”事件。但是，如果一个事件允许我们从多个状态(from)转换到对应的不同的状态(to)，那么我们必须将该事件分开写，如下面的”eat”事件。</i></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line">fsm:setupState(&#123;</span><br><span class="line">    initial = <span class="string">"hungry"</span>,</span><br><span class="line">    events  = &#123;</span><br><span class="line">            &#123;name = <span class="string">"eat"</span>,  from = <span class="string">"hungry"</span>,     to = <span class="string">"satisfied"</span>&#125;,</span><br><span class="line">            &#123;name = <span class="string">"eat"</span>,  from = <span class="string">"satisfied"</span>,  to = <span class="string">"full"</span>&#125;,</span><br><span class="line">            &#123;name = <span class="string">"eat"</span>,  from = <span class="string">"full"</span>,       to = <span class="string">"sick"</span>   &#125;,</span><br><span class="line">            &#123;name = <span class="string">"rest"</span>, from = &#123;<span class="string">"hungry"</span>, <span class="string">"satisfied"</span>, <span class="string">"full"</span>, <span class="string">"sick"</span>&#125;,  to = <span class="string">"hungry"</span>&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在设置了事件<code>events</code>之后，我们可以通过下面两个方法来完成状态转换。</p>
+<ul>
+<li>fsm:doEvent(“eat”)</li>
+<li>fsm:doEvent(“rest”)</li>
+</ul>
+<p><code>rest</code>事件的目的状态永远是<code>hungry</code>状态，而<code>eat</code>事件的目的状态取决于当前所处的状态。</p>
+<blockquote>
+<p>注意1：如果事件可以从任何当前状态开始进行转换，那么我们可以用一个通配符<code>*</code>来替代<code>from</code>状态。如<code>rest</code>事件,我们可以写成<code>{name = &quot;rest&quot;, from = &quot;*&quot;, to = &quot;hungry&quot;}</code>。</p>
+<p>注意2：上面例子的<code>rest</code>事件可以拆分写成4个，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;name = &#34;rest&#34;, from = &#34;hungry&#34;,    to = &#34;hungry&#34;&#125;,&#10;&#123;name = &#34;rest&#34;, from = &#34;satisfied&#34;, to = &#34;hungry&#34;&#125;,&#10;&#123;name = &#34;rest&#34;, from = &#34;full&#34;,      to = &#34;hungry&#34;&#125;,&#10;&#123;name = &#34;rest&#34;, from = &#34;sick&#34;,      to = &#34;hungry&#34;&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<p>#<i class="icon-paper-clip"> 回调<br>quick的状态机支持4种<strong>特定事件</strong>类型的回调:</i></p>
+<ul>
+<li><code>onbeforeEVNET</code>- 在特定事件EVENT开始前被激活</li>
+<li><code>onleaveSTATE</code> - 在离开旧状态STATE时被激活</li>
+<li><code>onenterSTATE</code> - 在进入新状态STATE时被激活</li>
+<li><code>onafterEVENT</code> - 在特定事件EVENT结束后被激活</li>
+</ul>
+<blockquote>
+<p>注解：编码时候，EVENT/STATE应该被替换为特定的名字</p>
+</blockquote>
+<p>为了便利起见，</p>
+<ul>
+<li><code>onenterSTATE</code>可以简写为<code>onSTATE</code></li>
+<li><code>onafterEVENT</code>可以简写为<code>onEVENT</code></li>
+</ul>
+<p>所以假如要使用简写的话，为了避免<code>onSTATE</code>和<code>onEVENT</code>的STATE/EVENT被替换成具体的名字后名字相同引起问题，<code>to</code>状态和<code>name</code>名字尽量不要相同。比如<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 角色开火</span></span><br><span class="line">&#123;name = <span class="string">"fire"</span>,   from = <span class="string">"idle"</span>,    to = <span class="string">"fire"</span>&#125;</span><br><span class="line"><span class="comment">--假如使用简写</span></span><br><span class="line"><span class="comment">--onSTATE --- onfire</span></span><br><span class="line"><span class="comment">--onEVENT --- onfire，回调会引起歧义。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--如果不使用简写</span></span><br><span class="line"><span class="comment">--则onenterSTATE --- onenterfire</span></span><br><span class="line"><span class="comment">--onafterEVENT --- onafterfire</span></span><br></pre></td></tr></table></figure></p>
+<p>另外，我们可以使用5种通用型的回调来捕获所有事件和状态的变化:</p>
+<ul>
+<li><code>onbeforeevent</code>- 在任何事件开始前被激活</li>
+<li><code>onleavestate</code> - 在离开任何状态时被激活</li>
+<li><code>onenterstate</code> - 在进入任何状态时被激活</li>
+<li><code>onafterevent</code> - 在任何事件结束后被激活</li>
+<li><code>onchangestate</code>  - 当状态发生改变的时候被激活</li>
+</ul>
+<blockquote>
+<p>注解：这里是任何事件、状态, 小写的event、state不能用具体的事件、状态名字替换。</p>
+</blockquote>
+<p>###回调参数<br>所有的回调都以<code>event</code>为参数，该event为表结构，包含了</p>
+<ul>
+<li>name 事件名字</li>
+<li>from 事件表示的起始状态</li>
+<li>to 事件表示的目的状态</li>
+<li>args 额外的参数，用来传递用户自定义的一些变量值</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line">fsm = fsm:setupState(&#123;</span><br><span class="line">        initial = <span class="string">"green"</span>,</span><br><span class="line">        events  = &#123;</span><br><span class="line">                &#123;name = <span class="string">"warn"</span>,  from = <span class="string">"green"</span>,  to = <span class="string">"yellow"</span>&#125;,</span><br><span class="line">                &#123;name = <span class="string">"panic"</span>, from = <span class="string">"green"</span>,  to = <span class="string">"red"</span>   &#125;,</span><br><span class="line">                &#123;name = <span class="string">"calm"</span>,  from = <span class="string">"red"</span>,    to = <span class="string">"yellow"</span>&#125;,</span><br><span class="line">                &#123;name = <span class="string">"clear"</span>, from = <span class="string">"yellow"</span>, to = <span class="string">"green"</span> &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        callbacks = &#123;</span><br><span class="line">            onbeforestart = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span> <span class="built_in">print</span>(<span class="string">"[FSM] STARTING UP"</span>) <span class="keyword">end</span>,</span><br><span class="line">            onstart       = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span> <span class="built_in">print</span>(<span class="string">"[FSM] READY"</span>) <span class="keyword">end</span>,</span><br><span class="line">            onbeforewarn  = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span> <span class="built_in">print</span>(<span class="string">"[FSM] START   EVENT: warn!"</span>) <span class="keyword">end</span>,</span><br><span class="line">            onbeforepanic = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span> <span class="built_in">print</span>(<span class="string">"[FSM] START   EVENT: panic!"</span>) <span class="keyword">end</span>,</span><br><span class="line">            onbeforecalm  = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span> <span class="built_in">print</span>(<span class="string">"[FSM] START   EVENT: calm!"</span>) <span class="keyword">end</span>,</span><br><span class="line">            onbeforeclear = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span> <span class="built_in">print</span>(<span class="string">"[FSM] START   EVENT: clear!"</span>) <span class="keyword">end</span>,</span><br><span class="line">            onwarn        = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span> <span class="built_in">print</span>(<span class="string">"[FSM] FINISH  EVENT: warn!"</span>) <span class="keyword">end</span>,</span><br><span class="line">&#125;)</span><br><span class="line">fsm:doEvent(<span class="string">"warn"</span>, <span class="string">"some msg"</span>)</span><br></pre></td></tr></table></figure>
+<p>如上例子，<code>fsm:doEvent(&quot;warn&quot;, &quot;some msg&quot;)</code>中的<code>some msg</code>作为额外的参数字段<code>args</code>结合<code>name</code> <code>from</code> <code>to</code>被添加到<code>event</code>，此时</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">event = &#123;</span><br><span class="line">    name = <span class="string">"warn"</span>,</span><br><span class="line">    from = <span class="string">"green"</span>,</span><br><span class="line">    to   = <span class="string">"yellow"</span>,</span><br><span class="line">    args = <span class="string">"some msg"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而<code>event</code>表正是回调函数的参数。</p>
+<p>###回调顺序<br>用{name = “clear”, from = “red”, to = “green”}举例，我画个示意图来说明<br><img src="http://childhoodgamedev.qiniudn.com/quick_%E5%9B%9E%E8%B0%83.png" alt="callback"></p>
+<p>注意：之前的<code>onbeforeEVENT</code>,这里<code>EVENT</code>就被具体替换为<code>clear</code>，于是是<code>onbeforeclear</code>，而<code>onbeforeevent</code>类似的通用型则不用替换。</p>
+<ul>
+<li>onbeforeclear - clear事件执行前的回调</li>
+<li>onbeforeevent - 任何事件执行前的回调</li>
+<li>onleavered  - 离开红色状态时的回调</li>
+<li>onleavestate - 离开任何状态时的回调</li>
+<li>onentergreen - 进入绿色状态时的回调</li>
+<li>onenterstate - 进入任何状态时的回调</li>
+<li>onafterclear - clear事件完成之后的回调</li>
+<li>onafterevent - 任何事件完成之后的回调</li>
+</ul>
+<p>####3种影响事件响应的方式</p>
+<ol>
+<li>在<code>onbeforeEVENT</code>方法中返回false来取消事件</li>
+<li>在<code>onleaveSTATE</code>方法中返回false来取消事件</li>
+<li>在<code>onleaveSTATE</code>方法中返回<code>ASYNC</code>来执行异步状态转换</li>
+</ol>
+<hr>
+<p>#<i class="icon-paper-clip"> 异步状态转换<br>有时候，我们需要在状态转换的时候执行一些异步性代码来确保不会进入新状态直到代码执行完毕。<br>举个例子来说，假如要从一个<code>menu</code>状态转换出来，或许我们想让TA淡出？滑出屏幕之外？总之执行完动画再进入<code>game</code>状态。</i></p>
+<p>我们可以在<code>onleavestate</code>或者<code>onleaveSTATE</code>方法里返回<code>StateMachine.ASYNC</code>,这时状态机会被挂起，直到我们使用了event的<code>transition()</code>方法。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">onleavered    = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span></span><br><span class="line">                self:log(<span class="string">"[FSM] LEAVE   STATE: red"</span>)</span><br><span class="line">                self:pending(event, <span class="number">3</span>)</span><br><span class="line">                self:performWithDelay(<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">                    self:pending(event, <span class="number">2</span>)</span><br><span class="line">                    self:performWithDelay(<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">                        self:pending(event, <span class="number">1</span>)</span><br><span class="line">                        self:performWithDelay(<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">                            self.pendingLabel_:setString(<span class="string">""</span>)</span><br><span class="line">                            event.transition()</span><br><span class="line">                        <span class="keyword">end</span>, <span class="number">1</span>)</span><br><span class="line">                    <span class="keyword">end</span>, <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">end</span>, <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"async"</span></span><br><span class="line">            <span class="keyword">end</span>,</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>提示：如果想取消异步事件，可以使用event的<code>cancel()</code>方法。</p>
+</blockquote>
+<hr>
+<p>#<i class="icon-paper-clip"> 初始化选项</i></p>
+<ul>
+<li><p>状态机的初始化选项一般根据我们游戏需求来决定，quick状态机提供了几个简单的选项。<br>在默认情况下，如果你没指定<code>initial</code>状态，状态机会指定当前状态为<code>none</code>状态，所以需要定义一个能将<code>none</code>状态转换出去的事件。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line">fsm = fsm:setupState(&#123;</span><br><span class="line">        events  = &#123;</span><br><span class="line">            &#123;name = <span class="string">"startup"</span>, from = <span class="string">"none"</span>,   to = <span class="string">"green"</span> &#125;,</span><br><span class="line">            &#123;name = <span class="string">"panic"</span>,   from = <span class="string">"green"</span>,  to = <span class="string">"red"</span>   &#125;,</span><br><span class="line">            &#123;name = <span class="string">"calm"</span>,    from = <span class="string">"red"</span>,    to = <span class="string">"green"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line">echoInfo(fsm:getState()) <span class="comment">-- "none"</span></span><br><span class="line">fsm:doEvent(<span class="string">"start"</span>)</span><br><span class="line">echoInfo(fsm:getState()) <span class="comment">-- "green"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果我们特别指定了<code>initial</code>状态，那么状态机在初始化的时候会自动创建<code>startup</code>事件，并且被执行。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line">fsm = fsm:setupState(&#123;</span><br><span class="line">        initial = <span class="string">"green"</span>,</span><br><span class="line">        events  = &#123;</span><br><span class="line">            <span class="comment">-- 当指定initial状态时，这个startup事件会被自动创建，所以可以不用写这一句 &#123;name = "startup", from = "none",   to = "green" &#125;,</span></span><br><span class="line">            &#123;name = <span class="string">"panic"</span>,   from = <span class="string">"green"</span>,  to = <span class="string">"red"</span>   &#125;,</span><br><span class="line">            &#123;name = <span class="string">"calm"</span>,    from = <span class="string">"red"</span>,    to = <span class="string">"green"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line">echoInfo(fsm:getState()) <span class="comment">-- "green"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我们也可以这样指定<code>initial</code>状态：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line">fsm = fsm:setupState(&#123;</span><br><span class="line">        initial = &#123;state = <span class="string">"green"</span>, event = <span class="string">"init"</span>&#125;,</span><br><span class="line">        events  = &#123;</span><br><span class="line">            &#123;name = <span class="string">"panic"</span>,   from = <span class="string">"green"</span>,  to = <span class="string">"red"</span>   &#125;,</span><br><span class="line">            &#123;name = <span class="string">"calm"</span>,    from = <span class="string">"red"</span>,    to = <span class="string">"yellow"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line">echoInfo(fsm:getState()) <span class="comment">-- "green"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果我们想延缓初始化状态转换事件的执行，我们可以添加<code>defer = true</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line">fsm = fsm:setupState(&#123;</span><br><span class="line">        initial = &#123;state = <span class="string">"green"</span>, event = <span class="string">"init"</span>, defer = <span class="keyword">true</span>&#125;,</span><br><span class="line">        events  = &#123;</span><br><span class="line">            &#123;name = <span class="string">"panic"</span>,   from = <span class="string">"green"</span>,  to = <span class="string">"red"</span>   &#125;,</span><br><span class="line">            &#123;name = <span class="string">"calm"</span>,    from = <span class="string">"red"</span>,    to = <span class="string">"green"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line">echoInfo(fsm:getState()) <span class="comment">-- "none"</span></span><br><span class="line">fsm:doEvent(<span class="string">"init"</span>)</span><br><span class="line">echoInfo(fsm:getState()) <span class="comment">-- "green"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>#<i class="icon-paper-clip"> 异常处理<br>在默认情况下，如果我们尝试着执行一个当前状态不允许转换的事件，状态机会抛出异常。如果选择处理这个异常，我们可以定义一个错误事件处理。在quick中，发生异常的时候<code>StateMachine:onError_(event, error, message)</code>会被调用。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> fsm = StateMachine.new()</span><br><span class="line">fsm:setupState(&#123;</span><br><span class="line">    initial = <span class="string">"green"</span>,</span><br><span class="line">    events  = &#123;</span><br><span class="line">            &#123;name = <span class="string">"warn"</span>,  from = <span class="string">"green"</span>,  to = <span class="string">"yellow"</span>&#125;,</span><br><span class="line">            &#123;name = <span class="string">"panic"</span>, from = <span class="string">"green"</span>,  to = <span class="string">"red"</span>   &#125;,</span><br><span class="line">            &#123;name = <span class="string">"calm"</span>,  from = <span class="string">"red"</span>,    to = <span class="string">"green"</span>&#125;,</span><br><span class="line">            &#123;name = <span class="string">"clear"</span>, from = <span class="string">"yellow"</span>, to = <span class="string">"green"</span> &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">fsm:doEvent(<span class="string">"calm"</span>) <span class="comment">-- fsm:onError_会被调用,在当前green状态下不允许执行calm事件</span></span><br></pre></td></tr></table></figure></i></p>
+<hr>
+<p>本文如果有写的不对的地方，还请大家指出，交流学习:)<br>如果朋友们有关于状态机的使用心得，也非常欢迎分享。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2013/11/29/quickcocos2dx-create-a-stroke-effect/" itemprop="url">
                   QuickCocos2dx创建描边效果
                 </a>
@@ -1284,7 +1527,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
