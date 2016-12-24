@@ -268,6 +268,149 @@
             
               
                 
+                <a class="post-title-link" href="/2014/10/22/today-submitted-for-review/" itemprop="url">
+                  心城1.1.0今天提交审核了
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-10-22T02:35:00+08:00" content="Oct 22 2014">
+              Oct 22 2014
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/创业/" itemprop="url" rel="index">
+                    <span itemprop="name">创业</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/10/22/today-submitted-for-review/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/22/today-submitted-for-review/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <center><img src="http://childhoodgamedev.qiniudn.com/xincheng_xincheng1.1.0.png" alt=""></center>
+
+<p>今天是2014年10月22号，距离上次心城1.0.0版本的提交快到了三周。在这三周里，我们围绕着身边朋友的反馈以及我们预计要做的功能，完成了1.1.0版本。</p>
+<center><br><div><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_appintro1.png" width="300" height="300"><br><img src="http://childhoodgamedev.qiniudn.com/xincheng_appintro2.png" width="300" height="300"><br></div><br></center>
+
+<p>看看我们的成果！新加功能，以后会有更多！</p>
+<p>1、增加了自定义背景色，颜色随心随手随时换；<br>2、增加了文本、照片两种表达方式，爱写字爱拍照的可以大展拳脚了；<br>3、增加了删除人物功能，请慎用；<br>4、调整了UI，常用功能轻点即立刻弹出，长按头像可展开更多功能。</p>
+<hr>
+<h2 id="小插曲">小插曲</h2><p>本来是昨天下午提交的，今天早上起来，看到一哥给我发的qq消息，我一看时间是凌晨1点多发的。他指出了新提交版本的一个问题，我核查了下代码，这个问题确实存在。</p>
+<p>那么问题来了。</p>
+<p>遇到这种情况，我们开发人员需要做什么工作？</p>
+<h3 id="1-关于代码方面">1.关于代码方面</h3><p>我一直用的git来进行代码版本控制，新建一个“1.1.0bugFix”分支后面进行合并或者在原1.1.0分支上进行修改都可以。关键是重现 BUG，找到代码问题所在，修复后，再次测试。没问题后，重新在Xcode里面<code>Archive</code>，上传到ITC后台。</p>
+<h3 id="2-ITC（ItunesConnect）方面的工作">2.ITC（ItunesConnect）方面的工作</h3><p>一般这种情况，我们需要将提交的 APP，自己手动 reject（拒绝）掉。因为ITC网站苹果改版了，最新的网站界面和以前的有很大不同，可能有时候遇到问题，google出来的解决办法或许并不使用。</p>
+<p>进入 ITC 后台，在 MyApps 里面，</p>
+<p><img src="http://childhoodgamedev.qiniudn.com/xincheng_reject.jpg" alt=""></p>
+<p>将刚提交的版本，点击<code>remove this version from review</code>，将刚提交的版本从审核队列中移除掉。我们需要选择我们刚上传的app就可以了，而其他的元数据资料不用改动。所以在下方的<code>Build</code>一栏中，将之前的 build 删除，后面要做的就是重新 add 我们新上传的 build。</p>
+<p>到这里有个问题，由于我们新上传 app，版本号仍然要保持 1.1.0，如果只修改了代码，就直接上传到ITC，在上传检查中就会报错，说你的这个 1.1.0 的 build 已经存在。问题出在了 build 的数字上面。第一次的1.1.0，在xcode项目中，Version为1.1.0，Build我也填成了1.1.0，而修改代码后，我忘记修改了Build的数字，所以会出现上面的报错信息。</p>
+<p>我脑海中第一个反应，能不能在ITC里面把我上传的<code>Version 1.1.0，Build 1.1.0</code>这个提交的app prelease 删除掉。在Stackoverflow上我找到了答案，不能删除。解决方法很简单，我们重新Archive的时候，修改下Build的数值就可以了。ITC里面会记录上你同一个版本的所有Build，以Build数值来区分。</p>
+<p>Build的填写没有很大要求，我这里改成了1.1.0.1。重新提交，这次顺利上传。</p>
+<p><img src="http://childhoodgamedev.qiniudn.com/xincheng_build.jpg" alt="在Xcode中的设置"></p>
+<p><img src="http://childhoodgamedev.qiniudn.com/xincheng_version_build.jpg" alt="在 MyApps 的 Prelease 一栏下，我们会看到同个版本的两次Build"></p>
+<hr>
+<p>作为一个ios开发新入门的选手，在开发的过程中遇到了许多问题，有些问题我记录在了印象笔记里，但我觉得仍然有必要把我一路过来遇到的杂七杂八的问题与大家一起分享下，在后面的文章中会陆续记录些我在心城的开发中，遇到的技术问题以及一些想法。</p>
+<p>也许你曾经遇到过，也许你没有，能一起有所收获，这么做便值了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/10/09/it-is-late-and-we-should-all-be-ashamed/" itemprop="url">
                   它既迟，也令我们感到羞愧
                 </a>
@@ -1564,134 +1707,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/07/07/ios-automatically-save-pictures-to-a-photo-album/" itemprop="url">
-                  IOS拍照自动保存到相簿
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-07-07T08:14:00+08:00" content="Jul 7 2014">
-              Jul 7 2014
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/07/07/ios-automatically-save-pictures-to-a-photo-album/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/07/ios-automatically-save-pictures-to-a-photo-album/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Github项目地址"><i class="icon-github icon-2x"></i><a href="https://github.com/dabing1022/PhotoPicker" target="_blank" rel="external">Github项目地址</a></h1><p>================</p>
-<p><img src="http://childhoodgamedev.qiniudn.com/ios_01.PNG" alt=""><br><img src="http://childhoodgamedev.qiniudn.com/ios_02.PNG" alt=""></p>
-<p>项目来自于苹果官方文档中的一个范例。</p>
-<p>针对这个范例，我对一些英文注释做了中文说明，并尝试着加入自动保存到相簿的这个小功能。好吧，有些过于简单了。</p>
-<figure class="highlight c"><figcaption><span>保存到相簿</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当从相册里选择一张照片或者用相机进行拍摄之后，该方法被调用</span></span><br><span class="line">- (<span class="keyword">void</span>)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info</span><br><span class="line">&#123;</span><br><span class="line">    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];</span><br><span class="line">    NSLog(@<span class="string">"SMILE!"</span>);</span><br><span class="line">    [self.capturedImages addObject:image];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ([self.cameraTimer isValid])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (self.imagePickerController.sourceType == UIImagePickerControllerSourceTypeCamera)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    [self finishAndUpdate];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(<span class="keyword">void</span>*)contextInfo</span><br><span class="line">&#123;</span><br><span class="line">    UIAlertView *alert;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (error)</span><br><span class="line">    &#123;</span><br><span class="line">        alert = [[UIAlertView alloc] initWithTitle:@<span class="string">"错误"</span></span><br><span class="line">                                           message:@<span class="string">"保存失败"</span></span><br><span class="line">                                          delegate:self cancelButtonTitle:@<span class="string">"确定"</span></span><br><span class="line">                                 otherButtonTitles:nil];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        alert = [[UIAlertView alloc] initWithTitle:@<span class="string">"成功"</span></span><br><span class="line">                                           message:@<span class="string">"保存成功"</span></span><br><span class="line">                                          delegate:self cancelButtonTitle:@<span class="string">"确定"</span></span><br><span class="line">                                 otherButtonTitles:nil];</span><br><span class="line">    &#125;</span><br><span class="line">    [alert show];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="后面要加入的功能">后面要加入的功能</h1><ul>
-<li>将拍照的照片存储到应用沙盒中</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1737,7 +1752,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

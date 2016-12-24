@@ -1,0 +1,853 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="HTTP,ios," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HappyCoding:)" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言早上8点左右的时候看到了微信群里有一条分享，点开进去后是一个视频，是网易新闻的一个关于圣诞节的一个推广视频，刚好就坐在电脑旁边，便用 Charles 抓包看了下。
+因为以前对视频加载这块接触的不多，便想了解下获取视频的请求和普通的请求有什么不通，如何播放就不谈了，主要从HTTP协议的角度研究学习下。
+
+刚打开网页的时候只有前3个请求，此时视频是暂停的，通过视频上方中的播放按钮开始了播放，这时候">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊一聊HTTP的Range, Content-Range">
+<meta property="og:url" content="dabing1022.github.io/2016/12/24/聊一聊HTTP的Range, Content-Range/index.html">
+<meta property="og:site_name" content="HappyCoding:)">
+<meta property="og:description" content="前言早上8点左右的时候看到了微信群里有一条分享，点开进去后是一个视频，是网易新闻的一个关于圣诞节的一个推广视频，刚好就坐在电脑旁边，便用 Charles 抓包看了下。
+因为以前对视频加载这块接触的不多，便想了解下获取视频的请求和普通的请求有什么不通，如何播放就不谈了，主要从HTTP协议的角度研究学习下。
+
+刚打开网页的时候只有前3个请求，此时视频是暂停的，通过视频上方中的播放按钮开始了播放，这时候">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/xmas1.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/xmas2.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/xmas3.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/charles-00.png">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/charles-01.png">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/charles-02.png">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/terminal-http.png">
+<meta property="og:updated_time" content="2016-12-24T02:48:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聊一聊HTTP的Range, Content-Range">
+<meta name="twitter:description" content="前言早上8点左右的时候看到了微信群里有一条分享，点开进去后是一个视频，是网易新闻的一个关于圣诞节的一个推广视频，刚好就坐在电脑旁边，便用 Charles 抓包看了下。
+因为以前对视频加载这块接触的不多，便想了解下获取视频的请求和普通的请求有什么不通，如何播放就不谈了，主要从HTTP协议的角度研究学习下。
+
+刚打开网页的时候只有前3个请求，此时视频是暂停的，通过视频上方中的播放按钮开始了播放，这时候">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="dabing1022.github.io/2016/12/24/聊一聊HTTP的Range, Content-Range/"/>
+
+  <title> 聊一聊HTTP的Range, Content-Range | HappyCoding:) </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HappyCoding:)</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                聊一聊HTTP的Range, Content-Range
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-24T10:00:00+08:00" content="Dec 24 2016">
+              Dec 24 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/24/聊一聊HTTP的Range, Content-Range/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/24/聊一聊HTTP的Range, Content-Range/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/xmas1.jpeg" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/xmas2.jpeg" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/xmas3.jpeg" alt=""></p>
+<h2 id="前言">前言</h2><p>早上8点左右的时候看到了微信群里有一条分享，点开进去后是一个视频，是网易新闻的一个关于圣诞节的一个推广视频，刚好就坐在电脑旁边，便用 Charles 抓包看了下。</p>
+<p>因为以前对视频加载这块接触的不多，便想了解下获取视频的请求和普通的请求有什么不通，如何播放就不谈了，主要从HTTP协议的角度研究学习下。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/charles-00.png" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/charles-01.png" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/charles-02.png" alt=""></p>
+<p>刚打开网页的时候只有前3个请求，此时视频是暂停的，通过视频上方中的播放按钮开始了播放，这时候开始发出了第4个请求。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">HTTP-Trace-Version: <span class="number">1.0</span>  // Charles的http trace版本</span><br><span class="line">Generator: Charles/<span class="number">4.0</span>.<span class="number">1</span> // Charles版本</span><br><span class="line"></span><br><span class="line">// 请求</span><br><span class="line">Method: GET</span><br><span class="line">Protocol-Version: HTTP/<span class="number">1.1</span></span><br><span class="line">Protocol: http</span><br><span class="line">Host: file.ws.<span class="number">126</span>.net</span><br><span class="line">File: /<span class="number">3</span>g/activities/xmas2016.mp4</span><br><span class="line">Remote-Address: <span class="number">58.59</span>.<span class="number">19.125</span></span><br><span class="line">Client-Address: <span class="number">192.168</span>.<span class="number">1.104</span></span><br><span class="line">Start-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.528</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">DNS-Duration: <span class="number">9</span></span><br><span class="line">Connect-Duration: <span class="number">22</span></span><br><span class="line">Request-Begin-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.560</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">Request-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.561</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">Response-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.586</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">End-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.588</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">Request-Header-Size: <span class="number">504</span></span><br><span class="line">Response-Header-Size: <span class="number">424</span></span><br><span class="line">Request-Body-Size: <span class="number">0</span></span><br><span class="line">Response-Body-Size: <span class="number">2</span></span><br><span class="line">Request-Body-Decoded: <span class="literal">false</span></span><br><span class="line">Response-Body-Decoded: <span class="literal">false</span></span><br><span class="line">Request-Header:&lt;&lt;--EOF-<span class="number">1482539973400</span>-</span><br><span class="line">GET /<span class="number">3</span>g/activities/xmas2016.mp4 HTTP/<span class="number">1.1</span></span><br><span class="line">Host: file.ws.<span class="number">126</span>.net</span><br><span class="line">Accept-Language: zh-cn</span><br><span class="line">X-Playback-Session-Id: <span class="number">843</span>D959A-<span class="number">32</span>AD-<span class="number">49</span>C4-A2D7-<span class="number">32065</span>A6292D9</span><br><span class="line">Range: bytes=<span class="number">0</span>-<span class="number">1</span></span><br><span class="line">Accept: */*</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (iPhone; CPU iPhone OS <span class="number">10</span>_2 like Mac OS X) AppleWebKit/<span class="number">602.3</span>.<span class="number">12</span> (KHTML, like Gecko) Mobile/<span class="number">14</span>C92 MicroMessenger/<span class="number">6.5</span>.<span class="number">2</span> NetType/WIFI Language/zh_CN</span><br><span class="line">Referer: http://c.m.<span class="number">163</span>.com/nc/qa/activity/<span class="number">20161202</span>/index.html?from=groupmessage&amp;isappinstalled=<span class="number">1</span></span><br><span class="line">Accept-Encoding: identity</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--EOF-<span class="number">1482539973400</span>-</span><br><span class="line">// 响应</span><br><span class="line">Response-Header:&lt;&lt;--EOF-<span class="number">1482539973400</span>-</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">206</span> Partial Content</span><br><span class="line">Date: Sat, <span class="number">24</span> Dec <span class="number">2016</span> <span class="number">00</span>:<span class="number">20</span>:<span class="number">44</span> GMT</span><br><span class="line">Expires: Sun, <span class="number">25</span> Dec <span class="number">2016</span> <span class="number">00</span>:<span class="number">20</span>:<span class="number">44</span> GMT</span><br><span class="line">Content-Length: <span class="number">2</span></span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Range: bytes <span class="number">0</span>-<span class="number">1</span>/<span class="number">4300047</span></span><br><span class="line">Content-Type: text/plain; charset=GBK</span><br><span class="line">Last-Modified: Thu, <span class="number">22</span> Dec <span class="number">2016</span> <span class="number">02</span>:<span class="number">04</span>:<span class="number">16</span> GMT</span><br><span class="line">Cache-Control: max-age=<span class="number">86400</span></span><br><span class="line">Server: nginx</span><br><span class="line">Fw-Cache-Status: hit</span><br><span class="line">Fw-Via: DISK HIT from <span class="number">61.130</span>.<span class="number">28.99</span>, DISK HIT from <span class="number">58.59</span>.<span class="number">19.104</span></span><br><span class="line">Proxy-Connection: Keep-alive</span><br></pre></td></tr></table></figure>
+<p>这是第一个请求的一些详细信息，其余3个请求我就不贴了，比较占篇幅，值得注意的是，这4个请求中请求头的range每一个都不同，依次如下：</p>
+<ul>
+<li>bytes=0-1</li>
+<li>bytes=0-4300046</li>
+<li>bytes=4276224-4300046</li>
+<li>bytes=8640-4276223</li>
+</ul>
+<h2 id="Range的诞生">Range的诞生</h2><p>Range，是在 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">HTTP/1.1</a>里新增的一个请求头字段域。我们使用的迅雷等支持多线程下载以及断点下载的核心也是基于此重要特性。</p>
+<h3 id="HTTP/1-1规范的_Range_的约定">HTTP/1.1规范的 Range 的约定</h3><p>如果Server支持 Range，首先就要告诉客户端，服务器会在响应头中添加<code>Accept-Ranges: bytes</code>来表示支持 Range 的请求，之后客户端才可能发起带 Range 的请求。不支持的话，用<code>Accept-Ranges: none</code>告知客户端，对不起，我不支持。</p>
+<p>Server通过请求头中的<code>Range: bytes=0-xxx</code>来判断是否是做 Range 请求，如果这个值存在而且有效，则只发回请求的那部分文件内容，响应的状态码变成206，表示Partial Content，并设置Content-Range。如果无效，则返回416状态码，表明Request Range Not Satisfiable。如果请求头中不带 Range，那么 Server则正常响应，也不会设置 Content-Range 等。</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>206</td>
+<td style="text-align:center">Partial Content</td>
+</tr>
+<tr>
+<td>416</td>
+<td style="text-align:center">Range Not Satisfiable</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/terminal-http.png" alt=""></p>
+<p>Range的格式为：</p>
+<p><code>Range:(unit=first byte pos)-[last byte pos]</code>，即<code>Range: 单位（如bytes）= 开始字节位置-结束字节位置</code>。</p>
+<p>我们再来看个例子。假设我们要开启多线程下载，需要把一个大文件分割成多个部分进行下载，比如4个部分，然后创建4个线程，每个线程负责下载一个部分，如果文件大小为 5000 个 byte（随意的数字），那么我们可以划分为</p>
+<ul>
+<li>Range: bytes=0-1199  头1200个字节</li>
+<li>Range: bytes=1200-2399 第二个1200字节</li>
+<li>Range: bytes=2400-3599 第三个1200字节</li>
+<li>Range: bytes=3600-5000 最后的1400字节</li>
+</ul>
+<p>服务器给出响应：</p>
+<p>// 第1个响应</p>
+<ul>
+<li>Content-Length：1200</li>
+<li>Content-Range：bytes 0-1199/5000</li>
+</ul>
+<p>// 第2个响应</p>
+<ul>
+<li>Content-Length：1200</li>
+<li>Content-Range：bytes 1200-2399/5000</li>
+</ul>
+<p>// 第3个响应</p>
+<ul>
+<li>Content-Length：1200</li>
+<li>Content-Range：bytes 2400-3599/5000</li>
+</ul>
+<p>// 第4个响应</p>
+<ul>
+<li>Content-Length：1400</li>
+<li>Content-Range：bytes 3600-5000/5000</li>
+</ul>
+<p>如果每个请求都成功了，服务器返回的response头中有一个 Content-Range 的字段域，Content-Range 用于响应头，告诉了客户端发送了多少数据，它描述了响应覆盖的范围和整个实体长度。一般格式：</p>
+<p><code>Content-Range: bytes (unit first byte pos) - [last byte pos]/[entity length]</code>即<code>Content-Range：字节 开始字节位置-结束字节位置／文件大小</code>。</p>
+<h1 id="小结">小结</h1><p>HTTP协议博大精深，设计有很多巧妙的地方，Range也许就是一处吧。</p>
+<h1 id="更多阅读">更多阅读</h1><ul>
+<li><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="external">RFC RangeRequest文档</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7u2lyz.com1.z0.glb.clouddn.com/wechatpay.jpg" alt="ChildhoodAndy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7u2lyz.com1.z0.glb.clouddn.com/alipay.jpg" alt="ChildhoodAndy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag">#HTTP</a>
+          
+            <a href="/tags/ios/" rel="tag">#ios</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/20/iOS HTTPS迁移之路-3. 了解SPDY协议/" rel="next" title="iOS HTTPS迁移之路-3. 了解SPDY协议">
+                <i class="fa fa-chevron-left"></i> iOS HTTPS迁移之路-3. 了解SPDY协议
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/24/聊一聊HTTP的Range, Content-Range/"
+     data-title="聊一聊HTTP的Range, Content-Range"
+     data-content=""
+     data-url="dabing1022.github.io/2016/12/24/聊一聊HTTP的Range, Content-Range/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/24/聊一聊HTTP的Range, Content-Range/"
+           data-title="聊一聊HTTP的Range, Content-Range" data-url="dabing1022.github.io/2016/12/24/聊一聊HTTP的Range, Content-Range/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="ChildhoodAndy" />
+          <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+          <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">115</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.github.com/dabing1022" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/childhoodandy" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1297984304" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/1986621" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zengrong.net/" title="曾嵘" target="_blank">曾嵘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://post.justbilt.com/" title="justblit" target="_blank">justblit</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yulingtianxia.com" title="玉令天下" target="_blank">玉令天下</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mokai.github.io" title="mokai" target="_blank">mokai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT-Help" target="_blank">NexT-Help</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.ibireme.com/" title="ibireme" target="_blank">ibireme</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Range的诞生"><span class="nav-number">2.</span> <span class="nav-text">Range的诞生</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP/1-1规范的_Range_的约定"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP/1.1规范的 Range 的约定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number"></span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更多阅读"><span class="nav-number"></span> <span class="nav-text">更多阅读</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ChildhoodAndy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

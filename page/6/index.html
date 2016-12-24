@@ -268,6 +268,154 @@
             
               
                 
+                <a class="post-title-link" href="/2013/12/27/detailed-quickcocos2dx-inheritance-mechanism/" itemprop="url">
+                  详解QuickCocos2dX继承机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2013-12-27T16:36:00+08:00" content="Dec 27 2013">
+              Dec 27 2013
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/12/27/detailed-quickcocos2dx-inheritance-mechanism/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/12/27/detailed-quickcocos2dx-inheritance-mechanism/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>这篇文章让我们来理解下QuickCocos2dx的继承机制，关于继承这个概念，是OO思想里提出来的。在C++中，我们就不说了; 在lua中，是用table配合元表metatable来实现面向对象的。下面分两部分来理解Quick中的继承机制。</p>
+<p>##第一部分：LUA的继承</p>
+<p>###充电站：元表</p>
+<ul>
+<li>lua中的元表和js的原型非常相似，熟悉js的朋友应该发现了</li>
+<li>在lua中，每一个表都有TA的元表metatable，lua默认创建一个不带元表的新表：</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">getmetatable</span>(t)) <span class="comment">--nil</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置元表</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mt = &#123;name = <span class="string">"quick"</span>&#125;</span><br><span class="line">t = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, mt)</span><br><span class="line"><span class="built_in">assert</span>(getmetatalbe(t) == mt)</span><br></pre></td></tr></table></figure>
+<p><img src="http://childhoodgamedev.qiniudn.com/lua_luaInherit.png" alt="LuaInherit lua继承"></p>
+<p>图示代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--====================Person======================</span></span><br><span class="line"><span class="keyword">local</span> Person = &#123;&#125;</span><br><span class="line">Person.attack = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person:new</span><span class="params">(o)</span></span></span><br><span class="line">	o = o <span class="keyword">or</span> &#123;&#125;</span><br><span class="line">	<span class="built_in">setmetatable</span>(o, self)</span><br><span class="line">	self.__index = self</span><br><span class="line">	<span class="keyword">return</span> o</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person:setAttack</span><span class="params">(attack)</span></span></span><br><span class="line">	self.attack = attack</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person:getAttack</span><span class="params">()</span></span></span><br><span class="line">	<span class="keyword">return</span> self.attack</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--====================Hero======================</span></span><br><span class="line"><span class="keyword">local</span> Hero = Person:new()</span><br><span class="line">Hero.name = <span class="string">""</span></span><br><span class="line">Hero.skill = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--====================hero1,hero2======================</span></span><br><span class="line"><span class="keyword">local</span> hero1 = Hero:new()</span><br><span class="line">hero1.name = <span class="string">"金刚狼"</span></span><br><span class="line">hero1.skill = <span class="string">"甩开爪子切牛排"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> hero2 = Hero:new(&#123;name = <span class="string">"超人"</span>&#125;)</span><br><span class="line">hero2.skill = <span class="string">"内裤外穿走T台"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">----====================================================</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printKeys</span><span class="params">(name, t)</span></span></span><br><span class="line">	<span class="built_in">print</span>(<span class="string">"======================"</span> .. name)</span><br><span class="line">	<span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(t) <span class="keyword">do</span></span><br><span class="line">		<span class="built_in">print</span>(k)</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">printKeys(<span class="string">"Person"</span>, Person)</span><br><span class="line">printKeys(<span class="string">"Person.__index"</span>, Person.__index)</span><br><span class="line"></span><br><span class="line">printKeys(<span class="string">"Hero"</span>, Hero)</span><br><span class="line">printKeys(<span class="string">"Hero.__index"</span>, Hero.__index)</span><br><span class="line">printKeys(<span class="string">"getmetatable(Hero).__index"</span>, <span class="built_in">getmetatable</span>(Hero).__index)</span><br><span class="line"></span><br><span class="line">printKeys(<span class="string">"hero1"</span>, hero1)</span><br><span class="line"></span><br><span class="line">printKeys(<span class="string">"hero2"</span>, hero2)</span><br></pre></td></tr></table></figure>
+<p>结合log我们分析下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">======================Person</span><br><span class="line">setAttack</span><br><span class="line">__index</span><br><span class="line">getAttack</span><br><span class="line">new</span><br><span class="line">attack</span><br><span class="line">======================Person.__index</span><br><span class="line">setAttack</span><br><span class="line">__index</span><br><span class="line">getAttack</span><br><span class="line">new</span><br><span class="line">attack</span><br><span class="line">======================Hero</span><br><span class="line">skill</span><br><span class="line">name</span><br><span class="line">__index</span><br><span class="line">======================Hero.__index</span><br><span class="line">skill</span><br><span class="line">name</span><br><span class="line">__index</span><br><span class="line">======================<span class="built_in">getmetatable</span>(Hero).__index</span><br><span class="line">setAttack</span><br><span class="line">__index</span><br><span class="line">getAttack</span><br><span class="line">new</span><br><span class="line">attack</span><br><span class="line">======================hero1</span><br><span class="line">name</span><br><span class="line">skill</span><br><span class="line">======================hero2</span><br><span class="line">name</span><br><span class="line">skill</span><br><span class="line">[Finished <span class="keyword">in</span> <span class="number">0.0</span>s]</span><br></pre></td></tr></table></figure>
+<p>###转回正题</p>
+<p>假如当我们调用<code>hero1:setAttack(500)</code>的时候，在hero1中是找不到<code>setAttack</code>方法的，这时候：</p>
+<ol>
+<li>lua会通过<code>getmetatable(hero1)</code>得到<code>hero1</code>的元表并到元表的<code>__index域</code>中去查找，箭头走向：<strong>3—》2</strong></li>
+<li>但仍然没找到，得到Hero元表并继续在其<code>__index域</code>中寻找，箭头走向：<strong>1—》0</strong>，这时候寻找到<code>setAttack</code>方法并且调用，由于<code>setAttack</code>方法，<code>hero1</code>会增加字段<code>attack</code>。</li>
+</ol>
+<p>##第二部分：QUICK的继承</p>
+<p>quick的继承实现要考虑到对C++对象的继承和对lua对象的继承。对lua对象的继承我们第一部分已经用元表机制说明。当我们在quick中用class新建类时，始终要清醒的明白，我们新建的类其实就是返回一个lua表（cls）.</p>
+<p>继承的核心代码见<code>framework/functions.lua</code>中<code>class(classname, super)</code>函数。</p>
+<p>为了方便理解，上个图先：</p>
+<p><img src="http://childhoodgamedev.qiniudn.com/lua_quick-x%E7%BB%A7%E6%89%BF.png" alt="quick-x class"></p>
+<p>函数class(classname, super)有两个参数：</p>
+<ul>
+<li>参数1：classname，见名知意，类名</li>
+<li>参数2：super<ul>
+<li>1.super的类型:<code>superType = type(super)</code></li>
+<li>2.superType可以为<code>function</code>, <code>table</code>，当不为这两种类型的时候我们将之置为<code>nil</code></li>
+<li>3.superType为<code>function</code>的时候，表示从C++对象继承，走图示2    </li>
+<li>4.superType为<code>table</code>的时候，还要看其<code>__ctype</code>值，1表示继承自C++对象，走图1；2表示继承自lua表对象，走图3</li>
+<li>5.superType为<code>nil</code>的时候，从lua表继承，走图4</li>
+</ul>
+</li>
+</ul>
+<p>samples/coinFlip项目是个绝佳的例子，我们可以结合该范例进行理解。这里我就不赘述了。</p>
+<hr>
+<p>更新：在谷歌邮件组Jacky的回复中，提到了另外一个朋友写的文章，非常不错，针对本文的第二部分讲解的很透彻，<a href="http://www.swfdiy.com/?p=1663" target="_blank" rel="external">地址</a></p>
+<hr>
+<blockquote>
+<p>你我是朋友，各拿一个苹果彼此交换，交换后仍然是各有一个苹果；倘若你有一个思想，我也有一种思想，而朋友间交流思想，那我们每个人就有两种思想了。 ——爱尔兰剧作家 萧伯纳 </p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2013/12/24/tolua-chinese-reference-manual-incomplete-translations/" itemprop="url">
                   tolua++中文参考手册【完整翻译】
                 </a>
@@ -1781,7 +1929,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

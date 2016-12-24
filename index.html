@@ -268,6 +268,196 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/24/聊一聊HTTP的Range, Content-Range/" itemprop="url">
+                  聊一聊HTTP的Range, Content-Range
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-24T10:00:00+08:00" content="Dec 24 2016">
+              Dec 24 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/24/聊一聊HTTP的Range, Content-Range/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/24/聊一聊HTTP的Range, Content-Range/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/xmas1.jpeg" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/xmas2.jpeg" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/xmas3.jpeg" alt=""></p>
+<h2 id="前言">前言</h2><p>早上8点左右的时候看到了微信群里有一条分享，点开进去后是一个视频，是网易新闻的一个关于圣诞节的一个推广视频，刚好就坐在电脑旁边，便用 Charles 抓包看了下。</p>
+<p>因为以前对视频加载这块接触的不多，便想了解下获取视频的请求和普通的请求有什么不通，如何播放就不谈了，主要从HTTP协议的角度研究学习下。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/charles-00.png" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/charles-01.png" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/charles-02.png" alt=""></p>
+<p>刚打开网页的时候只有前3个请求，此时视频是暂停的，通过视频上方中的播放按钮开始了播放，这时候开始发出了第4个请求。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">HTTP-Trace-Version: <span class="number">1.0</span>  // Charles的http trace版本</span><br><span class="line">Generator: Charles/<span class="number">4.0</span>.<span class="number">1</span> // Charles版本</span><br><span class="line"></span><br><span class="line">// 请求</span><br><span class="line">Method: GET</span><br><span class="line">Protocol-Version: HTTP/<span class="number">1.1</span></span><br><span class="line">Protocol: http</span><br><span class="line">Host: file.ws.<span class="number">126</span>.net</span><br><span class="line">File: /<span class="number">3</span>g/activities/xmas2016.mp4</span><br><span class="line">Remote-Address: <span class="number">58.59</span>.<span class="number">19.125</span></span><br><span class="line">Client-Address: <span class="number">192.168</span>.<span class="number">1.104</span></span><br><span class="line">Start-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.528</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">DNS-Duration: <span class="number">9</span></span><br><span class="line">Connect-Duration: <span class="number">22</span></span><br><span class="line">Request-Begin-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.560</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">Request-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.561</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">Response-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.586</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">End-Time: <span class="number">2016</span>-<span class="number">12</span>-<span class="number">24</span>T08:<span class="number">20</span>:<span class="number">44.588</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">Request-Header-Size: <span class="number">504</span></span><br><span class="line">Response-Header-Size: <span class="number">424</span></span><br><span class="line">Request-Body-Size: <span class="number">0</span></span><br><span class="line">Response-Body-Size: <span class="number">2</span></span><br><span class="line">Request-Body-Decoded: <span class="literal">false</span></span><br><span class="line">Response-Body-Decoded: <span class="literal">false</span></span><br><span class="line">Request-Header:&lt;&lt;--EOF-<span class="number">1482539973400</span>-</span><br><span class="line">GET /<span class="number">3</span>g/activities/xmas2016.mp4 HTTP/<span class="number">1.1</span></span><br><span class="line">Host: file.ws.<span class="number">126</span>.net</span><br><span class="line">Accept-Language: zh-cn</span><br><span class="line">X-Playback-Session-Id: <span class="number">843</span>D959A-<span class="number">32</span>AD-<span class="number">49</span>C4-A2D7-<span class="number">32065</span>A6292D9</span><br><span class="line">Range: bytes=<span class="number">0</span>-<span class="number">1</span></span><br><span class="line">Accept: */*</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (iPhone; CPU iPhone OS <span class="number">10</span>_2 like Mac OS X) AppleWebKit/<span class="number">602.3</span>.<span class="number">12</span> (KHTML, like Gecko) Mobile/<span class="number">14</span>C92 MicroMessenger/<span class="number">6.5</span>.<span class="number">2</span> NetType/WIFI Language/zh_CN</span><br><span class="line">Referer: http://c.m.<span class="number">163</span>.com/nc/qa/activity/<span class="number">20161202</span>/index.html?from=groupmessage&amp;isappinstalled=<span class="number">1</span></span><br><span class="line">Accept-Encoding: identity</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--EOF-<span class="number">1482539973400</span>-</span><br><span class="line">// 响应</span><br><span class="line">Response-Header:&lt;&lt;--EOF-<span class="number">1482539973400</span>-</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">206</span> Partial Content</span><br><span class="line">Date: Sat, <span class="number">24</span> Dec <span class="number">2016</span> <span class="number">00</span>:<span class="number">20</span>:<span class="number">44</span> GMT</span><br><span class="line">Expires: Sun, <span class="number">25</span> Dec <span class="number">2016</span> <span class="number">00</span>:<span class="number">20</span>:<span class="number">44</span> GMT</span><br><span class="line">Content-Length: <span class="number">2</span></span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Range: bytes <span class="number">0</span>-<span class="number">1</span>/<span class="number">4300047</span></span><br><span class="line">Content-Type: text/plain; charset=GBK</span><br><span class="line">Last-Modified: Thu, <span class="number">22</span> Dec <span class="number">2016</span> <span class="number">02</span>:<span class="number">04</span>:<span class="number">16</span> GMT</span><br><span class="line">Cache-Control: max-age=<span class="number">86400</span></span><br><span class="line">Server: nginx</span><br><span class="line">Fw-Cache-Status: hit</span><br><span class="line">Fw-Via: DISK HIT from <span class="number">61.130</span>.<span class="number">28.99</span>, DISK HIT from <span class="number">58.59</span>.<span class="number">19.104</span></span><br><span class="line">Proxy-Connection: Keep-alive</span><br></pre></td></tr></table></figure>
+<p>这是第一个请求的一些详细信息，其余3个请求我就不贴了，比较占篇幅，值得注意的是，这4个请求中请求头的range每一个都不同，依次如下：</p>
+<ul>
+<li>bytes=0-1</li>
+<li>bytes=0-4300046</li>
+<li>bytes=4276224-4300046</li>
+<li>bytes=8640-4276223</li>
+</ul>
+<h2 id="Range的诞生">Range的诞生</h2><p>Range，是在 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">HTTP/1.1</a>里新增的一个请求头字段域。我们使用的迅雷等支持多线程下载以及断点下载的核心也是基于此重要特性。</p>
+<h3 id="HTTP/1-1规范的_Range_的约定">HTTP/1.1规范的 Range 的约定</h3><p>如果Server支持 Range，首先就要告诉客户端，服务器会在响应头中添加<code>Accept-Ranges: bytes</code>来表示支持 Range 的请求，之后客户端才可能发起带 Range 的请求。不支持的话，用<code>Accept-Ranges: none</code>告知客户端，对不起，我不支持。</p>
+<p>Server通过请求头中的<code>Range: bytes=0-xxx</code>来判断是否是做 Range 请求，如果这个值存在而且有效，则只发回请求的那部分文件内容，响应的状态码变成206，表示Partial Content，并设置Content-Range。如果无效，则返回416状态码，表明Request Range Not Satisfiable。如果请求头中不带 Range，那么 Server则正常响应，也不会设置 Content-Range 等。</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>206</td>
+<td style="text-align:center">Partial Content</td>
+</tr>
+<tr>
+<td>416</td>
+<td style="text-align:center">Range Not Satisfiable</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/terminal-http.png" alt=""></p>
+<p>Range的格式为：</p>
+<p><code>Range:(unit=first byte pos)-[last byte pos]</code>，即<code>Range: 单位（如bytes）= 开始字节位置-结束字节位置</code>。</p>
+<p>我们再来看个例子。假设我们要开启多线程下载，需要把一个大文件分割成多个部分进行下载，比如4个部分，然后创建4个线程，每个线程负责下载一个部分，如果文件大小为 5000 个 byte（随意的数字），那么我们可以划分为</p>
+<ul>
+<li>Range: bytes=0-1199  头1200个字节</li>
+<li>Range: bytes=1200-2399 第二个1200字节</li>
+<li>Range: bytes=2400-3599 第三个1200字节</li>
+<li>Range: bytes=3600-5000 最后的1400字节</li>
+</ul>
+<p>服务器给出响应：</p>
+<p>// 第1个响应</p>
+<ul>
+<li>Content-Length：1200</li>
+<li>Content-Range：bytes 0-1199/5000</li>
+</ul>
+<p>// 第2个响应</p>
+<ul>
+<li>Content-Length：1200</li>
+<li>Content-Range：bytes 1200-2399/5000</li>
+</ul>
+<p>// 第3个响应</p>
+<ul>
+<li>Content-Length：1200</li>
+<li>Content-Range：bytes 2400-3599/5000</li>
+</ul>
+<p>// 第4个响应</p>
+<ul>
+<li>Content-Length：1400</li>
+<li>Content-Range：bytes 3600-5000/5000</li>
+</ul>
+<p>如果每个请求都成功了，服务器返回的response头中有一个 Content-Range 的字段域，Content-Range 用于响应头，告诉了客户端发送了多少数据，它描述了响应覆盖的范围和整个实体长度。一般格式：</p>
+<p><code>Content-Range: bytes (unit first byte pos) - [last byte pos]/[entity length]</code>即<code>Content-Range：字节 开始字节位置-结束字节位置／文件大小</code>。</p>
+<h1 id="小结">小结</h1><p>HTTP协议博大精深，设计有很多巧妙的地方，Range也许就是一处吧。</p>
+<h1 id="更多阅读">更多阅读</h1><ul>
+<li><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="external">RFC RangeRequest文档</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/20/iOS HTTPS迁移之路-3. 了解SPDY协议/" itemprop="url">
                   iOS HTTPS迁移之路-3. 了解SPDY协议
                 </a>
@@ -1179,7 +1369,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_ciwodaowf000vs1fun9cg1590"
+                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_cix2m9rjk0010trfya119kell"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" itemprop="contentUrl"/>
               </a>
@@ -1483,132 +1673,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/02/10/回家前对心城的絮絮叨叨/" itemprop="url">
-                  回家前对心城的絮絮叨叨
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-02-10T09:12:37+08:00" content="Feb 10 2015">
-              Feb 10 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/创业/" itemprop="url" rel="index">
-                    <span itemprop="name">创业</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/02/10/回家前对心城的絮絮叨叨/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/10/回家前对心城的絮絮叨叨/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>票不好买，我买了今天回家的票。下午5点多的汽车，明天到郑州。</p>
-<p>坐在电脑前，回想从我们两人（另外一人，一哥是负责产品），从开始做心城，磕磕碰碰，一路走到现在，对自己坚持的毅力也感到吃惊。</p>
-<p>整个程序我一个人写，从一个从游戏开发转应用开发的“新手”而言，刚开始对应用开发，完全摸不到节奏。节奏太重要了。</p>
-<p>怎么去寻找节奏？感谢R网站，跟着教程，我试着去理清ios应用开发的一些知识脉络。时间不等人。一边学习，一边开发，遇到问题，不断调试，查阅苹果文档，google和stackoverflow已经成了我解决问题离不开的渠道。知识面的不足，可以通过学习来弥补。但经验的不足，些许可以从旁人中吸取，但自己摔过的跟头，才会永远透彻的记得。审核时犯的错，容不得犯第二次。</p>
-<p>迭代了4个版本，也是近半年的开发成果，上周六通过了1.4.0版本，但存在一个bug，用户的数据没能正确显示出来，这是致命的。我不得不说，这次的跟头跌的太大了，完全是我的疏忽，提交前没有对升级进行严格测试。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/10/回家前对心城的絮絮叨叨/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1654,7 +1718,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
