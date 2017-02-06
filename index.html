@@ -268,6 +268,162 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/04/了解认识DNS/" itemprop="url">
+                  一起学习 DNS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-04T15:36:00+08:00" content="Feb 4 2017">
+              Feb 4 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/04/了解认识DNS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/04/了解认识DNS/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一起学习 DNS</p>
+<h1 id="什么是_DNS_？">什么是 DNS ？</h1><blockquote>
+<p>网域名称系统（英文：Domain Name System，缩写：DNS）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便地访问互联网。DNS使用TCP和UDP端口53。当前，对于每一级域名长度的限制是63个字符，域名总长度则不能超过253个字符。</p>
+</blockquote>
+<p>一方面，DNS能够帮助我们省去记忆和输入 IP 地址的麻烦。另一方面，对于在不同ip的主机开发部署有着很重要的意义：如果我们在访问一个ip地址为115.159.231.171的一个Web主页，假设如果公司将这个Web主页移动到了另外一个不同的ip主机上，那是不是要通知到每一个使用原ip地址访问服务的用户？这显然行不通。所以域名到网络ip地址的映射具有非常重要的意义。</p>
+<p>从域名到IP地址的一个翻译过程，我们俗称“DNS解析”。在DNS解析之后，便拿到了ip地址，有了ip地址，应用程序便可以与目标主机建立一个TCP连接或者发送UDP数据包。</p>
+<h1 id="DNS_解析">DNS 解析</h1><p>我们以查找<code>www.zhuanzhuan.com</code>为例子：</p>
+<p>0.查询Local DNS服务器</p>
+<p>我们不得不提到这个Local DNS 服务器。Local DNS包括网络服务提供商（ISP）分配给我们的DNS（一般为两个），或者是其他组织提供的公共DNS，比如谷歌的8.8.8.8，国内114DNS的114.114.114.114。因为这些DNS的地址填写在我们的本地电脑或者移动设备上，所以也称为Local DNS。有时候我们看到电脑或者移动设备上，DNS的地址是路由器的地址，而路由器本身会将DNS请求转发到ISP的DNS服务器上。这个小细节需要注意下。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/DNS.001.png" alt=""></p>
+<p>1.查询DNS根服务器</p>
+<p>DNS根服务器是一个超级大管家，掌管着所有顶级域名服务器，比如商用的<code>.com</code>，非赢利组织使用的<code>.org</code>，教育机构使用的<code>.edu</code>，政府部门使用的<code>.gov</code>等等，世界上的顶级域名大概有250多个。我们例子的顶级域名是<code>.com</code>，于是DNS根服务器会将查询请求转发给<code>.com</code>顶级域名服务器。</p>
+<p>2.查询<code>.com</code>顶级域名服务器</p>
+<p>.com顶级域名服务器掌管着<code>.com</code>域，我们的目标是<code>zhuanzhuan.com</code>，于是下一步将请求转发给<code>zhuanzhuan.com</code>域名服务器</p>
+<p>3.查询zhuanzhuan.com域名服务器</p>
+<p>zhuanzhuan.com域名服务器掌管着zhuanzhuan.com域下所有的子域和主机。它当然知道<code>www.zhuanzhuan.com</code>的IP地址。</p>
+<p>4.访问www.zhuanzhuan.com对应的web服务器</p>
+<p>根据上一步返回的IP地址进行访问。这里例子中，我们描绘的场景是一个最坏的情况，发生在DNS服务器没有缓存任何有用信息时。而在实际情况中，由于DNS服务器的缓存机制，在进行DNS解析道时候，实际的查询路径可能会更短，甚至没有，直接从本地DNS服务器缓存命中返回。</p>
+<p>DNS的查询和响应使用的传输层协议是UDP协议。DNS消息通过UDP数据包发送，如果在一个限定时间内没有收到响应的UDP数据包，那么DNS客户端则会重复查询请求，如果重复一定次数仍然失败，则会尝试域内另一台DNS服务器。</p>
+<h1 id="DNS_查询：递归／迭代">DNS 查询：递归／迭代</h1><p>递归查询:服务器必需回答域名与目标IP的映射关系，对这个关系的描述必须是完整的。<br>迭代查询:服务器收到一次迭代查询回复一次结果，这个结果不一定是目标IP与域名的映射关系，也可以是其它DNS服务器的地址。</p>
+<p>如文中图所示从客户端到本地DNS服务器是属于递归查询，而DNS服务器之间就是的交互查询就是迭代查询。一次域名解析可以涉及到递归和迭代两种机制。</p>
+<h1 id="DNS劫持">DNS劫持</h1><p>DNS劫持都谁干的好事？运营商。中国的电信运营商包括了三大运营商中国电信、中国移动、中国联通，还有一些小的运营商，包括长城宽带、歌华有线宽带等。我们可以谷歌搜索下，关于DNS劫持的问题，很多人都曾经遇到过。DNS劫持是网络运营商作恶的方式之一。电信运营商将原本网Web的IP地址故意解析为包含广告的IP地址，这样用户在访问网站时就会看到电信运营商那些无耻的广告。</p>
+<p>之前转转的用户就遇到过这样的问题。我们发现用户所在的地方，优品服务的一个域名被电信运营商给劫持了，跳转到了联通移动网络域名纠错导航页面。当用户使用WIFI时，我们可以修改网络的高级设置中DNS，尝试修改为谷歌的8.8.8.8，114DNS的114.114.114.114, 或者阿里DNS 223.5.5.5, 223.6.6.6等来解决。</p>
+<p>HTTPS解决的是HTTP劫持，并不能解决DNS劫持问题。更多阅读可以阅读文末的推荐文章<a href="http://bigsec.com/bigsec-news/wechat-16824-yunyingshangjiechi" target="_blank" rel="external">运营商的勾当：DNS劫持和HTTP劫持有什么区别</a>。</p>
+<h1 id="iOS清除DNS_CACHE">iOS清除DNS CACHE</h1><p>iOS设备对域名访问时并不是每次访问都需要向DNS服务器发出请求，一般来说当解析工作完成一次后，该解析结果会保存在设备的DNS缓存列表中，如果这时DNS解析出现更改变动的话，由于DNS缓存列表信息没有改变，所以仍旧会按照之前缓存的结果来解析，便会出现DNS解析故障。这时候我们要清除本地的DNS缓存，一般有几个办法：</p>
+<ol>
+<li>开启飞行模式 -&gt; 修改DNS -&gt; 关闭飞行模式</li>
+<li>开关机</li>
+<li>重置网络设置</li>
+</ol>
+<h1 id="修改HOST是什么鬼？">修改HOST是什么鬼？</h1><p>不知道读者有没有修改过电脑host文件的经历，我们修改有时候只是为了屏蔽不想访问的网站让破解软件注册时不向自己的服务器发送信息，比如发送到127.0.0.1本机地址上，有时候是为了测试，让线上的域名映射到开发环境的ip，有时候为了加速网站的解析速速。修改HOST给了我们很多方便的可能。</p>
+<p>iOS非越狱设备我们是无法修改HOST文件的，越狱之后，就另当别论了。</p>
+<h1 id="域名解析到常用命令">域名解析到常用命令</h1><p>域名解析中常用的命令有三个：dig、nslookup、host，关于这三个命令的一些使用，读者可以移步到阮一峰的<a href="http://www.ruanyifeng.com/blog/2016/06/dns.html" target="_blank" rel="external">DNS原理入门</a>。</p>
+<h1 id="更多参考">更多参考</h1><ul>
+<li><a href="http://bigsec.com/bigsec-news/wechat-16824-yunyingshangjiechi" target="_blank" rel="external">运营商的勾当：DNS劫持和HTTP劫持有什么区别</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/06/dns.html" target="_blank" rel="external">阮一峰：DNS原理入门</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/24/聊一聊HTTP的Range, Content-Range/" itemprop="url">
                   聊一聊HTTP的Range, Content-Range
                 </a>
@@ -1369,7 +1525,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_cix2m9rjk0010trfya119kell"
+                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_ciytkgpzw001ce8fulnvchgqi"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" itemprop="contentUrl"/>
               </a>
@@ -1545,139 +1701,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/17/近况/" itemprop="url">
-                  近况
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-17T22:04:33+08:00" content="Apr 17 2015">
-              Apr 17 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/17/近况/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/17/近况/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>从上海创业做游戏、IOS产品《心城》到离开来到北京已经有半个多月了。</p>
-<p>两年多后再次回到北京，刚来的那几天，眼睛酸疼的想流眼泪，污浊的空气让我嗓子干燥的难受。北京的空气更差了，要不是考虑女朋友，也许我还是更愿意待在上海发展或者回到西安。</p>
-<p>既来之，则安之吧。</p>
-<p>跑了一周多快两周的工作，也收到了一些offer，考虑了下我选择了嘀嗒拼车。这家公司的现状可能会更加的对我胃口。</p>
-<p>入职后，老大给了我几天的时间阅读了源代码，同事都很nice，抽了时间，对项目的目录，架构做了一些简介。之后，结合真机流程测试，大概对整体和核心的部分有了一些认识。</p>
-<p>从干程序以来，游戏，应用，因为公司也不大，一直都是一个人在单打独斗负责前端。这次头次和同事一起开发，心里不禁有一丝喜悦和兴奋。</p>
-<p>多人协作开发会涉及到版本的管理，公司采用了svn来进行版本控制。用惯了git，对svn不太熟悉，现阶段遵循公司的方式，我想如果将来可能的话，建议公司切换到git。</p>
-<p>项目由不同的同事开发，其中的代码风格也不尽相同。阅读项目时，也发现了一些味道比较坏的代码。我想将来有时间的话，应该和同事将部分部分代码进行重构，最重要的是将不合理的架构和类进行修改，提高阅读性，否则后续开发我想会越来越乱。关于对代码的重构，后面有时间的话很想和大家做个探讨。</p>
-<p>随笔到这先。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1718,7 +1746,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1735,7 +1763,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">115</span>
+                <span class="site-state-item-count">117</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1851,7 +1879,7 @@
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
