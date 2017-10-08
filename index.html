@@ -268,6 +268,153 @@
             
               
                 
+                <a class="post-title-link" href="/2017/10/08/MTU的奥秘/" itemprop="url">
+                  MTU的奥秘
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-08T15:36:00+08:00" content="Oct 8 2017">
+              Oct 8 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/08/MTU的奥秘/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/08/MTU的奥秘/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是_MTU_？">什么是 MTU ？</h2><p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/netlayer.jpeg" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/mtu&amp;mss.jpeg" alt=""></p>
+<p>我们通常意义上的说的以太网 MTU 是指不包含以太网 Header 和 FCS （帧检验序列：Frame Check Sequence）的以太网 Payload （有效载荷）部分，IEEE802 规定了大小为0~1500字节。这个长度不包含链路层，MTU是链路层对上层网络层的设计。所以，二层以太网帧长应该为这个长度加上18 bytes，该18 bytes 由 6 bytes的目的MAC地址-DA、6bytes的源MAC地址-SA和 2 bytes的上层协议类型以及 4 bytes 的FCS组成。FCS 由硬件计算，被添加到帧的最后，帧校验可以判断数据包是否由于噪声而被破坏出现了乱码位。根据上述，一个以太网数据帧，最大可达到1500 + 18 = 1518 字节。</p>
+<p>这里还有一个 MSS 的概念：TCP 有一个最大分段大小，用来在网络传输中通知传输双方每个分段中能发送的最大 TCP 数据量。我们可以从上图中清晰的看到 MSS 表示的数据。通常网络情况下，TCP MSS = MTU - IP Header 长度 - TCP Header 长度</p>
+<p>MTU 的大小也跟我们上网的方式有关系，不同的上网方式支持不同的 MTU。</p>
+<p>比如一般的EtherNet（以太网，默认值）：1500</p>
+<p>PPPoE（PPP Over Ethernet在以太网上承载PPP协议）/ADSL：1492</p>
+<p>Dial Up/Modem：576</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/tcp.jpg" alt=""></p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/pppoe.jpeg" alt=""></p>
+<h2 id="定义_MTU_的意义">定义 MTU 的意义</h2><p>MTU约束了 MAC 帧中数据部分（payload）的大小也就是说限定了 IP 封包的大小，这个大小包括 IP 封包的包头；而最终 IP 包是要放进 MAC 帧中的。</p>
+<p>所以我们可以认为MTU = IP封包的大小</p>
+<h2 id="IP报文的分片和重组">IP报文的分片和重组</h2><p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/ip_packet_cut.jpeg" alt=""></p>
+<h2 id="路径_MTU_发现">路径 MTU 发现</h2><p>在因特网协议中，一条因特网传输路径的“路径最大传输单元”被定义为从源地址到目标地址所经过路径上到所有 IP 跳到最大传输单元到最小值。举个例子，一个很长的水管，由不同粗细的水管组成，那么单位时间内通过该长水管的最大水量必定由最细的水管来决定。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/pmtu.jpeg" alt=""></p>
+<p>我们结合上图说下，路径 MTU 发现的工作原理：<br>1.在发送端主机发送 IP 数据报时将首部的分片禁止标志位设置为1。(Don’t fragment = 1，我们可以从 Wireshark中很容易看到该设置)。由于设置为了1，表明途中遇到的路由器不能私自将巨型包分片，而是直接将包丢弃。</p>
+<p>2.丢弃之后，通过 ICMP 消息将数据链路上的 MTU 值发给发送主机。</p>
+<p>3.发送端主机将从 ICMP 消息中获得的 MTU 值设定为当前 MTU，然后根据当前 MTU 对数据报进行重新发送。</p>
+<p>Internet网络层的设计有10大原则，其中一个原则就是『避免静态选项和参数』：如果不可避免要使用参数的话，比如最大数据包的长度，最好的办法就是让发送方和接收方协商一个数值，而不是直接使用定义好的固定的值。路径 MTU 发现要求发送端和接收端中间的网络路径是那个的设备都要支持 MTU 协商，如果有其中一台不支持，就无法协商到最小的 MTU。有时候也因为安全等原因，ICMP 消息被禁用导致路径 MTU 发现也不能生效。</p>
+<h4 id="注意">注意</h4><p>出于安全的考虑，比如防范 DDOS 攻击，有些网络域禁止了 ICMP 的传输，导致路径 MTU 发现功能无法正常运行，会造成用户的使用网络出现故障。常见的一个表现就是，在低数据流量低情况下可以正常工作，但在有大量数据发送的时候，网络就会没有响应。</p>
+<h2 id="MTU值设置不当会引起什么问题">MTU值设置不当会引起什么问题</h2><p>MTU值引起的常见现象：</p>
+<ul>
+<li>部分网站无法访问</li>
+<li>上网速度很慢</li>
+<li>部分网络应用无法使用</li>
+<li>图片不能上传等等</li>
+</ul>
+<h2 id="如何确定_MTU_值？">如何确定 MTU 值？</h2><p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/ping.jpeg" alt=""></p>
+<p>在 OSX 系统中，我们可以通过 ping 命令来发送特定大小的 ICMP 消息包。如上图所示，我刚开始使用来 packet size 为 1465 bytes 大小来 ping，数据包直接是被 100% 丢失的，而使用来 1464 bytes 来 ping，便发送接受正常。我家里使用的 PPPoE 网络，所以根据我们上面计算方式，1464 + ICMP Header（8 bytes）+ IP Header（20 bytes）= 1492，这便是 IP 封包的大小，也就是 MTU 的大小。跟 1500 bytes 相差的便是 PPPoE 网络带来的 8 bytes，由PPPoE Header（6 bytes）+ PPPID（2 bytes）得来。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/04/了解认识DNS/" itemprop="url">
                   一起学习 DNS
                 </a>
@@ -1525,7 +1672,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_ciytkgpzw001ce8fulnvchgqi"
+                 href="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" rel="gallery_cj8i7625r001cjkfuhv5que8n"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7u2lyz.com1.z0.glb.clouddn.com/ElementalDesignPatternsCover.jpg" itemprop="contentUrl"/>
               </a>
@@ -1542,136 +1689,6 @@
           《Elemental Design Patterns》 Jason McC. Smith
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/04/《元素模式》读书笔记01/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/28/近期技术思考/" itemprop="url">
-                  近期技术思考
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-28T18:00:00+08:00" content="Nov 28 2015">
-              Nov 28 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/28/近期技术思考/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/28/近期技术思考/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/thinking.png" alt=""></p>
-<p>博客半年没有更新了，自己在嘀嗒拼车的这半年里，更多的是对自己写的代码的一些反思，特此书写记录下来。</p>
-<ul>
-<li>代码如何写的优雅？</li>
-<li>这段代码是否写的很罗嗦？</li>
-<li>是否可以换一种写法或者是否能够应用某个设计模式很好的解决这个问题？</li>
-<li>···</li>
-</ul>
-<h1 id="谈代码的坏味道">谈代码的坏味道</h1><p>有味道的代码永远都存在的，每个人都或多或少不定期的产生一些垃圾代码，而产生此类代码的原因一般都有哪些原因？我曾经问过自己这样的问题。常见的几个原因有以下几个：</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/28/近期技术思考/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1746,7 +1763,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1754,7 +1771,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1763,7 +1780,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">117</span>
+                <span class="site-state-item-count">119</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -1,0 +1,804 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MSS,MTU," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HappyCoding:)" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/avatar.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是 MTU ？
+我们通常意义上的说的以太网 MTU 是指不包含以太网 Header 和 FCS （帧检验序列：Frame Check Sequence）的以太网 Payload （有效载荷）部分，IEEE802 规定了大小为0~1500字节。这个长度不包含链路层，MTU是链路层对上层网络层的设计。所以，二层以太网帧长应该为这个长度加上18 bytes，该18 bytes 由 6 bytes的目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MTU的奥秘">
+<meta property="og:url" content="dabing1022.github.io/2017/10/08/MTU的奥秘/index.html">
+<meta property="og:site_name" content="HappyCoding:)">
+<meta property="og:description" content="什么是 MTU ？
+我们通常意义上的说的以太网 MTU 是指不包含以太网 Header 和 FCS （帧检验序列：Frame Check Sequence）的以太网 Payload （有效载荷）部分，IEEE802 规定了大小为0~1500字节。这个长度不包含链路层，MTU是链路层对上层网络层的设计。所以，二层以太网帧长应该为这个长度加上18 bytes，该18 bytes 由 6 bytes的目">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/netlayer.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/mtu&mss.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/tcp.jpg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/pppoe.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/ip_packet_cut.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/pmtu.jpeg">
+<meta property="og:image" content="http://7u2lyz.com1.z0.glb.clouddn.com/ping.jpeg">
+<meta property="og:updated_time" content="2017-10-08T03:35:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MTU的奥秘">
+<meta name="twitter:description" content="什么是 MTU ？
+我们通常意义上的说的以太网 MTU 是指不包含以太网 Header 和 FCS （帧检验序列：Frame Check Sequence）的以太网 Payload （有效载荷）部分，IEEE802 规定了大小为0~1500字节。这个长度不包含链路层，MTU是链路层对上层网络层的设计。所以，二层以太网帧长应该为这个长度加上18 bytes，该18 bytes 由 6 bytes的目">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="dabing1022.github.io/2017/10/08/MTU的奥秘/"/>
+
+  <title> MTU的奥秘 | HappyCoding:) </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HappyCoding:)</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MTU的奥秘
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-08T15:36:00+08:00" content="Oct 8 2017">
+              Oct 8 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/08/MTU的奥秘/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/08/MTU的奥秘/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是_MTU_？">什么是 MTU ？</h2><p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/netlayer.jpeg" alt=""><br><img src="http://7u2lyz.com1.z0.glb.clouddn.com/mtu&amp;mss.jpeg" alt=""></p>
+<p>我们通常意义上的说的以太网 MTU 是指不包含以太网 Header 和 FCS （帧检验序列：Frame Check Sequence）的以太网 Payload （有效载荷）部分，IEEE802 规定了大小为0~1500字节。这个长度不包含链路层，MTU是链路层对上层网络层的设计。所以，二层以太网帧长应该为这个长度加上18 bytes，该18 bytes 由 6 bytes的目的MAC地址-DA、6bytes的源MAC地址-SA和 2 bytes的上层协议类型以及 4 bytes 的FCS组成。FCS 由硬件计算，被添加到帧的最后，帧校验可以判断数据包是否由于噪声而被破坏出现了乱码位。根据上述，一个以太网数据帧，最大可达到1500 + 18 = 1518 字节。</p>
+<p>这里还有一个 MSS 的概念：TCP 有一个最大分段大小，用来在网络传输中通知传输双方每个分段中能发送的最大 TCP 数据量。我们可以从上图中清晰的看到 MSS 表示的数据。通常网络情况下，TCP MSS = MTU - IP Header 长度 - TCP Header 长度</p>
+<p>MTU 的大小也跟我们上网的方式有关系，不同的上网方式支持不同的 MTU。</p>
+<p>比如一般的EtherNet（以太网，默认值）：1500</p>
+<p>PPPoE（PPP Over Ethernet在以太网上承载PPP协议）/ADSL：1492</p>
+<p>Dial Up/Modem：576</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/tcp.jpg" alt=""></p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/pppoe.jpeg" alt=""></p>
+<h2 id="定义_MTU_的意义">定义 MTU 的意义</h2><p>MTU约束了 MAC 帧中数据部分（payload）的大小也就是说限定了 IP 封包的大小，这个大小包括 IP 封包的包头；而最终 IP 包是要放进 MAC 帧中的。</p>
+<p>所以我们可以认为MTU = IP封包的大小</p>
+<h2 id="IP报文的分片和重组">IP报文的分片和重组</h2><p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/ip_packet_cut.jpeg" alt=""></p>
+<h2 id="路径_MTU_发现">路径 MTU 发现</h2><p>在因特网协议中，一条因特网传输路径的“路径最大传输单元”被定义为从源地址到目标地址所经过路径上到所有 IP 跳到最大传输单元到最小值。举个例子，一个很长的水管，由不同粗细的水管组成，那么单位时间内通过该长水管的最大水量必定由最细的水管来决定。</p>
+<p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/pmtu.jpeg" alt=""></p>
+<p>我们结合上图说下，路径 MTU 发现的工作原理：<br>1.在发送端主机发送 IP 数据报时将首部的分片禁止标志位设置为1。(Don’t fragment = 1，我们可以从 Wireshark中很容易看到该设置)。由于设置为了1，表明途中遇到的路由器不能私自将巨型包分片，而是直接将包丢弃。</p>
+<p>2.丢弃之后，通过 ICMP 消息将数据链路上的 MTU 值发给发送主机。</p>
+<p>3.发送端主机将从 ICMP 消息中获得的 MTU 值设定为当前 MTU，然后根据当前 MTU 对数据报进行重新发送。</p>
+<p>Internet网络层的设计有10大原则，其中一个原则就是『避免静态选项和参数』：如果不可避免要使用参数的话，比如最大数据包的长度，最好的办法就是让发送方和接收方协商一个数值，而不是直接使用定义好的固定的值。路径 MTU 发现要求发送端和接收端中间的网络路径是那个的设备都要支持 MTU 协商，如果有其中一台不支持，就无法协商到最小的 MTU。有时候也因为安全等原因，ICMP 消息被禁用导致路径 MTU 发现也不能生效。</p>
+<h4 id="注意">注意</h4><p>出于安全的考虑，比如防范 DDOS 攻击，有些网络域禁止了 ICMP 的传输，导致路径 MTU 发现功能无法正常运行，会造成用户的使用网络出现故障。常见的一个表现就是，在低数据流量低情况下可以正常工作，但在有大量数据发送的时候，网络就会没有响应。</p>
+<h2 id="MTU值设置不当会引起什么问题">MTU值设置不当会引起什么问题</h2><p>MTU值引起的常见现象：</p>
+<ul>
+<li>部分网站无法访问</li>
+<li>上网速度很慢</li>
+<li>部分网络应用无法使用</li>
+<li>图片不能上传等等</li>
+</ul>
+<h2 id="如何确定_MTU_值？">如何确定 MTU 值？</h2><p><img src="http://7u2lyz.com1.z0.glb.clouddn.com/ping.jpeg" alt=""></p>
+<p>在 OSX 系统中，我们可以通过 ping 命令来发送特定大小的 ICMP 消息包。如上图所示，我刚开始使用来 packet size 为 1465 bytes 大小来 ping，数据包直接是被 100% 丢失的，而使用来 1464 bytes 来 ping，便发送接受正常。我家里使用的 PPPoE 网络，所以根据我们上面计算方式，1464 + ICMP Header（8 bytes）+ IP Header（20 bytes）= 1492，这便是 IP 封包的大小，也就是 MTU 的大小。跟 1500 bytes 相差的便是 PPPoE 网络带来的 8 bytes，由PPPoE Header（6 bytes）+ PPPID（2 bytes）得来。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7u2lyz.com1.z0.glb.clouddn.com/wechatpay.jpg" alt="ChildhoodAndy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7u2lyz.com1.z0.glb.clouddn.com/alipay.jpg" alt="ChildhoodAndy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MSS/" rel="tag">#MSS</a>
+          
+            <a href="/tags/MTU/" rel="tag">#MTU</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/04/了解认识DNS/" rel="next" title="一起学习 DNS">
+                <i class="fa fa-chevron-left"></i> 一起学习 DNS
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/10/08/MTU的奥秘/"
+     data-title="MTU的奥秘"
+     data-content=""
+     data-url="dabing1022.github.io/2017/10/08/MTU的奥秘/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/08/MTU的奥秘/"
+           data-title="MTU的奥秘" data-url="dabing1022.github.io/2017/10/08/MTU的奥秘/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="ChildhoodAndy" />
+          <p class="site-author-name" itemprop="name">ChildhoodAndy</p>
+          <p class="site-description motion-element" itemprop="description">思维世界的发展，在某种意义上说，就是对惊奇的不断摆脱。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">119</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.github.com/dabing1022" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/childhoodandy" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1297984304" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/1986621" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zengrong.net/" title="曾嵘" target="_blank">曾嵘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://post.justbilt.com/" title="justblit" target="_blank">justblit</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yulingtianxia.com" title="玉令天下" target="_blank">玉令天下</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mokai.github.io" title="mokai" target="_blank">mokai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT-Help" target="_blank">NexT-Help</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.ibireme.com/" title="ibireme" target="_blank">ibireme</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是_MTU_？"><span class="nav-number">1.</span> <span class="nav-text">什么是 MTU ？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义_MTU_的意义"><span class="nav-number">2.</span> <span class="nav-text">定义 MTU 的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP报文的分片和重组"><span class="nav-number">3.</span> <span class="nav-text">IP报文的分片和重组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径_MTU_发现"><span class="nav-number">4.</span> <span class="nav-text">路径 MTU 发现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">4.0.1.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MTU值设置不当会引起什么问题"><span class="nav-number">5.</span> <span class="nav-text">MTU值设置不当会引起什么问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何确定_MTU_值？"><span class="nav-number">6.</span> <span class="nav-text">如何确定 MTU 值？</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChildhoodAndy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ChildhoodAndy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
